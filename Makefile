@@ -6,7 +6,7 @@
 #    By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/26 11:46:05 by akeryan           #+#    #+#              #
-#    Updated: 2023/12/27 13:11:05 by akeryan          ###   ########.fr        #
+#    Updated: 2023/12/27 13:36:53 by akeryan          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -57,6 +57,10 @@ fclean_readline:
 		make -C $(READLINE_DIR) uninstall; \
 		make -C $(READLINE_DIR) distclean; \
 	fi
+	rm -rf $(READLINE_DIR)/bin
+	rm -rf $(READLINE_DIR)/include
+	rm -rf $(READLINE_DIR)/lib
+	rm -rf $(READLINE_DIR)/share
 
 clean: clean_readline
 	$(RM) $(OBJ)
