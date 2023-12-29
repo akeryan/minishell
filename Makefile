@@ -6,7 +6,7 @@
 #    By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/26 11:46:05 by akeryan           #+#    #+#              #
-#    Updated: 2023/12/29 11:46:13 by akeryan          ###   ########.fr        #
+#    Updated: 2023/12/29 12:43:50 by akeryan          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,13 +15,14 @@ FLAGS = -Wall -Wextra -Werror
 CC = cc
 RM = rm -f
 
-BLINKS = -I$(INCLUDE) -I$(READLINE_DIR)/include/readline -I$(READLINE_DIR)/include -L$(READLINE_DIR)/lib -lreadline -lhistory
+BLINKS = -I$(INCLUDE) -I$(READLINE_DIR)/include/readline -I$(READLINE_DIR)/include -I$(LIBFT_DIR) -L$(READLINE_DIR)/lib -L$(LIBFT_DIR) -lreadline -lhistory -lft
 OLINKS = -I$(INCLUDE) -I$(READLINE_DIR)/include/readline -I$(READLINE_DIR)/include 
 
 CURRENT_DIR = $(shell pwd)
 INCLUDE = include
 SRC_DIR = src
 READLINE_DIR = readline
+LIBFT_DIR = libft
 BUILD_DIR = build
 
 MANDATORY = main.c
@@ -30,7 +31,7 @@ all: $(NAME)
 
 OBJ = $(patsubst %.c, %.o, $(MANDATORY))
 
-$(NAME): submodules_init_update readline_add $(OBJ) 
+$(NAME): submodules_init_update readline_add libft_add $(OBJ) 
 	$(CC) $(FLAGS) $(BLINKS) -o $@ $(OBJ) 
 	
 %.o: $(SRC_DIR)/%.c
@@ -43,11 +44,13 @@ readline_add:
 		make install; \
 	fi
 
+libft_add:
+	if [ ! -f $(LIBFT_DIR)/libft.a ]; then \
+		make -C $(LIBFT_DIR); \
+	fi
+
 submodules_init_update:
 	git submodule update --init
-
-print_obj:
-	@echo "==============================================================================="
 
 clean_readline:
 	@if [ -f $(READLINE_DIR)/Makefile ]; then \
@@ -65,9 +68,11 @@ fclean_readline:
 	rm -rf $(READLINE_DIR)/share
 
 clean: clean_readline
+	make -C $(LIBFT_DIR) clean
 	$(RM) $(OBJ)
 
 fclean: clean fclean_readline
+	make -C $(LIBFT_DIR) fclean
 	$(RM) $(NAME)
 
 re: fclean all
