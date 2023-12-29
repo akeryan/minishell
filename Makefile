@@ -6,7 +6,7 @@
 #    By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/26 11:46:05 by akeryan           #+#    #+#              #
-#    Updated: 2023/12/27 13:36:53 by akeryan          ###   ########.fr        #
+#    Updated: 2023/12/29 11:46:13 by akeryan          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,9 +37,11 @@ $(NAME): submodules_init_update readline_add $(OBJ)
 	$(CC) $(FLAGS) $(OLINKS) -c $< -o $@ 
 
 readline_add:
-	cd $(READLINE_DIR) && ./configure --prefix=$(CURRENT_DIR)/$(READLINE_DIR)
-	make -C $(READLINE_DIR)
-	make -C $(READLINE_DIR) install
+	@if [ ! -d $(READLINE_DIR)/lib ]; then \
+		cd $(READLINE_DIR) && ./configure --prefix=$(CURRENT_DIR)/$(READLINE_DIR); \
+		make; \
+		make install; \
+	fi
 
 submodules_init_update:
 	git submodule update --init
