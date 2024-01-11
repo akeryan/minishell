@@ -6,7 +6,7 @@
 #    By: dabdygal <dabdygal@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/15 15:43:23 by dabdygal          #+#    #+#              #
-#    Updated: 2024/01/11 18:45:32 by dabdygal         ###   ########.fr        #
+#    Updated: 2024/01/11 19:19:31 by dabdygal         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,10 +30,10 @@ LIBFT_DIR = libft
 
 LIBFT_NAME = libft.a
 
-LIB1_NAME = readline.a
+LIB1_NAME = libreadline.a \
+			libhistory.a
 
-INCLUDE_FILES = minishell.h \
-				readline/readline.h
+INCLUDE_FILES = minishell.h
 
 MAIN_FILE = main.c
 
@@ -43,7 +43,7 @@ OBJ_FILES = $(SRC_FILES:.c=.o)
 
 CC = cc
 
-CFLAGS = -Wall -Wextra -Werror -I $(INCLUDE_DIR)
+CFLAGS = -Wall -Wextra -Werror -I $(INCLUDE_DIR) -I $(LIB1_DIR) -I .
 
 # ************************************RULES*********************************** #
 
@@ -51,7 +51,7 @@ $(BIN_NAME):  $(addprefix $(LIB1_DIR)/,$(LIB1_NAME)) $(addprefix $(LIBFT_DIR)/,$
 	$(CC) $(CFLAGS) $(addprefix $(MAIN_DIR)/,$(MAIN_FILE)) $(addprefix $(SRC_DIR)/,$(SRC_FILES)) $(addprefix $(LIBFT_DIR)/,$(LIBFT_NAME)) $(addprefix $(LIB1_DIR)/,$(LIB1_NAME)) -o $(BIN_NAME)
 
 $(addprefix $(LIB1_DIR)/,$(LIB1_NAME)): $(addprefix $(LIB1_DIR)/,Makefile)
-	make -C $(LIB1_DIR)
+	make -C $(LIB1_DIR); make install -C $(LIB1_DIR)
 
 $(addprefix $(LIB1_DIR)/,Makefile): $(LIB1_DIR)
 	(cd $(LIB1_DIR); ./configure)
