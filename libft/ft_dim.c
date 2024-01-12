@@ -1,14 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   ft_dim.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dabdygal <dabdygal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/26 17:28:57 by akeryan           #+#    #+#             */
-/*   Updated: 2024/01/11 19:02:26 by dabdygal         ###   ########.fr       */
+/*   Created: 2023/11/01 13:53:29 by dabdygal          #+#    #+#             */
+/*   Updated: 2023/11/01 18:56:53 by dabdygal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <stdlib.h>
+/**
+ * @brief Returns positive difference between two integers.
+ * @details Function returns positive difference of two integers x and y.
+ * @param x First integer argument.
+ * @param y Second integer argument.
+ * @return Difference between arguments as non-negative integer value,.
+*/
+int	ft_dim(int x, int y)
+{
+	if (x < y)
+		return (y - x);
+	else
+		return (x - y);
+}

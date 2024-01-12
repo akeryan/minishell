@@ -1,14 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dabdygal <dabdygal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/26 17:28:57 by akeryan           #+#    #+#             */
-/*   Updated: 2024/01/11 19:02:26 by dabdygal         ###   ########.fr       */
+/*   Created: 2023/07/04 14:56:24 by dabdygal          #+#    #+#             */
+/*   Updated: 2023/07/04 15:05:01 by dabdygal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <stdlib.h>
+#include <stddef.h>
+
+size_t	ft_strlen(const char *s)
+{
+	size_t	i;
+
+	i = 0;
+	while (*(s + i))
+	{
+		i++;
+	}
+	return (i);
+}

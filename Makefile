@@ -3,77 +3,78 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+         #
+#    By: dabdygal <dabdygal@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2023/12/26 11:46:05 by akeryan           #+#    #+#              #
-#    Updated: 2023/12/29 12:43:50 by akeryan          ###   ########.fr        #
+#    Created: 2023/07/15 15:43:23 by dabdygal          #+#    #+#              #
+#    Updated: 2024/01/11 19:40:18 by dabdygal         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = minishell
-FLAGS = -Wall -Wextra -Werror
-CC = cc
-RM = rm -f
+# *********************************INITIALIZE********************************* #
 
-BLINKS = -I$(INCLUDE) -I$(READLINE_DIR)/include/readline -I$(READLINE_DIR)/include -I$(LIBFT_DIR) -L$(READLINE_DIR)/lib -L$(LIBFT_DIR) -lreadline -lhistory -lft
-OLINKS = -I$(INCLUDE) -I$(READLINE_DIR)/include/readline -I$(READLINE_DIR)/include 
+BIN_NAME = minishell
 
-CURRENT_DIR = $(shell pwd)
-INCLUDE = include
+INCLUDE_DIR = include
+
+MAIN_DIR = .
+
 SRC_DIR = src
-READLINE_DIR = readline
+
+OBJ_DIR = src
+
+LIB1_DIR = readline
+
+LIB1_GIT = git://git.savannah.gnu.org/readline.git
+
 LIBFT_DIR = libft
-BUILD_DIR = build
 
-MANDATORY = main.c
+LIBFT_NAME = libft.a
 
-all: $(NAME)
+LIB1_NAME = libreadline.a \
+			libhistory.a
 
-OBJ = $(patsubst %.c, %.o, $(MANDATORY))
+INCLUDE_FILES = minishell.h
 
-$(NAME): submodules_init_update readline_add libft_add $(OBJ) 
-	$(CC) $(FLAGS) $(BLINKS) -o $@ $(OBJ) 
-	
-%.o: $(SRC_DIR)/%.c
-	$(CC) $(FLAGS) $(OLINKS) -c $< -o $@ 
+MAIN_FILE = main.c
 
-readline_add:
-	@if [ ! -d $(READLINE_DIR)/lib ]; then \
-		cd $(READLINE_DIR) && ./configure --prefix=$(CURRENT_DIR)/$(READLINE_DIR); \
-		make; \
-		make install; \
-	fi
+SRC_FILES = 
 
-libft_add:
-	if [ ! -f $(LIBFT_DIR)/libft.a ]; then \
-		make -C $(LIBFT_DIR); \
-	fi
+OBJ_FILES = $(SRC_FILES:.c=.o)
 
-submodules_init_update:
-	git submodule update --init
+CC = cc
 
-clean_readline:
-	@if [ -f $(READLINE_DIR)/Makefile ]; then \
-		make -C $(READLINE_DIR) clean; \
-	fi
+CFLAGS = -Wall -Wextra -Werror -I $(INCLUDE_DIR) -I $(LIB1_DIR) -I .
 
-fclean_readline:
-	@if [ -f $(READLINE_DIR)/Makefile ]; then \
-		make -C $(READLINE_DIR) uninstall; \
-		make -C $(READLINE_DIR) distclean; \
-	fi
-	rm -rf $(READLINE_DIR)/bin
-	rm -rf $(READLINE_DIR)/include
-	rm -rf $(READLINE_DIR)/lib
-	rm -rf $(READLINE_DIR)/share
+# ************************************RULES*********************************** #
 
-clean: clean_readline
-	make -C $(LIBFT_DIR) clean
-	$(RM) $(OBJ)
+$(BIN_NAME):  $(addprefix $(LIB1_DIR)/,$(LIB1_NAME)) $(addprefix $(LIBFT_DIR)/,$(LIBFT_NAME)) $(addprefix $(MAIN_DIR)/,$(MAIN_FILE)) $(addprefix $(OBJ_DIR)/,$(OBJ_FILES)) $(addprefix $(INCLUDE_DIR)/,$(INCLUDE_FILES))
+	$(CC) $(CFLAGS) -lreadline $(addprefix $(MAIN_DIR)/,$(MAIN_FILE)) $(addprefix $(SRC_DIR)/,$(SRC_FILES)) $(addprefix $(LIBFT_DIR)/,$(LIBFT_NAME)) $(addprefix $(LIB1_DIR)/,$(LIB1_NAME)) -o $(BIN_NAME)
 
-fclean: clean fclean_readline
-	make -C $(LIBFT_DIR) fclean
-	$(RM) $(NAME)
+$(addprefix $(LIB1_DIR)/,$(LIB1_NAME)): $(addprefix $(LIB1_DIR)/,Makefile)
+	make -C $(LIB1_DIR)
+
+$(addprefix $(LIB1_DIR)/,Makefile): $(LIB1_DIR)
+	(cd $(LIB1_DIR); ./configure)
+
+$(LIB1_DIR):
+	git clone $(LIB1_GIT)
+
+$(addprefix $(OBJ_DIR)/,$(OBJ_FILES)): $(addprefix $(INCLUDE_DIR)/,$(INCLUDE_FILES))
+
+$(addprefix $(LIBFT_DIR)/,$(LIBFT_NAME)):
+	make $(LIBFT_NAME) -C $(LIBFT_DIR)
+
+all: $(BIN_NAME)
+
+clean:
+	rm -f $(addprefix $(OBJ_DIR)/,$(OBJ_FILES))
+	make clean -C $(LIBFT_DIR)
+	make clean -C $(LIB1_DIR)
+
+fclean: clean
+	rm -f $(BIN_NAME)
+	make fclean -C $(LIBFT_DIR)
+	make distclean maintainer-clean -C $(LIB1_DIR)
 
 re: fclean all
 
