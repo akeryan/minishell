@@ -1,37 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_free.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dabdygal <dabdygal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/25 19:21:52 by akeryan           #+#    #+#             */
-/*   Updated: 2024/01/12 16:22:47 by dabdygal         ###   ########.fr       */
+/*   Created: 2024/01/12 15:17:39 by dabdygal          #+#    #+#             */
+/*   Updated: 2024/01/12 15:22:51 by dabdygal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-#include "minishell.h"
-#include <stdio.h>
-#include "readline/readline.h"
-#include "readline/history.h"
 #include <stdlib.h>
 
-int	main(void)
+/**
+ * @brief Frees the allocation and sets the pointer as NULL.
+ * @details Frees allocations that were created via the preceding allocation 
+ * functions. Sets the pointer \p ptr to NULL.
+ * @param ptr A pointer to be freed.
+ * @return Does not return anything.
+*/
+void	ft_free(void *ptr)
 {
-	char	*input;
-
-	while (1)
-	{
-		input = readline(MSH_PROMPT);
-		if (input == NULL)
-		{
-			printf(EXIT_MSG);
-			return (EXIT_SUCCESS);
-		}
-		add_history(input);
-		printf("The command entered: %s\n", input);
-		ft_free(input);
-	}
-	return (EXIT_SUCCESS);
+	free(ptr);
+	ptr = NULL;
 }

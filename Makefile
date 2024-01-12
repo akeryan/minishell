@@ -6,7 +6,7 @@
 #    By: dabdygal <dabdygal@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/15 15:43:23 by dabdygal          #+#    #+#              #
-#    Updated: 2024/01/11 19:40:18 by dabdygal         ###   ########.fr        #
+#    Updated: 2024/01/12 16:11:48 by dabdygal         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,8 +30,7 @@ LIBFT_DIR = libft
 
 LIBFT_NAME = libft.a
 
-LIB1_NAME = libreadline.a \
-			libhistory.a
+LIB1_NAME = libreadline.a
 
 INCLUDE_FILES = minishell.h
 
@@ -43,17 +42,17 @@ OBJ_FILES = $(SRC_FILES:.c=.o)
 
 CC = cc
 
-CFLAGS = -Wall -Wextra -Werror -I $(INCLUDE_DIR) -I $(LIB1_DIR) -I .
+CFLAGS = -Wall -Wextra -Werror -I $(INCLUDE_DIR) -I .
 
 # ************************************RULES*********************************** #
 
-$(BIN_NAME):  $(addprefix $(LIB1_DIR)/,$(LIB1_NAME)) $(addprefix $(LIBFT_DIR)/,$(LIBFT_NAME)) $(addprefix $(MAIN_DIR)/,$(MAIN_FILE)) $(addprefix $(OBJ_DIR)/,$(OBJ_FILES)) $(addprefix $(INCLUDE_DIR)/,$(INCLUDE_FILES))
-	$(CC) $(CFLAGS) -lreadline $(addprefix $(MAIN_DIR)/,$(MAIN_FILE)) $(addprefix $(SRC_DIR)/,$(SRC_FILES)) $(addprefix $(LIBFT_DIR)/,$(LIBFT_NAME)) $(addprefix $(LIB1_DIR)/,$(LIB1_NAME)) -o $(BIN_NAME)
+$(BIN_NAME): $(addprefix $(LIB1_DIR)/,$(LIB1_NAME)) $(addprefix $(LIBFT_DIR)/,$(LIBFT_NAME)) $(addprefix $(MAIN_DIR)/,$(MAIN_FILE)) $(addprefix $(OBJ_DIR)/,$(OBJ_FILES)) $(addprefix $(INCLUDE_DIR)/,$(INCLUDE_FILES))
+	$(CC) $(CFLAGS) -lreadline $(addprefix $(MAIN_DIR)/,$(MAIN_FILE)) $(addprefix $(SRC_DIR)/,$(SRC_FILES)) $(addprefix $(LIBFT_DIR)/,$(LIBFT_NAME)) -o $(BIN_NAME)
 
-$(addprefix $(LIB1_DIR)/,$(LIB1_NAME)): $(addprefix $(LIB1_DIR)/,Makefile)
+$(addprefix $(LIB1_DIR)/,$(LIB1_NAME)): | $(addprefix $(LIB1_DIR)/,Makefile)
 	make -C $(LIB1_DIR)
 
-$(addprefix $(LIB1_DIR)/,Makefile): $(LIB1_DIR)
+$(addprefix $(LIB1_DIR)/,Makefile): | $(LIB1_DIR)
 	(cd $(LIB1_DIR); ./configure)
 
 $(LIB1_DIR):
@@ -74,7 +73,6 @@ clean:
 fclean: clean
 	rm -f $(BIN_NAME)
 	make fclean -C $(LIBFT_DIR)
-	make distclean maintainer-clean -C $(LIB1_DIR)
 
 re: fclean all
 
