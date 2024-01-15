@@ -6,12 +6,21 @@
 /*   By: dabdygal <dabdygal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 12:37:41 by dabdygal          #+#    #+#             */
-/*   Updated: 2023/07/10 15:21:56 by dabdygal         ###   ########.fr       */
+/*   Updated: 2024/01/12 14:40:08 by dabdygal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
+#include <errno.h>
 
+/**
+ * @brief Save a copy of a string.
+ * @details The ft_strdup() function allocates sufficient memory for a copy of
+ * the string s1, does the copy, and returns a pointer to it. If malloc failed,
+ * NULL is returned and errno is set to ENOMEM.
+ * @param s1 A string to be copied.
+ * @return A pointer to a new copied string. NULL if error occured.
+*/
 char	*ft_strdup(const char *s1)
 {
 	char	*ptr;

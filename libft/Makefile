@@ -6,7 +6,7 @@
 #    By: dabdygal <dabdygal@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/07 14:51:38 by dabdygal          #+#    #+#              #
-#    Updated: 2023/11/01 13:55:34 by dabdygal         ###   ########.fr        #
+#    Updated: 2024/01/12 15:23:18 by dabdygal         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -63,7 +63,8 @@ SRC_FILES 	= ft_memset.c \
 			  ft_isspace.c \
 			  ft_split_wspace.c \
 			  ft_min.c \
-			  ft_dim.c
+			  ft_dim.c \
+			  ft_free.c
 
 OBJECTS		= $(SRC_FILES:.c=.o)
 
