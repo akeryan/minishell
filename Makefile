@@ -6,7 +6,7 @@
 #    By: dabdygal <dabdygal@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/15 15:43:23 by dabdygal          #+#    #+#              #
-#    Updated: 2024/01/12 16:11:48 by dabdygal         ###   ########.fr        #
+#    Updated: 2024/01/15 19:09:38 by dabdygal         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,11 +32,13 @@ LIBFT_NAME = libft.a
 
 LIB1_NAME = libreadline.a
 
-INCLUDE_FILES = minishell.h
+INCLUDE_FILES = minishell.h \
+				tokens.h
 
 MAIN_FILE = main.c
 
-SRC_FILES = 
+SRC_FILES = ft_readline.c \
+			get_next_token.c
 
 OBJ_FILES = $(SRC_FILES:.c=.o)
 
