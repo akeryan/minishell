@@ -6,7 +6,7 @@
 /*   By: dabdygal <dabdygal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/25 19:21:52 by akeryan           #+#    #+#             */
-/*   Updated: 2024/01/15 11:34:37 by dabdygal         ###   ########.fr       */
+/*   Updated: 2024/01/15 11:59:31 by dabdygal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ int	main(void)
 		input = readline(MSH_PROMPT);
 		if (input == NULL)
 		{
-			printf(EXIT_MSG);
+			if (printf(EXIT_MSG) < 0)
+				return (EXIT_FAILURE);
 			return (EXIT_SUCCESS);
 		}
 		add_history(input);
