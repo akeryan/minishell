@@ -6,7 +6,7 @@
 /*   By: dabdygal <dabdygal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 14:32:56 by dabdygal          #+#    #+#             */
-/*   Updated: 2024/01/15 19:31:43 by dabdygal         ###   ########.fr       */
+/*   Updated: 2024/01/16 11:38:31 by dabdygal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,21 +42,37 @@ static t_token	detect_op(const t_line *line)
 	return (token);
 }
 
-static t_token	consume_token(t_line *line)
+static	t_token	detect_meta(const t_line *line)
 {
 	t_token	token;
+	int		i;
 
 	token = detect_op(line);
 	if (token.type == END_TOKEN)
 	{
+		i = 0;
+		if (*line->cursor == OP_SPACE_CHAR || *line->cursor == OP_TAB_CHAR)
+			token.type = BLANK_TOKEN;
+		while (*(line->cursor + i) == ' ' || *(line->cursor + i) == '\t')
+			i++;
+		token.slice.length = i;
+	}
+	return (token);
+}
+
+static t_token	consume_token(t_line *line)
+{
+	t_token	token;
+
+	token = detect_meta(line);
+	if (token.type == END_TOKEN)
+	{
 		token.type = WORD_TOKEN;
 		token.slice.length = 0;
-		while (*line->cursor && detect_op(line).type == END_TOKEN)
+		while (*line->cursor && detect_meta(line).type == END_TOKEN)
 		{
 			line->cursor++;
 			token.slice.length++;
-			if (*line->cursor == ' ' || *line->cursor == '\t')
-				break ;
 		}
 	}
 	else
@@ -65,7 +81,7 @@ static t_token	consume_token(t_line *line)
 }
 
 /**
- * @brief Extract next token ot of the line.
+ * @brief Extract next token of of the line.
  * @details get_next_token() recognizes and returns one token at a time in a 
  * "input" of a line, moves the "cursor" by token length. Repeated calls for
  * the same line return next token in a line input, upon reading EOF END_TOKEN
@@ -84,8 +100,6 @@ t_token	get_next_token(t_line *line)
 		token.type = ERROR_TOKEN;
 		return (token);
 	}
-	while (*line->cursor == ' ' || *line->cursor == '\t')
-		line->cursor++;
 	if (*line->cursor == '\0')
 	{
 		token.type = END_TOKEN;
