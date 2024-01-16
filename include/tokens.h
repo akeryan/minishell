@@ -6,7 +6,7 @@
 /*   By: dabdygal <dabdygal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 14:27:29 by dabdygal          #+#    #+#             */
-/*   Updated: 2024/01/15 19:27:23 by dabdygal         ###   ########.fr       */
+/*   Updated: 2024/01/16 11:11:21 by dabdygal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@
 # define OP_EXPAN "$"
 # define OP_DOUBLE_QUOTE "\""
 # define OP_SINGLE_QUOTE "\'"
+# define OP_SPACE_CHAR ' '
+# define OP_TAB_CHAR '\t'
 
 /** Type of a token */
 typedef enum e_token_type
@@ -39,7 +41,8 @@ typedef enum e_token_type
 	EXPAN_TOKEN = 6,
 	DOUBLE_QUOTE_TOKEN = 7,
 	SINGLE_QUOTE_TOKEN = 8,
-	WORD_TOKEN = 9
+	WORD_TOKEN = 9,
+	BLANK_TOKEN = 10
 }	t_token_type;
 
 /** A slice of a string */
