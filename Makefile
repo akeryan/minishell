@@ -6,7 +6,7 @@
 #    By: dabdygal <dabdygal@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/15 15:43:23 by dabdygal          #+#    #+#              #
-#    Updated: 2024/01/15 19:09:38 by dabdygal         ###   ########.fr        #
+#    Updated: 2024/01/20 17:08:09 by dabdygal         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,7 +49,7 @@ CFLAGS = -Wall -Wextra -Werror -I $(INCLUDE_DIR) -I .
 # ************************************RULES*********************************** #
 
 $(BIN_NAME): $(addprefix $(LIB1_DIR)/,$(LIB1_NAME)) $(addprefix $(LIBFT_DIR)/,$(LIBFT_NAME)) $(addprefix $(MAIN_DIR)/,$(MAIN_FILE)) $(addprefix $(OBJ_DIR)/,$(OBJ_FILES)) $(addprefix $(INCLUDE_DIR)/,$(INCLUDE_FILES))
-	$(CC) $(CFLAGS) -lreadline $(addprefix $(MAIN_DIR)/,$(MAIN_FILE)) $(addprefix $(SRC_DIR)/,$(SRC_FILES)) $(addprefix $(LIBFT_DIR)/,$(LIBFT_NAME)) -o $(BIN_NAME)
+	$(CC) $(CFLAGS) $(addprefix $(MAIN_DIR)/,$(MAIN_FILE)) $(addprefix $(SRC_DIR)/,$(SRC_FILES)) $(addprefix $(LIBFT_DIR)/,$(LIBFT_NAME)) -lreadline -o $(BIN_NAME)
 
 $(addprefix $(LIB1_DIR)/,$(LIB1_NAME)): | $(addprefix $(LIB1_DIR)/,Makefile)
 	make -C $(LIB1_DIR)
