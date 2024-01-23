@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 16:14:32 by akeryan           #+#    #+#             */
-/*   Updated: 2024/01/23 16:59:41 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/01/23 17:07:26 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,10 @@ typedef enum e_node_type
 	LINEBREAK_NODE = 11,
 	NEWLINE_LIST_NODE = 12	
 } t_node_type;
+
+typedef struct s_node {
+	t_node_type		type;
+	t_node_value	data;
+} t_node;
 
 #endif
