@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 16:14:32 by akeryan           #+#    #+#             */
-/*   Updated: 2024/01/23 16:14:38 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/01/23 16:59:41 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@ typedef enum e_node_type
 	FILENAME_NODE = 8,
 	IO_HERE_NODE = 9,
 	HERE_END_NODE = 10,
-	LINEBREAK_NODE = 11	
+	LINEBREAK_NODE = 11,
+	NEWLINE_LIST_NODE = 12	
 } t_node_type;
 
 #endif
