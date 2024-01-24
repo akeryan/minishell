@@ -6,7 +6,7 @@
 /*   By: dabdygal <dabdygal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 14:27:29 by dabdygal          #+#    #+#             */
-/*   Updated: 2024/01/24 11:35:27 by dabdygal         ###   ########.fr       */
+/*   Updated: 2024/01/24 16:35:28 by dabdygal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include <unistd.h>
 
-/** Operator symbols */
+/** Operator symbols. Keep them as strings */
 # define OP_PIPE "|"
 # define OP_DLESS "<<"
 # define OP_DGREAT ">>"
@@ -26,7 +26,7 @@
 typedef enum e_token_type
 {
 	EOF_TOKEN = -1,
-	NEWLINE = 0,
+	NEWLINE_TOKEN = 0,
 	PIPE = 1,
 	DLESS = 2,
 	DGREAT = 3,
@@ -48,5 +48,8 @@ typedef struct s_token
 	t_token_type	type;
 	t_slice			slice;
 }	t_token;
+
+t_token	peek_token(void);
+t_token	consume_token(void);
 
 #endif

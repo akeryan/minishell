@@ -6,7 +6,7 @@
 #    By: dabdygal <dabdygal@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/15 15:43:23 by dabdygal          #+#    #+#              #
-#    Updated: 2024/01/20 17:08:09 by dabdygal         ###   ########.fr        #
+#    Updated: 2024/01/24 16:00:12 by dabdygal         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,8 +37,7 @@ INCLUDE_FILES = minishell.h \
 
 MAIN_FILE = main.c
 
-SRC_FILES = ft_readline.c \
-			get_next_token.c
+SRC_FILES = token_utils.c
 
 OBJ_FILES = $(SRC_FILES:.c=.o)
 
