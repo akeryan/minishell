@@ -6,14 +6,15 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 16:14:32 by akeryan           #+#    #+#             */
-/*   Updated: 2024/01/24 15:29:02 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/01/24 18:56:02 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef NODE_H
 #define NODE_H
 
-/** */
+#include "tokens.h"
+
 typedef enum e_node_type
 {
 	ERROR_NODE = -1,
@@ -32,9 +33,10 @@ typedef enum e_node_type
 	NEWLINE_LIST_NODE = 12	
 } t_node_type;
 
-typedef char	*t_word_value;
-typedef t_node	*t_cmd_name_value;
-typedef t_node	*t_cmd_word_value;
+typedef char*	t_word_value;
+typedef t_node*	t_cmd_name_value;
+typedef t_node*	t_cmd_word_value;
+typedef t_node*	t_filename_value;
 
 typedef struct s_node
 {
@@ -78,6 +80,7 @@ typedef struct s_redir_value
 
 typedef struct s_io_file_value
 {
+	t_node	*io_op;
 	t_node	*filename;
 } t_io_file_value;
 
@@ -85,12 +88,13 @@ typedef union u_node_value
 {
 	t_pipeline_value	pipeline;
 	t_cmd_value			cmd;
-	t_cmd_name_value	cmd;
+	t_cmd_name_value	cmd_name;
 	t_word_value		word;	
 	t_prefix_value		prefix;
 	t_sufix_value		sufix;
 	t_redir_value		io_redir;
 	t_io_file_value		io_file;
+	t_filename_value	filename;
 } t_node_value;
 
 #endif
