@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 16:14:32 by akeryan           #+#    #+#             */
-/*   Updated: 2024/01/24 19:01:04 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/01/24 19:02:50 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ typedef t_node*	t_cmd_name_value;
 typedef t_node*	t_cmd_word_value;
 typedef t_node*	t_filename_value;
 typedef char*	t_dless_value;
+typedef t_node*	t_here_end_value;
 
 typedef struct s_node
 {
@@ -103,6 +104,7 @@ typedef union u_node_value
 	t_io_file_value		io_file;
 	t_filename_value	filename;
 	t_dless_value		dless;
+	t_here_end_value	here_end;
 } t_node_value;
 
 #endif
