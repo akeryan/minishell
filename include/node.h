@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 16:14:32 by akeryan           #+#    #+#             */
-/*   Updated: 2024/01/23 17:07:26 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/01/23 17:15:50 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,14 @@ typedef enum e_node_type
 	NEWLINE_LIST_NODE = 12	
 } t_node_type;
 
-typedef struct s_node {
+typedef struct s_pipeline_value
+{
+	t_node *left;
+	t_node *right;
+} t_pipeline_value;
+
+typedef struct s_node
+{
 	t_node_type		type;
 	t_node_value	data;
 } t_node;
