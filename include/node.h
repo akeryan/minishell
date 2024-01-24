@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 16:14:32 by akeryan           #+#    #+#             */
-/*   Updated: 2024/01/23 17:15:50 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/01/24 15:04:23 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,16 +32,59 @@ typedef enum e_node_type
 	NEWLINE_LIST_NODE = 12	
 } t_node_type;
 
-typedef struct s_pipeline_value
-{
-	t_node *left;
-	t_node *right;
-} t_pipeline_value;
+typedef char	*t_word_value;
+typedef t_node	*t_cmd_name_value;
+typedef t_node	*t_cmd_word_value;
 
 typedef struct s_node
 {
 	t_node_type		type;
 	t_node_value	data;
 } t_node;
+
+typedef struct s_pipeline_value
+{
+	t_node	*cmd;
+	t_node	*next;
+} t_pipeline_value;
+
+typedef struct s_cmd_value
+{
+	t_node	*prefix;
+	t_node	*word;
+	t_node	*sufix;
+	t_node	*cmd_name;
+	t_node	*cmd_word;
+} t_cmd_value;
+
+typedef struct s_prefix_value
+{
+	t_node	*redir;
+	t_node	*next;
+} t_prefix_value;
+
+typedef struct s_sufix_value
+{
+	t_node	*io_redir;
+	t_node	*next;
+	t_node	*word;
+} t_sufix_value;
+
+typedef struct s_redir_value
+{
+	t_node	*io_file;
+	t_node	*io_here;
+} t_redir_value;
+
+typedef union u_node_value
+{
+	t_pipeline_value	pipeline;
+	t_cmd_value			cmd;
+	t_cmd_name_value	cmd;
+	t_word_value		word;	
+	t_prefix_value		prefix;
+	t_sufix_value		sufix;
+	t_redir_value		io_redir;
+} t_node_value;
 
 #endif
