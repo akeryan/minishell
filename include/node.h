@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 16:14:32 by akeryan           #+#    #+#             */
-/*   Updated: 2024/01/24 15:04:23 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/01/24 15:29:02 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ typedef struct s_cmd_value
 
 typedef struct s_prefix_value
 {
-	t_node	*redir;
+	t_node	*io_redir;
 	t_node	*next;
 } t_prefix_value;
 
@@ -76,6 +76,11 @@ typedef struct s_redir_value
 	t_node	*io_here;
 } t_redir_value;
 
+typedef struct s_io_file_value
+{
+	t_node	*filename;
+} t_io_file_value;
+
 typedef union u_node_value
 {
 	t_pipeline_value	pipeline;
@@ -85,6 +90,7 @@ typedef union u_node_value
 	t_prefix_value		prefix;
 	t_sufix_value		sufix;
 	t_redir_value		io_redir;
+	t_io_file_value		io_file;
 } t_node_value;
 
 #endif
