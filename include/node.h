@@ -40,7 +40,7 @@ typedef struct s_node
 {
 	char			*word;
 	t_node_type		node_type;
-	t_token_type	token_type;
+	t_token_type	redir_type;
 	struct s_node	*left;
 	struct s_node	*right;
 }	t_node;
