@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 16:14:32 by akeryan           #+#    #+#             */
-/*   Updated: 2024/01/25 15:35:33 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/01/25 15:42:12 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,12 @@ typedef enum e_node_type
 
 /**
  * Covers architectures of all types of nodes from e_node_type
- * - See the 'Grammar' document to distinguish between node structures
- * - e.g. 'COMMAND' node uitlizes the following attributes
- * -- 'left' for 'prefix' node
- * -- 'word' for 'command name'
- * -- 'right' for 'suffix' node
- * -- the rest of the attributes are left uninitialized;
+ * See the 'Grammar' document to distinguish between node structures
+ * e.g. 'COMMAND' node uitlizes the following attributes
+ * - 'left' for 'prefix' node
+ * - 'word' for 'command name'
+ * - 'right' for 'suffix' node
+ * - the rest of the attributes are left uninitialized;
 */
 typedef struct s_node
 {
