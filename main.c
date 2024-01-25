@@ -6,7 +6,7 @@
 /*   By: dabdygal <dabdygal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/25 19:21:52 by akeryan           #+#    #+#             */
-/*   Updated: 2024/01/15 19:36:05 by dabdygal         ###   ########.fr       */
+/*   Updated: 2024/01/24 16:36:25 by dabdygal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,30 +17,42 @@
 #include <stdlib.h>
 #include "tokens.h"
 
+static char	*token_type(t_token_type type)
+{
+	if (type == EOF_TOKEN)
+		return ("EOF");
+	else if (type == NEWLINE_TOKEN)
+		return ("NEWLINE");
+	else if (type == PIPE)
+		return ("PIPE");
+	else if (type == DLESS)
+		return ("DLESS");
+	else if (type == DGREAT)
+		return ("DGREAT");
+	else if (type == LESS)
+		return ("LESS");
+	else if (type == GREAT)
+		return ("GREAT");
+	else if (type == WORD)
+		return ("WORD");
+	return ("ERROR!!!");
+}
+
 int	main(void)
 {
-	t_line	line;
 	t_token	token;
 
 	while (1)
 	{
-		line = ft_readline(MSH_PROMPT);
-		if (line.input == NULL)
+		token = consume_token();
+		printf("%s(%zu) ", token_type(token.type), token.slice.length);
+		if (token.type == NEWLINE_TOKEN)
+			printf("\n");
+		if (token.type == EOF_TOKEN)
 		{
-			if (printf(EXIT_MSG) < 0)
-				return (EXIT_FAILURE);
+			printf(EXIT_MSG);
 			return (EXIT_SUCCESS);
 		}
-		add_history(line.input);
-		printf("The command entered: %s\n", line.input);
-		token.type = ERROR_TOKEN;
-		while (token.type != END_TOKEN)
-		{
-			token = get_next_token(&line);
-			printf("Token: %i; length: %zu\n", token.type, token.slice.length);
-		}
-		ft_free(line.input);
-		line.cursor = NULL;
 	}
 	return (EXIT_SUCCESS);
 }

@@ -6,7 +6,7 @@
 /*   By: dabdygal <dabdygal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 15:17:39 by dabdygal          #+#    #+#             */
-/*   Updated: 2024/01/12 15:22:51 by dabdygal         ###   ########.fr       */
+/*   Updated: 2024/01/24 15:40:27 by dabdygal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@
  * @param ptr A pointer to be freed.
  * @return Does not return anything.
 */
-void	ft_free(void *ptr)
+void	ft_free(void **ptr)
 {
-	free(ptr);
-	ptr = NULL;
+	free(*ptr);
+	*ptr = NULL;
 }

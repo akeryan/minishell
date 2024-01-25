@@ -6,7 +6,7 @@
 /*   By: dabdygal <dabdygal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 14:27:29 by dabdygal          #+#    #+#             */
-/*   Updated: 2024/01/16 11:11:21 by dabdygal         ###   ########.fr       */
+/*   Updated: 2024/01/24 16:35:28 by dabdygal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,35 +14,25 @@
 # define TOKENS_H
 
 # include <unistd.h>
-# include "minishell.h"
 
-/** Operator symbols */
+/** Operator symbols. Keep them as strings */
 # define OP_PIPE "|"
-# define OP_HERE_DOC "<<"
-# define OP_APP_REDIR ">>"
-# define OP_IN_REDIR "<"
-# define OP_OUT_REDIR ">"
-# define OP_EXPAN "$"
-# define OP_DOUBLE_QUOTE "\""
-# define OP_SINGLE_QUOTE "\'"
-# define OP_SPACE_CHAR ' '
-# define OP_TAB_CHAR '\t'
+# define OP_DLESS "<<"
+# define OP_DGREAT ">>"
+# define OP_LESS "<"
+# define OP_GREAT ">"
 
 /** Type of a token */
 typedef enum e_token_type
 {
-	ERROR_TOKEN = -1,
-	END_TOKEN = 0,
-	PIPE_TOKEN = 1,
-	HERE_DOC_TOKEN = 2,
-	APP_REDIR_TOKEN = 3,
-	IN_REDIR_TOKEN = 4,
-	OUT_REDIR_TOKEN = 5,
-	EXPAN_TOKEN = 6,
-	DOUBLE_QUOTE_TOKEN = 7,
-	SINGLE_QUOTE_TOKEN = 8,
-	WORD_TOKEN = 9,
-	BLANK_TOKEN = 10
+	EOF_TOKEN = -1,
+	NEWLINE_TOKEN = 0,
+	PIPE = 1,
+	DLESS = 2,
+	DGREAT = 3,
+	LESS = 4,
+	GREAT = 5,
+	WORD = 6
 }	t_token_type;
 
 /** A slice of a string */
@@ -59,6 +49,7 @@ typedef struct s_token
 	t_slice			slice;
 }	t_token;
 
-t_token	get_next_token(t_line *line);
+t_token	peek_token(void);
+t_token	consume_token(void);
 
 #endif
