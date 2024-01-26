@@ -6,16 +6,17 @@
 /*   By: dabdygal <dabdygal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/25 19:21:52 by akeryan           #+#    #+#             */
-/*   Updated: 2024/01/24 16:36:25 by dabdygal         ###   ########.fr       */
+/*   Updated: 2024/01/26 17:36:04 by dabdygal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "minishell.h"
 #include <stdio.h>
-#include "readline/history.h"
 #include <stdlib.h>
 #include "tokens.h"
+
+int	g_signal;
 
 static char	*token_type(t_token_type type)
 {

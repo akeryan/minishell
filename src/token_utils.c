@@ -6,7 +6,7 @@
 /*   By: dabdygal <dabdygal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 11:21:48 by dabdygal          #+#    #+#             */
-/*   Updated: 2024/01/24 16:42:16 by dabdygal         ###   ########.fr       */
+/*   Updated: 2024/01/26 14:45:04 by dabdygal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,12 +92,22 @@ static t_token	process_token(int consume)
 		cursor += token.slice.length;
 	return (token);
 }
-
+/**
+ * @brief Peek a current token from STDIN
+ * @brief Peeks a current token from readline() function
+ * @return Returns a recognised token of type t_token
+*/
 t_token	peek_token(void)
 {
 	return (process_token(0));
 }
 
+/**
+ * @brief Consume a current token from STDIN
+ * @brief Consumes a current token from readline() function and moves the
+ * cursor to the next token.
+ * @return Returns a recognised token of type t_token
+*/
 t_token	consume_token(void)
 {
 	return (process_token(1));
