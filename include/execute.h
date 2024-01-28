@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/28 20:03:09 by akeryan           #+#    #+#             */
-/*   Updated: 2024/01/28 20:05:23 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/01/28 20:20:27 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,5 +27,7 @@ typedef struct s_data
 	t_pid_node	*pid_list;
 	t_pipe_node	*pipe_list;
 }	t_data;
+
+void command(t_node *node, t_data *d);
 
 #endif
