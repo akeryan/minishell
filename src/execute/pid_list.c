@@ -6,45 +6,26 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/28 10:59:14 by akeryan           #+#    #+#             */
-/*   Updated: 2024/01/28 16:53:46 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/01/28 19:54:39 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stddef.h>
 #include <stdlib.h>
-# include <errno.h>
+#include <errno.h>
 #include "pid_list.h"
-
-
-/* prototype of the new_node() function */
-static t_pid_node *new_node(void);
-
-/**
- * @brief Creates a new	node of type t_pid_node and initializes it with the \
- * 	passed value 
- * @param pid value that the node is initialized with
- * @return A pointer to the newly created node
-*/
-t_pid_node *create_node(const unsigned int pid)
-{
-	t_pid_node	*new;
-
-	new = new_node();
-	new->pid = pid;
-	return (new);
-}
 
 /**
  * @brief Creates a new node of type t_pid_node and 
  * 	initializes it with default values:
- *	- pid = 0
- *	- next = NULL
+ *	pid = 0, next = NULL
  * @return	A pointer to the newly created node. If memory allocation fails \
  * the program exits with EXIT_FAILURE and doesn't return 
 */
-static t_pid_node *new_node(void)
+static t_pid_node	*new_node(void)
 {
-	t_pid_node *new_node;
+	t_pid_node	*new_node;
+
 	new_node = (t_pid_node *)malloc(sizeof(t_pid_node));
 	if (new_node == NULL)
 	{
@@ -65,7 +46,7 @@ static t_pid_node *new_node(void)
  * @return Pointer to the new 'head' of the list
  * Beaware of passing uninitilized arguments to the function
 */
-t_pid_node *add_node(t_pid_node *head, t_pid_node *node)
+t_pid_node	*add_node(t_pid_node *head, t_pid_node *node)
 {
 	if (node == NULL)
 		return (head);
@@ -79,9 +60,10 @@ t_pid_node *add_node(t_pid_node *head, t_pid_node *node)
  * @brief The memory occupied by the linked list of t_pid_node type
  * @param head A pointer to the head of the linked list
 */
-void free_pid_list (t_pid_node *head)
+void	free_pid_list(t_pid_node *head)
 {
 	t_pid_node	*tmp;
+
 	while (head != NULL)
 	{
 		tmp = head;

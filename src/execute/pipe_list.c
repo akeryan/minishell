@@ -6,13 +6,13 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/28 12:07:55 by akeryan           #+#    #+#             */
-/*   Updated: 2024/01/28 17:45:23 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/01/28 19:58:21 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stddef.h>
 #include <stdlib.h>
-# include <errno.h>
+#include <errno.h>
 #include "pipe_list.h"
 
 /**
@@ -23,9 +23,10 @@
  * @return	A pointer to the newly created node. If memory allocation fails \
  * the program exits with EXIT_FAILURE and doesn't return 
 */
-t_pipe_node *new_node(void)
+t_pipe_node	*new_pipe(void)
 {
-	t_pipe_node *new_node;
+	t_pipe_node	*new_node;
+
 	new_node = (t_pipe_node *)malloc(sizeof(t_pipe_node));
 	if (new_node == NULL)
 	{
@@ -47,7 +48,7 @@ t_pipe_node *new_node(void)
  * @return Pointer to the new 'head' of the list
  * Beaware of passing uninitilized arguments to the function
 */
-t_pipe_node *add_node(t_pipe_node *head, t_pipe_node *node)
+t_pipe_node	*add_pipe(t_pipe_node *head, t_pipe_node *node)
 {
 	if (node == NULL)
 		return (head);
