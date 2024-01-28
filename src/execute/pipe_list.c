@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/28 12:07:55 by akeryan           #+#    #+#             */
-/*   Updated: 2024/01/28 17:30:37 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/01/28 17:45:23 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,6 @@
 #include <stdlib.h>
 # include <errno.h>
 #include "pipe_list.h"
-
-/** Prototype of the new_node() function */
-static t_pipe_node *new_node(void);
 
 /**
  * @brief Creates a new node of type t_pipe_node and 
@@ -26,7 +23,7 @@ static t_pipe_node *new_node(void);
  * @return	A pointer to the newly created node. If memory allocation fails \
  * the program exits with EXIT_FAILURE and doesn't return 
 */
-static t_pipe_node *new_node(void)
+t_pipe_node *new_node(void)
 {
 	t_pipe_node *new_node;
 	new_node = (t_pipe_node *)malloc(sizeof(t_pipe_node));
