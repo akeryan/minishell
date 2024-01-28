@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/28 10:56:04 by akeryan           #+#    #+#             */
-/*   Updated: 2024/01/28 19:51:55 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/01/28 20:09:25 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ typedef struct s_pid_node
  * @return	A pointer to the newly created node. If memory allocation fails
  * the program exits with EXIT_FAILURE and doesn't return 
 */
-t_pid_node	*new_node(void);
+t_pid_node	*new_pid(void);
 
 /**
  * @brief Creates a new node of type t_pid_node and 
@@ -42,7 +42,7 @@ t_pid_node	*new_node(void);
  * @return	A pointer to the newly created node. If memory allocation fails
  * the program exits with EXIT_FAILURE and doesn't return 
 */
-t_pid_node	*add_node(t_pid_node *head, t_pid_node *pid_node);
+t_pid_node	*add_pid(t_pid_node *head, t_pid_node *pid_node);
 
 /**
  * @brief The memory occupied by the linked list of t_pid_node type
