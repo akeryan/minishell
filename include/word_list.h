@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 12:26:44 by akeryan           #+#    #+#             */
-/*   Updated: 2024/01/29 15:18:37 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/01/29 15:52:15 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ t_word_node	*new_word(char *str);
  * @param head Pointer to the first node of the list
  * @param node Pointer to the node that needs to be added to the list
 */
-void		add_word(t_word_node **head, t_word_node *word_node);
+void		add_word_back(t_word_node **head, t_word_node *word_node);
 
 /**
  * @brief Frees up the memory occupied by the linked list of t_word_node

@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 13:48:45 by akeryan           #+#    #+#             */
-/*   Updated: 2024/01/29 15:48:57 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/01/29 15:55:28 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,17 +44,25 @@ t_word_node	*new_word(char *str)
 }
 
 /**
- * @brief Adds node to the beginning of the list
+ * @brief Adds node to the end of the list
  * @param head Pointer to the first node of the list
  * @param node Pointer to the node that needs to be added to the list
 */
-void	add_word_front(t_word_node **head, t_word_node *node)
+void	add_word_back(t_word_node **head, t_word_node *node)
 {
+	t_word_node	*temp;
+
 	if (head)
 	{
-		if (*head && node)
-			node->next = *head;
-		*head = node;
+		if (!*head)
+			*head = node;
+		else
+		{
+			temp = *head;
+			while (temp -> next)
+				temp = temp -> next;
+			temp -> next = node;
+		}
 	}
 }
 
