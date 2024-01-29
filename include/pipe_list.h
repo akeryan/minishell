@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/28 12:03:48 by akeryan           #+#    #+#             */
-/*   Updated: 2024/01/29 14:51:14 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/01/29 15:17:42 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ typedef struct s_pipe_node
 
 /**
  * @brief Creates a new node of type t_pipe_node 
- * @return	A pointer to the newly created node. If memory allocation fails \
+ * @return	A pointer to the newly created node. If memory allocation fails
 */
 t_pipe_node	*new_pipe(void);
 
@@ -33,10 +33,10 @@ t_pipe_node	*new_pipe(void);
  * @param head Pointer to the first node of the list
  * @param node Pointer to the node that needs to be added to the list
 */
-void add_pipe_front(t_pipe_node *head, t_pipe_node *node);
+void		add_pipe_front(t_pipe_node *head, t_pipe_node *node);
 
 /**
- * @brief The memory occupied by the linked list of t_pid_node type
+ * @brief Frees up the memory occupied by the linked list of t_pipe_node type
  * @param head A pointer to the head of the linked list
 */
 void		free_pipe_list(t_pipe_node *head);

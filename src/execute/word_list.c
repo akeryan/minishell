@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 13:48:45 by akeryan           #+#    #+#             */
-/*   Updated: 2024/01/29 15:55:28 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/01/29 17:57:51 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ t_word_node	*new_empty_word(void)
  * @return Newly created node of t_word_node type
  */
 
-t_word_node	*new_word(char *str)
+t_word_node	*new_word(const char * const str)
 {
 	t_word_node	*new_node;
 
@@ -48,7 +48,7 @@ t_word_node	*new_word(char *str)
  * @param head Pointer to the first node of the list
  * @param node Pointer to the node that needs to be added to the list
 */
-void	add_word_back(t_word_node **head, t_word_node *node)
+void	add_word_back(const t_word_node ** const head, const t_word_node *node)
 {
 	t_word_node	*temp;
 
@@ -81,4 +81,23 @@ void	free_word_list(t_word_node *head)
 		free(tmp->word);
 		free(tmp);
 	}
+}
+
+/**
+ * @brief Counts number of nodes in the list
+ * @param head A pointer to the first node of the list
+ * @return A number of nodes in the list
+*/
+int		word_list_len(const t_word_node *head)
+{
+	t_word_node		*tmp;
+	unsigned int	len;
+
+	tmp = head;
+	while (tmp)
+	{
+		len++;
+		tmp = tmp->next;
+	}
+	return (len);
 }

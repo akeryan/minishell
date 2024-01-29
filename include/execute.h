@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/28 20:03:09 by akeryan           #+#    #+#             */
-/*   Updated: 2024/01/28 20:20:27 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/01/29 19:04:05 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ Copyright (C) 2007 Free Software Foundation, Inc. */
 #ifndef EXECUTE_H
 # define EXECUTE_H
 
-# include <unistd.h>
 # include "node.h"
 # include "pid_list.h"
 # include "pipe_list.h"
@@ -28,6 +27,9 @@ typedef struct s_data
 	t_pipe_node	*pipe_list;
 }	t_data;
 
-void command(t_node *node, t_data *d);
+void	command(const t_node *node, t_data *d);
+void	redir_read(char *file_name);
+void	redir_write(char *file_name);
+void	redir_append(char *file_name);
 
 #endif
