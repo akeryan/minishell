@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/28 12:03:48 by akeryan           #+#    #+#             */
-/*   Updated: 2024/01/28 20:00:11 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/01/29 14:51:14 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,24 +23,22 @@ typedef struct s_pipe_node
 }	t_pipe_node;
 
 /**
- * @brief Creates a new node of type t_pipe_node and 
- * 	initializes it with default values:
- *	- fd = [0, 0]
- *	- next = NULL
+ * @brief Creates a new node of type t_pipe_node 
  * @return	A pointer to the newly created node. If memory allocation fails \
- * the program exits with EXIT_FAILURE and doesn't return 
 */
 t_pipe_node	*new_pipe(void);
 
 /**
  * @brief Adds node to the beginning of the list
- * 	The function is used the following way:
- * 		head = add_node(head, new_node);
  * @param head Pointer to the first node of the list
  * @param node Pointer to the node that needs to be added to the list
- * @return Pointer to the new 'head' of the list
- * Beaware of passing uninitilized arguments to the function
 */
-t_pipe_node	*add_pipe(t_pipe_node *head, t_pipe_node *node);
+void add_pipe_front(t_pipe_node *head, t_pipe_node *node);
+
+/**
+ * @brief The memory occupied by the linked list of t_pid_node type
+ * @param head A pointer to the head of the linked list
+*/
+void		free_pipe_list(t_pipe_node *head);
 
 #endif

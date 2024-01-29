@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/28 10:56:04 by akeryan           #+#    #+#             */
-/*   Updated: 2024/01/28 20:09:25 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/01/29 14:50:07 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,24 +25,18 @@ typedef struct s_pid_node
 
 // ---------------- PROTOTYPES ----------------------------
 /**
- * @brief Creates a new node of type t_pid_node and 
- * 	initializes it with default values:
- *	- pid = 0
- *	- next = NULL
+ * @brief Creates a new node of type t_pid_node 
  * @return	A pointer to the newly created node. If memory allocation fails
  * the program exits with EXIT_FAILURE and doesn't return 
 */
 t_pid_node	*new_pid(void);
 
 /**
- * @brief Creates a new node of type t_pid_node and 
- * 	initializes it with default values:
- *	- pid = 0
- *	- next = NULL
- * @return	A pointer to the newly created node. If memory allocation fails
- * the program exits with EXIT_FAILURE and doesn't return 
+ * @brief Adds node to the beginning of the list
+ * @param head Pointer to the first node of the list
+ * @param node Pointer to the node that needs to be added to the list
 */
-t_pid_node	*add_pid(t_pid_node *head, t_pid_node *pid_node);
+void		add_pid_front(t_pid_node **head, t_pid_node *pid_node);
 
 /**
  * @brief The memory occupied by the linked list of t_pid_node type

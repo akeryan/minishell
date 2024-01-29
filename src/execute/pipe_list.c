@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/28 12:07:55 by akeryan           #+#    #+#             */
-/*   Updated: 2024/01/28 19:58:21 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/01/29 14:54:06 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,19 +41,31 @@ t_pipe_node	*new_pipe(void)
 
 /**
  * @brief Adds node to the beginning of the list
- * 	The function is used the following way:
- * 		head = add_node(head, new_node);
  * @param head Pointer to the first node of the list
  * @param node Pointer to the node that needs to be added to the list
- * @return Pointer to the new 'head' of the list
- * Beaware of passing uninitilized arguments to the function
 */
-t_pipe_node	*add_pipe(t_pipe_node *head, t_pipe_node *node)
+void	add_pipe_front(t_pipe_node **head, t_pipe_node *node)
 {
-	if (node == NULL)
-		return (head);
-	if (head == NULL)
-		return (node);
-	node->next = head;
-	return (node);
+	if (head)
+	{
+		if (*head && node)
+			node->next = *head;
+		*head = node;
+	}
+}
+
+/**
+ * @brief The memory occupied by the linked list of t_pipe_node type
+ * @param head A pointer to the head of the linked list
+*/
+void	free_pipe_list(t_pipe_node *head)
+{
+	t_pipe_node	*tmp;
+
+	while (head != NULL)
+	{
+		tmp = head;
+		head = head->next;
+		free(tmp);
+	}
 }
