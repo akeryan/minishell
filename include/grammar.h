@@ -6,7 +6,7 @@
 /*   By: dabdygal <dabdygal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 15:24:27 by dabdygal          #+#    #+#             */
-/*   Updated: 2024/01/26 17:22:53 by dabdygal         ###   ########.fr       */
+/*   Updated: 2024/01/29 18:37:01 by dabdygal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,5 +58,7 @@ typedef struct s_grammar
 
 t_ingredient	book_to_ing(t_node_type node);
 t_ingredient	token_to_ing(t_token_type token);
+t_grammar		setup_grammar(t_recipe *recipe);
+t_book			book_command(void);
 
 #endif

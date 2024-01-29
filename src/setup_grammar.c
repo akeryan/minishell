@@ -6,7 +6,7 @@
 /*   By: dabdygal <dabdygal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 15:36:53 by dabdygal          #+#    #+#             */
-/*   Updated: 2024/01/26 17:34:27 by dabdygal         ###   ########.fr       */
+/*   Updated: 2024/01/29 18:43:39 by dabdygal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,4 +84,6 @@ t_grammar	setup_grammar(t_recipe *recipe)
 
 	grammar.book[0] = book_program();
 	grammar.book[1] = book_pipeline();
+	grammar.book[2] = book_command();
+	grammar.book[3] = book_cmd_prefix();
 }
