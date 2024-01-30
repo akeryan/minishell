@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 16:27:16 by akeryan           #+#    #+#             */
-/*   Updated: 2024/01/30 15:42:11 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/01/30 17:23:30 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,24 +21,28 @@ void	program(t_node *head, t_data *d)
 	if (head == NULL)
 		return ;
 	newline_list(head->left);
-	pipeline(head->right, d);
+	pipeline(head->right, NULL, d);
 }
 
-void	pipeline(t_node *node, t_data *d)
+void	pipeline(t_node *node, int _pipe[2], t_data *d)
 {
-	int	pipe_fd[2];
+	int	pipe_[2];
 
 	if (node == NULL)
 		return ;
-	pipe(pipe_fd);
-	if (dup2(pipe_fd[0], STDIN_FILENO) == -1)
-		ft_printf(2, "%s\n", strerror(errno));
-	if (dup2(pipe_fd[1], STDOUT_FILENO) == -1)
-		ft_printf(2, "%s\n", strerror(errno));
-	close(pipe_fd[0]);
-	close(pipe_fd[1]);
+	if (_pipe)
+		if (dup2(_pipe[0], STDIN_FILENO) == -1)
+			ft_printf(2, "%s\n", strerror(errno));
+	if (node->right)
+	{
+		pipe(pipe_);
+		if (dup2(pipe_[1], STDOUT_FILENO) == -1)
+			ft_printf(2, "%s\n", strerror(errno));
+		close(pipe_[0]);
+		close(pipe_[1]);
+	}
 	command(node->left, d);
-	pipeline(node->right, d);
+	pipeline(node->right, pipe_, d);
 }
 
 void	prefix(t_node *node)
