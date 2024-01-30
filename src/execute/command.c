@@ -6,14 +6,19 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/28 10:50:20 by akeryan           #+#    #+#             */
-/*   Updated: 2024/01/29 19:08:21 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/01/30 14:00:16 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <errno.h>
+#include <stdlib.h>
 #include "node.h"
 #include "execute.h"
 #include "word_list.h"
 #include "libft.h"
+
+static void	close_pipes(const t_pipe_node *head);
+static char	**list_to_array(const t_word_node *head);
 
 void	command(const t_node *node, t_data * const d)
 {
@@ -30,7 +35,7 @@ void	command(const t_node *node, t_data * const d)
 	{
 		prefix(node->left);
 		suffix(node->right, args_list);
-		//close pipes
+		close_pipes(d->pid_list);
 		argv = list_to_array(args_list);
 		free_word_list(args_list);
 		args_list = NULL;
@@ -62,6 +67,10 @@ static char	**list_to_array(const t_word_node *head)
 	return (arr);
 }
 
+/**
+ * @brief Closes all the listed pipes
+ * @param head The head of the list
+*/
 static void	close_pipes(const t_pipe_node *head) 
 {
 	while (head)
@@ -72,8 +81,18 @@ static void	close_pipes(const t_pipe_node *head)
 	}
 }
 
+/**
+ * @brief Executes command with execve system utility
+ * @param cmd_name Name of the command to be executed
+ * @param argv Arguments of the command
+ * @param d->path Full path to the command
+ * @param d->env Environmental variable of the parent process
+*/
 void ft_execve(char *cmd_name, char **argv, t_data *d)
 {
-	
-	
+	d->path = get_cmd_path(cmd_name, d->env);
+	error_check(d->path, "get_cmd_path() failed", PTR);
+	execve(d->path, argv, d->env);
+	ft_printf(2, "Error: execve in execve_cmd: %s\n", strerror(errno));
+	exit(EXIT_FAILURE);
 }
