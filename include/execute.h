@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/28 20:03:09 by akeryan           #+#    #+#             */
-/*   Updated: 2024/01/29 19:04:05 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/01/30 13:36:13 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,6 @@ void	command(const t_node *node, t_data *d);
 void	redir_read(char *file_name);
 void	redir_write(char *file_name);
 void	redir_append(char *file_name);
+char	*get_cmd_path(char *cmd, char **env);
 
 #endif
