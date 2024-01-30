@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/28 20:03:09 by akeryan           #+#    #+#             */
-/*   Updated: 2024/01/30 13:47:04 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/01/30 15:42:49 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ typedef struct s_data
 {
 	char		**env;
 	t_pid_node	*pid_list;
-	t_pipe_node	*pipe_list;
 	char		*path;
 }	t_data;
 
