@@ -6,7 +6,7 @@
 /*   By: dabdygal <dabdygal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 15:24:27 by dabdygal          #+#    #+#             */
-/*   Updated: 2024/01/29 18:37:01 by dabdygal         ###   ########.fr       */
+/*   Updated: 2024/01/31 16:03:10 by dabdygal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ typedef union u_ing_data
 
 typedef struct s_ingredient
 {
-	int			optional;
 	t_ingtype	type;
 	t_ing_data	ing_data;
 }	t_ingredient;
@@ -56,9 +55,13 @@ typedef struct s_grammar
 	t_book	book[BOOKS_NUMBER];
 }	t_grammar;
 
+t_grammar		setup_grammar(void);
 t_ingredient	book_to_ing(t_node_type node);
 t_ingredient	token_to_ing(t_token_type token);
-t_grammar		setup_grammar(t_recipe *recipe);
 t_book			book_command(void);
+t_book			book_cmd_prefix(void);
+t_book			book_cmd_suffix(void);
+t_book			book_io_redir(void);
+t_book			book_newline_list(void);
 
 #endif

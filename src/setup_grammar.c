@@ -6,7 +6,7 @@
 /*   By: dabdygal <dabdygal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 15:36:53 by dabdygal          #+#    #+#             */
-/*   Updated: 2024/01/29 18:43:39 by dabdygal         ###   ########.fr       */
+/*   Updated: 2024/01/31 16:19:17 by dabdygal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,6 @@ t_ingredient	book_to_ing(t_node_type node)
 	t_ingredient	ing;
 
 	ing.type = BOOK;
-	ing.optional = 0;
-	if (node == NEWLINE_LIST)
-		ing.optional = 1;
 	ing.ing_data.book_type = node;
 	return (ing);
 }
@@ -29,7 +26,6 @@ t_ingredient	token_to_ing(t_token_type token)
 	t_ingredient	ing;
 
 	ing.type = TOKEN;
-	ing.optional = 0;
 	ing.ing_data.token = token;
 	return (ing);
 }
@@ -78,7 +74,14 @@ static t_book	book_pipeline(void)
 	return (pipeline);
 }
 
-t_grammar	setup_grammar(t_recipe *recipe)
+/**
+ * @brief Sets up grammar rules.
+ * @details Sets up grammar rules as a respective structure.
+ * Any token may be considered as "EMPTY" token.
+ * @return Returns a t_grammar structure with rules setup as substructures.
+ * @warning Handle "EMPTY" token in parser, as tokenizer may not recignize it.
+*/
+t_grammar	setup_grammar(void)
 {
 	t_grammar	grammar;
 
@@ -86,4 +89,8 @@ t_grammar	setup_grammar(t_recipe *recipe)
 	grammar.book[1] = book_pipeline();
 	grammar.book[2] = book_command();
 	grammar.book[3] = book_cmd_prefix();
+	grammar.book[4] = book_cmd_suffix();
+	grammar.book[5] = book_io_redir();
+	grammar.book[6] = book_newline_list();
+	return (grammar);
 }

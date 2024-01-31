@@ -6,7 +6,7 @@
 /*   By: dabdygal <dabdygal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 14:27:29 by dabdygal          #+#    #+#             */
-/*   Updated: 2024/01/26 14:45:11 by dabdygal         ###   ########.fr       */
+/*   Updated: 2024/01/31 15:39:29 by dabdygal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,8 @@ typedef enum e_token_type
 	DGREAT = 3,
 	LESS = 4,
 	GREAT = 5,
-	WORD = 6
+	WORD = 6,
+	EMPTY = 7
 }	t_token_type;
 
 /** A slice of a string */

@@ -6,7 +6,7 @@
 #    By: dabdygal <dabdygal@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/15 15:43:23 by dabdygal          #+#    #+#              #
-#    Updated: 2024/01/26 14:41:35 by dabdygal         ###   ########.fr        #
+#    Updated: 2024/01/31 16:08:48 by dabdygal         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,7 +37,9 @@ INCLUDE_FILES = minishell.h \
 
 MAIN_FILE = main.c
 
-SRC_FILES = token_utils.c
+SRC_FILES = token_utils.c \
+			setup_grammar.c \
+			setup_grammar_utils.c
 
 OBJ_FILES = $(SRC_FILES:.c=.o)
 

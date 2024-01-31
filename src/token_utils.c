@@ -6,7 +6,7 @@
 /*   By: dabdygal <dabdygal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 11:21:48 by dabdygal          #+#    #+#             */
-/*   Updated: 2024/01/26 14:45:04 by dabdygal         ###   ########.fr       */
+/*   Updated: 2024/01/31 16:17:19 by dabdygal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,13 +85,14 @@ static t_token	process_token(int consume)
 	token.slice.length = token_len(cursor, token.type);
 	if (consume > 0 && cursor && *cursor == '\0')
 	{
-		ft_free((void**) &line);
+		ft_free((void **) &line);
 		cursor = NULL;
 	}
 	else if (consume > 0 && cursor && *cursor != '\0')
 		cursor += token.slice.length;
 	return (token);
 }
+
 /**
  * @brief Peek a current token from STDIN
  * @brief Peeks a current token from readline() function

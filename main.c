@@ -6,7 +6,7 @@
 /*   By: dabdygal <dabdygal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/25 19:21:52 by akeryan           #+#    #+#             */
-/*   Updated: 2024/01/26 17:36:04 by dabdygal         ###   ########.fr       */
+/*   Updated: 2024/01/31 16:12:28 by dabdygal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "minishell.h"
 #include <stdio.h>
 #include <stdlib.h>
-#include "tokens.h"
+#include "grammar.h"
 
 int	g_signal;
 
@@ -41,8 +41,10 @@ static char	*token_type(t_token_type type)
 
 int	main(void)
 {
-	t_token	token;
+	t_token		token;
+	t_grammar	grammar;
 
+	grammar = setup_grammar();
 	while (1)
 	{
 		token = consume_token();
