@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 16:27:16 by akeryan           #+#    #+#             */
-/*   Updated: 2024/01/30 17:23:30 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/01/31 19:57:44 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,8 @@ void	pipeline(t_node *node, int _pipe[2], t_data *d)
 		close(pipe_[1]);
 	}
 	command(node->left, d);
-	pipeline(node->right, pipe_, d);
+	if (node->right)
+		pipeline(node->right, pipe_, d);
 }
 
 void	prefix(t_node *node)
@@ -74,7 +75,10 @@ void redirect(t_node *node)
 	if (node->redir_type == DLESS)
 		return here_doc();//???????
 }
-//char **newline(t_node *node)
-//{
 
-//}
+void newline_list(t_node *node)
+{
+	if (node == NULL)
+		return ;
+	newline_list(node->left);
+}

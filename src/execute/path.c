@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 11:11:56 by akeryan           #+#    #+#             */
-/*   Updated: 2024/01/30 13:34:53 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/01/31 17:58:06 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,29 +14,25 @@
 #include "execute.h"
 
 static char	*cmd_in_path(char *path, char *cmd);
-static int	get_path_indx(char **env);
+static int	get_path_indx(void);
 
 /**
  * @brief Finds the location of the utility on the system
  * @param cmd Name of the utility
- * @param env Environmental variables of the process
  * @return Path to the location of the utility
 */
-char	*get_cmd_path(char *cmd, char **env)
+char	*get_cmd_path(char *cmd)
 {
 	char	**paths;
 	char	*pth;
-	int		loc;
 	int		i;
 
 	if (cmd == NULL)
 	{
 		ft_printf(2, "Error: command is empty\n");
-		exit(EXIT_FAILURE);
+		return (NULL);
 	}
-	loc = get_path_indx(env);
-	//error_check(&loc, "No PATH: get_path_indx()", INT);
-	paths = ft_split(env[loc], ':');
+	paths = ft_split(getenv("PATH"), ':');
 	//error_check(paths, "Memory allocation failed in ft_split()", PTR);
 	i = 0;
 	while (paths[++i])
@@ -50,7 +46,7 @@ char	*get_cmd_path(char *cmd, char **env)
 	}
 	//ft_printf(2, "Error: command not found: %s\n", cmd);
 	free_split(paths);
-	exit(EXIT_FAILURE);
+	return (NULL);	
 }
 
 /**
@@ -72,25 +68,4 @@ static char	*cmd_in_path(char *path, char *cmd)
 		return (pth[1]);
 	free(pth[1]);
 	return (NULL);
-}
-
-/**
- * @brief Locates the index of the string element in 'env' starting with PATH
- * @param env Pointer to the environmental variables of the process
- * @return Index of 'PATH' string in 'env'
-*/
-static int	get_path_indx(char **env)
-{
-	int	i;
-	int	loc;
-
-	i = 0;
-	while (env[i])
-	{
-		loc = ft_strncmp(env[i], "PATH", 4);
-		if (loc == 0)
-			return (i);
-		i++;
-	}
-	return (-1);
 }
