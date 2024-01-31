@@ -6,7 +6,7 @@
 /*   By: dabdygal <dabdygal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 15:24:27 by dabdygal          #+#    #+#             */
-/*   Updated: 2024/01/31 16:03:10 by dabdygal         ###   ########.fr       */
+/*   Updated: 2024/01/31 17:09:31 by dabdygal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ typedef struct s_recipe
 typedef struct s_book
 {
 	int				size;
+	t_node_type		type;
 	t_recipe		recipe[MAX_RECIPES];
 }	t_book;
 

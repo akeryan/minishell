@@ -6,7 +6,7 @@
 /*   By: dabdygal <dabdygal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 18:18:53 by dabdygal          #+#    #+#             */
-/*   Updated: 2024/01/31 16:01:04 by dabdygal         ###   ########.fr       */
+/*   Updated: 2024/01/31 17:12:52 by dabdygal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ t_book	book_command(void)
 {
 	t_book	command;
 
+	command.type = COMMAND;
 	command.size = 5;
 	command.recipe[0].size = 3;
 	command.recipe[0].ing[0] = book_to_ing(PREFIX);
@@ -49,6 +50,7 @@ t_book	book_cmd_prefix(void)
 {
 	t_book	cmd_prefix;
 
+	cmd_prefix.type = PREFIX;
 	cmd_prefix.size = 2;
 	cmd_prefix.recipe[0].size = 1;
 	cmd_prefix.recipe[0].ing[0] = book_to_ing(IO_REDIR);
@@ -68,6 +70,7 @@ t_book	book_cmd_suffix(void)
 {
 	t_book	cmd_suffix;
 
+	cmd_suffix.type = SUFFIX;
 	cmd_suffix.size = 4;
 	cmd_suffix.recipe[0].size = 1;
 	cmd_suffix.recipe[0].ing[0] = book_to_ing(IO_REDIR);
@@ -92,6 +95,7 @@ t_book	book_io_redir(void)
 {
 	t_book	io_redir;
 
+	io_redir.type = IO_REDIR;
 	io_redir.size = 4;
 	io_redir.recipe[0].size = 2;
 	io_redir.recipe[0].ing[0] = token_to_ing(LESS);
@@ -117,6 +121,7 @@ t_book	book_newline_list(void)
 {
 	t_book	newline_list;
 
+	newline_list.type = NEWLINE_LIST;
 	newline_list.size = 3;
 	newline_list.recipe[0].size = 1;
 	newline_list.recipe[0].ing[0] = token_to_ing(NEWLINE_TOKEN);
