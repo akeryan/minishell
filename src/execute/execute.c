@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 16:27:16 by akeryan           #+#    #+#             */
-/*   Updated: 2024/01/31 19:57:44 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/02/01 15:59:41 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,17 @@
 #include "execute.h"
 #include "word_list.h"
 #include "redirect.h"
+#include "ft_printf.h"
 
-void	program(t_node *head, t_data *d)
+void	program(t_node *head)
 {
+	t_data	data;
+
 	if (head == NULL)
 		return ;
 	newline_list(head->left);
-	pipeline(head->right, NULL, d);
+	pipeline(head->right, NULL, &data);
+	free_pid_list(data.pid_list);
 }
 
 void	pipeline(t_node *node, int _pipe[2], t_data *d)

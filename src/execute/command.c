@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/28 10:50:20 by akeryan           #+#    #+#             */
-/*   Updated: 2024/01/31 17:59:39 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/02/01 18:04:46 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include "execute.h"
 #include "word_list.h"
 #include "libft.h"
+#include "error.h"
 
 static int ft_execve(char *cmd_name, char **argv);
 static char	**list_to_array(const t_word_node *head);
@@ -53,10 +54,21 @@ static int ft_execve(char *cmd_name, char **argv)
 {
 	char	*path;
 
+	if (ft_strchr(cmd_name, '/'))
+	{
+		if(access(cmd_name, F_OK) == 0)
+			execve(cmd_name, argv, NULL);
+		else
+			ft_printf(2, "%s: %s: %s\n", MSH_NAME, cmd_name, NO_CMD);//STOPPED HERE (Feb 1, 6pm)
+	}
+
 	path = get_cmd_path(cmd_name);
 	//error_check(path, "get_cmd_path() failed", PTR);
 	if (!path)
+	{
+		ft_printf(2, "%s: %s: %s\n", MSH_NAME, cmd_name, NO_CMD);
 		return (-1);
+	}
 	execve(path, argv, NULL);
 	ft_printf(2, "Error: execve in execve_cmd: %s\n", strerror(errno));
 	free(path);
