@@ -6,13 +6,13 @@
 /*   By: dabdygal <dabdygal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 17:09:25 by dabdygal          #+#    #+#             */
-/*   Updated: 2023/07/10 15:05:16 by dabdygal         ###   ########.fr       */
+/*   Updated: 2024/02/01 14:45:55 by dabdygal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stddef.h>
 
-static size_t	ft_strlen(const char *s)
+static size_t	fun_strlen(const char *s)
 {
 	size_t	i;
 
@@ -29,7 +29,7 @@ char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
 
 	if (*needle == '\0')
 		return ((char *) haystack);
-	needle_size = ft_strlen(needle);
+	needle_size = fun_strlen(needle);
 	while (len && *haystack && len >= needle_size)
 	{
 		if (*haystack == *needle)

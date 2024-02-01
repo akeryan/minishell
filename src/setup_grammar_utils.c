@@ -6,7 +6,7 @@
 /*   By: dabdygal <dabdygal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 18:18:53 by dabdygal          #+#    #+#             */
-/*   Updated: 2024/02/01 11:47:15 by dabdygal         ###   ########.fr       */
+/*   Updated: 2024/02/01 14:10:17 by dabdygal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,11 +51,10 @@ t_book	book_cmd_prefix(void)
 	t_book	cmd_prefix;
 
 	cmd_prefix.type = PREFIX;
-	cmd_prefix.size = 2;	
+	cmd_prefix.size = 2;
 	cmd_prefix.recipe[0].size = 2;
 	cmd_prefix.recipe[0].ing[0] = book_to_ing(IO_REDIR);
 	cmd_prefix.recipe[0].ing[1] = book_to_ing(PREFIX);
-
 	cmd_prefix.recipe[1].size = 1;
 	cmd_prefix.recipe[1].ing[0] = book_to_ing(IO_REDIR);
 	return (cmd_prefix);
