@@ -6,7 +6,7 @@
 /*   By: dabdygal <dabdygal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 15:36:53 by dabdygal          #+#    #+#             */
-/*   Updated: 2024/01/31 19:04:52 by dabdygal         ###   ########.fr       */
+/*   Updated: 2024/02/01 11:40:38 by dabdygal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ t_ingredient	token_to_ing(t_token_type token)
 }
 
 /**
- * program	: newline_list
- * 			| newline_list pipeline
+ * program	: newline_list pipeline
+ * 			| newline_list
 */
 static t_book	book_program(void)
 {
@@ -53,7 +53,7 @@ static t_book	book_program(void)
 }
 
 /**
- * pipeline	: command
+ * pipeline	: command	NEWLINE
  * 			| command	PIPE	newline_list	pipeline
 */
 static t_book	book_pipeline(void)
@@ -63,8 +63,9 @@ static t_book	book_pipeline(void)
 	pipeline.type = PIPELINE;
 	pipeline.size = 2;
 	{
-		pipeline.recipe[0].size = 1;
+		pipeline.recipe[0].size = 2;
 		pipeline.recipe[0].ing[0] = book_to_ing(COMMAND);
+		pipeline.recipe[0].ing[1] = token_to_ing(NEWLINE_TOKEN);
 	}
 	{
 		pipeline.recipe[1].size = 4;

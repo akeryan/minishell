@@ -6,7 +6,7 @@
 /*   By: dabdygal <dabdygal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 18:18:53 by dabdygal          #+#    #+#             */
-/*   Updated: 2024/01/31 17:12:52 by dabdygal         ###   ########.fr       */
+/*   Updated: 2024/02/01 11:47:15 by dabdygal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,8 @@ t_book	book_command(void)
 	return (command);
 }
 /* 
-cmd_prefix	: io_redirect
-            | io_redirect  cmd_prefix
+cmd_prefix	: io_redirect	cmd_prefix
+            | io_redirect
  */
 
 t_book	book_cmd_prefix(void)
@@ -51,20 +51,21 @@ t_book	book_cmd_prefix(void)
 	t_book	cmd_prefix;
 
 	cmd_prefix.type = PREFIX;
-	cmd_prefix.size = 2;
-	cmd_prefix.recipe[0].size = 1;
+	cmd_prefix.size = 2;	
+	cmd_prefix.recipe[0].size = 2;
 	cmd_prefix.recipe[0].ing[0] = book_to_ing(IO_REDIR);
-	cmd_prefix.recipe[1].size = 2;
+	cmd_prefix.recipe[0].ing[1] = book_to_ing(PREFIX);
+
+	cmd_prefix.recipe[1].size = 1;
 	cmd_prefix.recipe[1].ing[0] = book_to_ing(IO_REDIR);
-	cmd_prefix.recipe[1].ing[1] = book_to_ing(PREFIX);
 	return (cmd_prefix);
 }
 
 /*
-cmd_suffix	: io_redirect
-            | io_redirect	cmd_suffix
-            | WORD
+cmd_suffix	: io_redirect	cmd_suffix
+            | io_redirect
             | WORD			cmd_suffix
+            | WORD
 */
 t_book	book_cmd_suffix(void)
 {
@@ -72,16 +73,16 @@ t_book	book_cmd_suffix(void)
 
 	cmd_suffix.type = SUFFIX;
 	cmd_suffix.size = 4;
-	cmd_suffix.recipe[0].size = 1;
+	cmd_suffix.recipe[0].size = 2;
 	cmd_suffix.recipe[0].ing[0] = book_to_ing(IO_REDIR);
-	cmd_suffix.recipe[1].size = 2;
+	cmd_suffix.recipe[0].ing[1] = book_to_ing(SUFFIX);
+	cmd_suffix.recipe[1].size = 1;
 	cmd_suffix.recipe[1].ing[0] = book_to_ing(IO_REDIR);
-	cmd_suffix.recipe[1].ing[1] = book_to_ing(SUFFIX);
-	cmd_suffix.recipe[2].size = 1;
+	cmd_suffix.recipe[2].size = 2;
 	cmd_suffix.recipe[2].ing[0] = token_to_ing(WORD);
-	cmd_suffix.recipe[3].size = 2;
+	cmd_suffix.recipe[2].ing[1] = book_to_ing(SUFFIX);
+	cmd_suffix.recipe[3].size = 1;
 	cmd_suffix.recipe[3].ing[0] = token_to_ing(WORD);
-	cmd_suffix.recipe[3].ing[1] = book_to_ing(SUFFIX);
 	return (cmd_suffix);
 }
 
@@ -113,8 +114,8 @@ t_book	book_io_redir(void)
 }
 
 /*
-newline_list	: NEWLINE
-                | NEWLINE	newline_list
+newline_list	: NEWLINE	newline_list
+                | NEWLINE
                 | empty
 */
 t_book	book_newline_list(void)
@@ -123,11 +124,11 @@ t_book	book_newline_list(void)
 
 	newline_list.type = NEWLINE_LIST;
 	newline_list.size = 3;
-	newline_list.recipe[0].size = 1;
+	newline_list.recipe[0].size = 2;
 	newline_list.recipe[0].ing[0] = token_to_ing(NEWLINE_TOKEN);
-	newline_list.recipe[1].size = 2;
+	newline_list.recipe[0].ing[1] = book_to_ing(NEWLINE_LIST);
+	newline_list.recipe[1].size = 1;
 	newline_list.recipe[1].ing[0] = token_to_ing(NEWLINE_TOKEN);
-	newline_list.recipe[1].ing[1] = book_to_ing(NEWLINE_LIST);
 	newline_list.recipe[2].size = 1;
 	newline_list.recipe[2].ing[0] = token_to_ing(EMPTY);
 	return (newline_list);
