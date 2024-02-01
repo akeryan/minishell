@@ -1,23 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse.h                                            :+:      :+:    :+:   */
+/*   erase_node.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dabdygal <dabdygal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/01 15:00:39 by dabdygal          #+#    #+#             */
-/*   Updated: 2024/02/01 16:29:15 by dabdygal         ###   ########.fr       */
+/*   Created: 2024/02/01 15:37:12 by dabdygal          #+#    #+#             */
+/*   Updated: 2024/02/01 15:42:39 by dabdygal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PARSE_H
-# define PARSE_H
+#include "node.h"
+#include "libft.h"
 
-# include "grammar.h"
-
-t_node	*parse(t_node_type node_type, t_grammar *grammar);
-char	*here_file(t_token token);
-void	erase_node(t_node **node);
-char	*here_file(t_token token);
-
-#endif
+void	erase_node(t_node **node)
+{
+	ft_free(&(*node)->word);
+	ft_free(&(*node)->left);
+	ft_free(&(*node)->newl_ptr);
+	ft_free(&(*node)->right);
+	ft_free(node);
+}

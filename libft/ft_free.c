@@ -6,7 +6,7 @@
 /*   By: dabdygal <dabdygal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 15:17:39 by dabdygal          #+#    #+#             */
-/*   Updated: 2024/01/24 15:40:27 by dabdygal         ###   ########.fr       */
+/*   Updated: 2024/02/01 15:38:58 by dabdygal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 */
 void	ft_free(void **ptr)
 {
-	free(*ptr);
+	if (*ptr)
+		free(*ptr);
 	*ptr = NULL;
 }

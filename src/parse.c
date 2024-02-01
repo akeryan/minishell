@@ -6,12 +6,13 @@
 /*   By: dabdygal <dabdygal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 14:42:18 by dabdygal          #+#    #+#             */
-/*   Updated: 2024/02/01 14:59:40 by dabdygal         ###   ########.fr       */
+/*   Updated: 2024/02/01 16:28:26 by dabdygal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "grammar.h"
 #include "libft.h"
+#include "parse.h"
 #include <stdlib.h>
 #include <errno.h>
 
@@ -89,17 +90,16 @@ static int	fill_node(t_node *node, t_book *book, t_grammar *grammar)
 	int				j;
 
 	i = 0;
+	j = 0;
 	while (i < book->size)
 	{
-		j = 0;
 		while (j < book->recipe[i].size)
 		{
 			if (!parse_ing(&book->recipe[i].ing[j], node, grammar))
 			{
-				if (errno == 0)
-					break ;
-				else
+				if (errno != 0)
 					return (0);
+				break ;
 			}
 			j++;
 		}
@@ -129,7 +129,7 @@ t_node	*parse(t_node_type node_type, t_grammar *grammar)
 	book = find_book(node_type, grammar);
 	if (!book || !fill_node(node, book, grammar))
 	{
-		ft_free(&node);
+		erase_node(&node);
 		return (NULL);
 	}
 	return (node);
