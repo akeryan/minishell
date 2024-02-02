@@ -6,7 +6,7 @@
 /*   By: dabdygal <dabdygal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 11:21:48 by dabdygal          #+#    #+#             */
-/*   Updated: 2024/01/31 16:17:19 by dabdygal         ###   ########.fr       */
+/*   Updated: 2024/02/02 20:24:28 by dabdygal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include "minishell.h"
 #include "readline/readline.h"
 #include "readline/history.h"
+#include <errno.h>
 
 static size_t	token_len(const char *cursor, t_token_type type)
 {
@@ -75,6 +76,7 @@ static t_token	process_token(int consume)
 	if (!line || !cursor)
 	{
 		line = readline(MSH_PROMPT);
+		errno = 0;
 		add_history(line);
 		cursor = line;
 	}

@@ -6,7 +6,7 @@
 /*   By: dabdygal <dabdygal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 14:42:18 by dabdygal          #+#    #+#             */
-/*   Updated: 2024/02/01 16:28:26 by dabdygal         ###   ########.fr       */
+/*   Updated: 2024/02/02 20:28:14 by dabdygal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include "parse.h"
 #include <stdlib.h>
 #include <errno.h>
+#include <stdio.h>
 
 static	t_book	*find_book(t_node_type node_type, t_grammar *grammar)
 {
@@ -95,7 +96,7 @@ static int	fill_node(t_node *node, t_book *book, t_grammar *grammar)
 	{
 		while (j < book->recipe[i].size)
 		{
-			if (!parse_ing(&book->recipe[i].ing[j], node, grammar))
+			if (parse_ing(&book->recipe[i].ing[j], node, grammar) == 0)
 			{
 				if (errno != 0)
 					return (0);

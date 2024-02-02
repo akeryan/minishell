@@ -6,7 +6,7 @@
 #    By: dabdygal <dabdygal@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/15 15:43:23 by dabdygal          #+#    #+#              #
-#    Updated: 2024/01/31 16:08:48 by dabdygal         ###   ########.fr        #
+#    Updated: 2024/02/02 18:34:22 by dabdygal         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,13 +33,20 @@ LIBFT_NAME = libft.a
 LIB1_NAME = libreadline.a
 
 INCLUDE_FILES = minishell.h \
-				tokens.h
+				tokens.h \
+				grammar.h \
+				libft.h \
+				node.h \
+				parse.h
 
 MAIN_FILE = main.c
 
 SRC_FILES = token_utils.c \
 			setup_grammar.c \
-			setup_grammar_utils.c
+			setup_grammar_utils.c \
+			erase_node.c \
+			here_file.c \
+			parse.c
 
 OBJ_FILES = $(SRC_FILES:.c=.o)
 
