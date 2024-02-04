@@ -6,7 +6,7 @@
 /*   By: dabdygal <dabdygal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 15:02:17 by dabdygal          #+#    #+#             */
-/*   Updated: 2024/02/02 18:46:56 by dabdygal         ###   ########.fr       */
+/*   Updated: 2024/02/04 23:21:57 by dabdygal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static int	create_open_file(char **ptr)
 		ft_free((void **) &num);
 		if (!*ptr)
 			return (-1);
-		fd = open(*ptr, O_RDONLY | O_CREAT | O_EXCL, 0000666);
+		fd = open(*ptr, O_RDWR | O_CREAT | O_EXCL, 0666);
 		if (fd < 0)
 		{
 			ft_free((void **) ptr);

@@ -6,7 +6,7 @@
 /*   By: dabdygal <dabdygal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 11:21:48 by dabdygal          #+#    #+#             */
-/*   Updated: 2024/02/02 20:24:28 by dabdygal         ###   ########.fr       */
+/*   Updated: 2024/02/04 22:37:14 by dabdygal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,51 +47,57 @@ static size_t	token_len(const char *cursor, t_token_type type)
 }
 
 //Order of check is important. Do the longest strings first.
-static t_token_type	typify_token(const char *cursor)
+static t_token	define_token(char *cursor)
 {
+	t_token	token;
+
 	if (!cursor)
-		return (EOF_TOKEN);
+		token.type = EOF_TOKEN;
 	else if (*cursor == '\0')
-		return (NEWLINE_TOKEN);
+		token.type = NEWLINE_TOKEN;
 	else if (!ft_strncmp(cursor, OP_PIPE, ft_strlen(OP_PIPE)))
-		return (PIPE);
+		token.type = PIPE;
 	else if (!ft_strncmp(cursor, OP_DLESS, ft_strlen(OP_DLESS)))
-		return (DLESS);
+		token.type = DLESS;
 	else if (!ft_strncmp(cursor, OP_DGREAT, ft_strlen(OP_DGREAT)))
-		return (DGREAT);
+		token.type = DGREAT;
 	else if (!ft_strncmp(cursor, OP_LESS, ft_strlen(OP_LESS)))
-		return (LESS);
+		token.type = LESS;
 	else if (!ft_strncmp(cursor, OP_GREAT, ft_strlen(OP_GREAT)))
-		return (GREAT);
+		token.type = GREAT;
 	else
-		return (WORD);
+		token.type = WORD;
+	token.slice.location = cursor;
+	token.slice.length = token_len(cursor, token.type);
+	return (token);
 }
 
 static t_token	process_token(int consume)
 {
-	static char	*line;
-	static char	*cursor;
-	t_token		token;
+	static char		*line;
+	static char		*cursor;
+	static t_token	token;
 
-	if (!line || !cursor)
+	if (token.type == EOF_TOKEN)
+		return (token);
+	if (!line)
 	{
 		line = readline(MSH_PROMPT);
+		if (line)
+			add_history(line);
 		errno = 0;
-		add_history(line);
 		cursor = line;
 	}
 	while (cursor && (*cursor == ' ' || *cursor == '\t'))
 		cursor++;
-	token.type = typify_token(cursor);
-	token.slice.location = cursor;
-	token.slice.length = token_len(cursor, token.type);
-	if (consume > 0 && cursor && *cursor == '\0')
+	token = define_token(cursor);
+	if (consume > 0 && cursor && *cursor != '\0')
+		cursor += token.slice.length;
+	else if (consume > 0 && cursor && *cursor == '\0')
 	{
 		ft_free((void **) &line);
 		cursor = NULL;
 	}
-	else if (consume > 0 && cursor && *cursor != '\0')
-		cursor += token.slice.length;
 	return (token);
 }
 

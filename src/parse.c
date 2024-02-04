@@ -6,7 +6,7 @@
 /*   By: dabdygal <dabdygal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 14:42:18 by dabdygal          #+#    #+#             */
-/*   Updated: 2024/02/02 20:28:14 by dabdygal         ###   ########.fr       */
+/*   Updated: 2024/02/04 23:36:20 by dabdygal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ static int	parse_ing(t_ingredient *ing, t_node *node, t_grammar *grammar)
 				node->right = ptr;
 		}
 	}
-	else if (ing->ing_data.token == EMPTY)
+	else if (ing->ing_data.token == EMPTY && peek_token().type != EOF_TOKEN)
 		return (1);
 	else if (peek_token().type == ing->ing_data.token && parse_token(node))
 		return (1);

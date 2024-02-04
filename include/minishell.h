@@ -6,7 +6,7 @@
 /*   By: dabdygal <dabdygal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/26 17:28:57 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/02 19:32:17 by dabdygal         ###   ########.fr       */
+/*   Updated: 2024/02/04 23:36:37 by dabdygal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,5 @@
 
 /** EXIT_MSG - exit message */
 # define EXIT_MSG "\nexit\n"
-
 
 #endif

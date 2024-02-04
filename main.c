@@ -6,7 +6,7 @@
 /*   By: dabdygal <dabdygal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/25 19:21:52 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/02 19:48:22 by dabdygal         ###   ########.fr       */
+/*   Updated: 2024/02/04 22:40:44 by dabdygal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@
 // 	return ("ERROR!!!");
 // }
 
-
 int	main(void)
 {
 	t_grammar	grammar;
@@ -46,5 +45,10 @@ int	main(void)
 
 	grammar = setup_grammar();
 	root = parse(PROGRAM, &grammar);
+	while (root)
+	{
+		printf("Root: %i\n", root->node_type);
+		root = parse(PROGRAM, &grammar);
+	}
 	return (EXIT_SUCCESS);
 }
