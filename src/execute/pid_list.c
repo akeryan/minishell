@@ -6,14 +6,16 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/28 10:59:14 by akeryan           #+#    #+#             */
-/*   Updated: 2024/01/29 14:54:20 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/02/04 20:46:48 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stddef.h>
 #include <stdlib.h>
 #include <errno.h>
+#include <string.h>
 #include "pid_list.h"
+#include "error_handling.h"
 
 /**
  * @brief Creates a new node of type t_pid_node and 
@@ -26,11 +28,12 @@ t_pid_node	*new_pid(void)
 {
 	t_pid_node	*new_node;
 
+	errno = 0;
 	new_node = (t_pid_node *)malloc(sizeof(t_pid_node));
 	if (new_node == NULL)
 	{
-		//ft_printf(2, "%s\n", strerror(errno));
-		exit(EXIT_FAILURE);
+		malloc_error_msg();
+		return (NULL);
 	}
 	new_node->pid = 0;
 	new_node->next = NULL;

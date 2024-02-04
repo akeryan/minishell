@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 13:48:45 by akeryan           #+#    #+#             */
-/*   Updated: 2024/01/29 17:57:51 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/02/04 19:38:35 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ t_word_node	*new_word(const char * const str)
  * @param head Pointer to the first node of the list
  * @param node Pointer to the node that needs to be added to the list
 */
-void	add_word_back(const t_word_node ** const head, const t_word_node *node)
+int	add_word_back(const t_word_node ** const head, const t_word_node *node)
 {
 	t_word_node	*temp;
 
@@ -64,6 +64,7 @@ void	add_word_back(const t_word_node ** const head, const t_word_node *node)
 			temp -> next = node;
 		}
 	}
+	return (0);
 }
 
 /**
@@ -93,6 +94,8 @@ int		word_list_len(const t_word_node *head)
 	t_word_node		*tmp;
 	unsigned int	len;
 
+	if (head == NULL)
+		return (0);
 	tmp = head;
 	while (tmp)
 	{

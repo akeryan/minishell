@@ -1,19 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   node.h                                             :+:      :+:    :+:   */
+/*   data.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dabdygal <dabdygal@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/23 16:14:32 by akeryan           #+#    #+#             */
-/*   Updated: 2024/01/25 16:15:49 by dabdygal         ###   ########.fr       */
+/*   Created: 2024/02/04 11:59:34 by akeryan           #+#    #+#             */
+/*   Updated: 2024/02/04 12:09:30 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef NODE_H
-# define NODE_H
+#ifndef DATA_H
+# define DATA_H
 
-# include "tokens.h"
+#include "pipe_list.h"
+#include "pid_list.h"
+#include "tokens.h"
+
+typedef struct s_data
+{
+	t_pid_node	*pid_list;
+	t_pipe_node	*pipe_list;
+}	t_data;
 
 /** Types of nodes */
 typedef enum e_node_type

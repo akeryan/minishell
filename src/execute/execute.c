@@ -6,83 +6,73 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 16:27:16 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/01 15:59:41 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/02/04 20:52:55 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
-#include <errno.h>
 #include "execute.h"
 #include "word_list.h"
-#include "redirect.h"
 #include "ft_printf.h"
 
-void	program(t_node *head)
+/**
+ * @brief Initializes the t_data structure variable
+ * @param data Pointer to a t_data variable 
+ * @return 0 - Successful execution
+ * @return 1 - data argument is empty
+*/
+int	init_data(t_data *data)
 {
-	t_data	data;
+	if (!data)
+		return (1);
+	data->pid_list = NULL;
+	data->pipe_list = NULL;
+	return (0);
+}
+
+/**
+ * @brief Malloced memory by t_data variable
+ * @param data Pointer to t_data variable
+ * @return 0 - Successful execution
+ * @return 1 - Argument is empty
+*/
+int	free_data(t_data *data)
+{
+	if (!data)
+		return (1);
+	if (data->pid_list)
+		free_pid_list(data->pid_list);
+	if (data->pipe_list)
+		free_pipe_list(data->pipe_list);
+	return (0);
+}
+
+/**
+ * @brief Explores the parser tree and creates pipes if present
+ * @param head Pointer to the head of the tree
+ * @param data Pointer to a t_data variable
+ * @return 0 - if the pipes were created successfully;
+ * @return 1 - if head argument is a NULL;
+ * @return -1 - if pipe() failed. 'data' is freed before returning;
+*/
+int	create_pipes(t_node *head, t_data *data)
+{
+	t_pipe_node	*pipe_node;
+	t_node		*current;
 
 	if (head == NULL)
-		return ;
-	newline_list(head->left);
-	pipeline(head->right, NULL, &data);
-	free_pid_list(data.pid_list);
-}
-
-void	pipeline(t_node *node, int _pipe[2], t_data *d)
-{
-	int	pipe_[2];
-
-	if (node == NULL)
-		return ;
-	if (_pipe)
-		if (dup2(_pipe[0], STDIN_FILENO) == -1)
-			ft_printf(2, "%s\n", strerror(errno));
-	if (node->right)
+		return (1);
+	current = head;
+	if (!current->right)
+		return (0);
+	current = current->right;
+	while (current->right)
 	{
-		pipe(pipe_);
-		if (dup2(pipe_[1], STDOUT_FILENO) == -1)
-			ft_printf(2, "%s\n", strerror(errno));
-		close(pipe_[0]);
-		close(pipe_[1]);
+		pipe_node = new_pipe();
+		if (pipe_node == NULL)
+			return (-1);
+		add_pipe_front(data->pipe_list, pipe);
+		current = current->right;
 	}
-	command(node->left, d);
-	if (node->right)
-		pipeline(node->right, pipe_, d);
-}
-
-void	prefix(t_node *node)
-{
-	if (node == NULL)
-		return ;
-	redirect(node->left);
-	prefix(node->right);
-}
-
-void	suffix(t_node *node, t_word_node *head)
-{
-	if (node == NULL)
-		return ;
-	redirect(node->left);
-	if (node->word)
-		add_word_back(&head, node->word);
-	suffix(node->right, head);
-}
-
-void redirect(t_node *node)
-{
-	if (node->redir_type == LESS)
-		return redir_read(node->word);
-	if (node->redir_type == GREAT)
-		return redir_write(node->word);
-	if (node->redir_type == DGREAT)
-		return redir_append(node->word);
-	if (node->redir_type == DLESS)
-		return here_doc();//???????
-}
-
-void newline_list(t_node *node)
-{
-	if (node == NULL)
-		return ;
-	newline_list(node->left);
+	return (0);
 }

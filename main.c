@@ -3,19 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dabdygal <dabdygal@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/25 19:21:52 by akeryan           #+#    #+#             */
-/*   Updated: 2024/01/24 16:36:25 by dabdygal         ###   ########.fr       */
+/*   Updated: 2024/02/04 13:59:34 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-#include "minishell.h"
 #include <stdio.h>
-#include "readline/history.h"
 #include <stdlib.h>
-#include "tokens.h"
+//#include "libft.h"
+#include "minishell.h"
+#include "execute.h"
+#include "readline/history.h"
+#include "data.h"
 
 static char	*token_type(t_token_type type)
 {
@@ -41,6 +42,18 @@ static char	*token_type(t_token_type type)
 int	main(void)
 {
 	t_token	token;
+	t_data	data;
+	t_node	parser_tree;
+
+	{
+		init_data(&data);
+		parse(&parser_tree);
+		if(create_pipes(&parser_tree, &data) != 0)
+		{
+			clean_memory(&parser_tree, &data);
+			//exit
+		}
+	}
 
 	while (1)
 	{
@@ -55,4 +68,10 @@ int	main(void)
 		}
 	}
 	return (EXIT_SUCCESS);
+}
+
+void clean_memory(t_node *tree, t_data *data)
+{
+	free_tree(tree);
+	free_data(data);
 }

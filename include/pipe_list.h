@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/28 12:03:48 by akeryan           #+#    #+#             */
-/*   Updated: 2024/01/29 15:17:42 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/02/04 14:39:04 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ typedef struct s_pipe_node
 {
 	int					fd[2];
 	struct s_pipe_node	*next;
+	struct s_pipe_node	*prev;
 }	t_pipe_node;
 
 /**
@@ -33,7 +34,7 @@ t_pipe_node	*new_pipe(void);
  * @param head Pointer to the first node of the list
  * @param node Pointer to the node that needs to be added to the list
 */
-void		add_pipe_front(t_pipe_node *head, t_pipe_node *node);
+void		add_pipe_front(t_pipe_node **head, t_pipe_node *node);
 
 /**
  * @brief Frees up the memory occupied by the linked list of t_pipe_node type
