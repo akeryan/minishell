@@ -6,16 +6,16 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 11:59:34 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/04 12:09:30 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/02/05 10:20:48 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef DATA_H
 # define DATA_H
 
-#include "pipe_list.h"
-#include "pid_list.h"
-#include "tokens.h"
+# include "pipe_list.h"
+# include "pid_list.h"
+# include "tokens.h"
 
 typedef struct s_data
 {

@@ -6,30 +6,29 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 11:54:33 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/04 18:21:03 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/02/05 10:14:08 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "data.h"
 #include "fcntl.h"
 
-
-int redirect(t_node *node)
+int	redirect(t_node *node)
 {
 	if (node->redir_type == LESS)
-		return redir_read(node->word);
+		return (redir_read(node->word));
 	if (node->redir_type == GREAT)
-		return redir_write(node->word);
+		return (redir_write(node->word));
 	if (node->redir_type == DGREAT)
-		return redir_append(node->word);
+		return (redir_append(node->word));
 	if (node->redir_type == DLESS)
-		return here_doc();//???????
+		return (here_doc());//???????
 	return (1);
 }
 
-int redir_read(char *file_name)
+int	redir_read(char *file_name)
 {
-	int fd;
+	int	fd;
 
 	if (!file_name)
 		return (1);
@@ -46,9 +45,9 @@ int redir_read(char *file_name)
 	return (0);
 }
 
-int redir_write(char *file_name)
+int	redir_write(char *file_name)
 {
-	int fd;
+	int	fd;
 
 	if (!file_name)
 		return (1);
@@ -65,9 +64,9 @@ int redir_write(char *file_name)
 	return (0);
 }
 
-int redir_append(char *file_name)
+int	redir_append(char *file_name)
 {
-	int fd;
+	int	fd;
 
 	if (!file_name)
 		return (1);
