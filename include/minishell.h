@@ -6,7 +6,7 @@
 /*   By: dabdygal <dabdygal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/26 17:28:57 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/04 23:36:37 by dabdygal         ###   ########.fr       */
+/*   Updated: 2024/02/05 14:23:57 by dabdygal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,6 @@
 # define MSH_TMPFIL_PREF "/tmp/minishell_tmp_"
 
 /** EXIT_MSG - exit message */
-# define EXIT_MSG "\nexit\n"
+# define EXIT_MSG "exit\n"
 
 #endif
