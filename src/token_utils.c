@@ -6,7 +6,7 @@
 /*   By: dabdygal <dabdygal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 11:21:48 by dabdygal          #+#    #+#             */
-/*   Updated: 2024/02/04 22:37:14 by dabdygal         ###   ########.fr       */
+/*   Updated: 2024/02/05 17:19:32 by dabdygal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,21 +27,21 @@ static size_t	token_len(const char *cursor, t_token_type type)
 		return (0);
 	else if (type == NEWLINE_TOKEN || type == PIPE)
 		return (1);
-	else if (type == DLESS)
-		return (ft_strlen(OP_DLESS));
-	else if (type == DGREAT)
-		return (ft_strlen(OP_DGREAT));
+	else if (type == DLESS || type == DGREAT)
+		return (2);
 	else if (type == LESS)
 		return (ft_strlen(OP_LESS));
 	else if (type == GREAT)
 		return (ft_strlen(OP_GREAT));
 	delim = ' ';
-	i = 1;
-	if (*cursor == '\"' || *cursor == '\'')
-		delim = *cursor;
+	i = 0;
 	while (*(cursor + i) && *(cursor + i) != delim)
+	{
+		if (*(cursor + i) == '\"' || *(cursor + i) == '\'')
+			delim = *(cursor + i);
 		i++;
-	if (delim != ' ' && *(cursor + i))
+	}
+	if (*(cursor + i) && delim != ' ')
 		i++;
 	return (i);
 }
