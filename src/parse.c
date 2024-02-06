@@ -6,7 +6,7 @@
 /*   By: dabdygal <dabdygal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 14:42:18 by dabdygal          #+#    #+#             */
-/*   Updated: 2024/02/06 04:57:50 by dabdygal         ###   ########.fr       */
+/*   Updated: 2024/02/06 05:51:13 by dabdygal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,17 +98,17 @@ static int	fill_node(t_node *node, t_book *book, t_grammar *grammar)
 		{
 			if (parse_ing(&book->recipe[i].ing[j], node, grammar) == 0)
 			{
-				if (errno != 0)
-					return (0);
+				if (errno == 0 && node->node_type == IO_REDIR && j > 0)
+					errno = MSH_SYNTAX;
 				break ;
 			}
 			j++;
 		}
-		if (j == book->recipe[i].size)
+		if (j == book->recipe[i].size || errno != 0)
 			break ;
 		i++;
 	}
-	if (i == book->size)
+	if (i == book->size || errno != 0)
 		return (0);
 	return (1);
 }
@@ -127,10 +127,11 @@ t_node	*parse(t_node_type node_type, t_grammar *grammar)
 	node->word = NULL;
 	node->token_type = EMPTY;
 	node->newl_ptr = NULL;
-	node->status = 0;
 	book = find_book(node_type, grammar);
 	if (!book || !fill_node(node, book, grammar))
 	{
+		if (node_type == PROGRAM && errno == MSH_SYNTAX)
+			errno = 0;
 		erase_node(&node);
 		return (NULL);
 	}

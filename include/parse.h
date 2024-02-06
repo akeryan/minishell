@@ -6,7 +6,7 @@
 /*   By: dabdygal <dabdygal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 15:00:39 by dabdygal          #+#    #+#             */
-/*   Updated: 2024/02/06 04:46:32 by dabdygal         ###   ########.fr       */
+/*   Updated: 2024/02/06 05:45:37 by dabdygal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 # define PARSE_H
 
 # include "grammar.h"
+
+#define MSH_SYNTAX 200
 
 t_node	*parse(t_node_type node_type, t_grammar *grammar);
 char	*here_file(t_token token);

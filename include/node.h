@@ -6,7 +6,7 @@
 /*   By: dabdygal <dabdygal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 16:14:32 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/06 04:46:52 by dabdygal         ###   ########.fr       */
+/*   Updated: 2024/02/06 05:15:25 by dabdygal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ typedef struct s_node
 	struct s_node	*left;
 	struct s_node	*newl_ptr;
 	struct s_node	*right;
-	int				status;
 }	t_node;
 
 #endif
