@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 11:59:34 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/05 10:20:48 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/02/06 10:36:39 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ typedef struct s_node
 	t_node_type		node_type;
 	t_token_type	redir_type;
 	struct s_node	*left;
+	struct s_node	*newl_ptr;
 	struct s_node	*right;
 }	t_node;
 

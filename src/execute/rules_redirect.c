@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 11:54:33 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/05 10:14:08 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/02/06 14:03:58 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 
 int	redirect(t_node *node)
 {
+	if (node == NULL)
+		return (1);
 	if (node->redir_type == LESS)
 		return (redir_read(node->word));
 	if (node->redir_type == GREAT)
@@ -22,11 +24,11 @@ int	redirect(t_node *node)
 	if (node->redir_type == DGREAT)
 		return (redir_append(node->word));
 	if (node->redir_type == DLESS)
-		return (here_doc());//???????
+		return (here_doc(node->word));
 	return (1);
 }
 
-int	redir_read(char *file_name)
+static int	redir_read(char *file_name)
 {
 	int	fd;
 
@@ -45,7 +47,7 @@ int	redir_read(char *file_name)
 	return (0);
 }
 
-int	redir_write(char *file_name)
+static int	redir_write(char *file_name)
 {
 	int	fd;
 
@@ -64,7 +66,7 @@ int	redir_write(char *file_name)
 	return (0);
 }
 
-int	redir_append(char *file_name)
+static int	redir_append(char *file_name)
 {
 	int	fd;
 
@@ -79,6 +81,13 @@ int	redir_append(char *file_name)
 	if (fd_dup2(fd, STDOUT_FILENO) == -1)
 		return (-1);
 	if (ft_close(1, fd) == -1)
+		return (-1);
+	return (0);
+}
+
+static int	here_doc(char *file_name)
+{
+	if (redir_read(file_name) == -1)
 		return (-1);
 	return (0);
 }
