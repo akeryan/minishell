@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 11:54:33 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/06 14:03:58 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/02/06 16:45:19 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,12 @@ static int	redir_append(char *file_name)
 
 static int	here_doc(char *file_name)
 {
-	if (redir_read(file_name) == -1)
+	int	output;
+
+	output = redir_read(file_name);
+	if (unlink(file_name) == -1)
+		perror("here_doc: ");
+	if (output == -1)
 		return (-1);
 	return (0);
 }
