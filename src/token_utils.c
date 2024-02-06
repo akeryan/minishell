@@ -6,7 +6,7 @@
 /*   By: dabdygal <dabdygal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 11:21:48 by dabdygal          #+#    #+#             */
-/*   Updated: 2024/02/05 17:31:35 by dabdygal         ###   ########.fr       */
+/*   Updated: 2024/02/06 02:58:41 by dabdygal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,20 +25,21 @@ static size_t	token_len(const char *cursor, t_token_type type)
 
 	if (type == EOF_TOKEN)
 		return (0);
-	else if (type == NEWLINE_TOKEN || type == PIPE)
-		return (1);
 	else if (type == DLESS || type == DGREAT)
 		return (2);
-	else if (type == LESS)
-		return (ft_strlen(OP_LESS));
-	else if (type == GREAT)
-		return (ft_strlen(OP_GREAT));
+	else if (type != WORD)
+		return (1);
 	delim = ' ';
 	i = 0;
-	while (*(cursor + i) && *(cursor + i) != delim)
+	while (*(cursor + i) && (*(cursor + i) != ' ' || delim != ' '))
 	{
-		if ((*(cursor + i) == '\"' || *(cursor + i) == '\'') && delim == ' ')
-			delim = *(cursor + i);
+		if (*(cursor + i) == '\"' || *(cursor + i) == '\'')
+		{
+			if (delim == ' ')
+				delim = *(cursor + i);
+			else if (*(cursor + i) == delim)
+				delim = ' ';
+		}
 		i++;
 	}
 	if (*(cursor + i) && delim != ' ')

@@ -6,7 +6,7 @@
 /*   By: dabdygal <dabdygal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 14:42:18 by dabdygal          #+#    #+#             */
-/*   Updated: 2024/02/05 15:33:59 by dabdygal         ###   ########.fr       */
+/*   Updated: 2024/02/06 04:57:50 by dabdygal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ static int	parse_ing(t_ingredient *ing, t_node *node, t_grammar *grammar)
 			node->newl_ptr = ptr;
 		else
 		{
-			if (!node->left)
+			if (!node->left && ing->ing_data.book_type != SUFFIX)
 				node->left = ptr;
 			else
 				node->right = ptr;
@@ -127,6 +127,7 @@ t_node	*parse(t_node_type node_type, t_grammar *grammar)
 	node->word = NULL;
 	node->token_type = EMPTY;
 	node->newl_ptr = NULL;
+	node->status = 0;
 	book = find_book(node_type, grammar);
 	if (!book || !fill_node(node, book, grammar))
 	{
