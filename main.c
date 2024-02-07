@@ -3,20 +3,33 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dabdygal <dabdygal@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/25 19:21:52 by akeryan           #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2024/02/05 15:38:49 by dabdygal         ###   ########.fr       */
+=======
+/*   Updated: 2024/02/04 13:59:34 by akeryan          ###   ########.fr       */
+>>>>>>> v2.0/MSH-12-create-execute
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
+<<<<<<< HEAD
 #include "libft.h"
 #include "minishell.h"
 #include <stdlib.h>
 #include "parse.h"
 #include <sys/errno.h>
 #include <errno.h>
+=======
+#include <stdlib.h>
+//#include "libft.h"
+#include "minishell.h"
+#include "execute.h"
+#include "readline/history.h"
+#include "data.h"
+>>>>>>> v2.0/MSH-12-create-execute
 
 static char	*token_type_to_a(t_token_type type)
 {
@@ -118,8 +131,24 @@ static void	print_tree(t_node *node, int level)
 
 int	main(void)
 {
+<<<<<<< HEAD
 	t_grammar	grammar;
 	t_node		*root;
+=======
+	t_token	token;
+	t_data	data;
+	t_node	parser_tree;
+
+	{
+		init_data(&data);
+		parse(&parser_tree);
+		if(create_pipes(&parser_tree, &data) != 0)
+		{
+			clean_memory(&parser_tree, &data);
+			//exit
+		}
+	}
+>>>>>>> v2.0/MSH-12-create-execute
 
 	grammar = setup_grammar();
 	while (1)
@@ -143,4 +172,10 @@ int	main(void)
 		}
 	}
 	return (EXIT_SUCCESS);
+}
+
+void clean_memory(t_node *tree, t_data *data)
+{
+	free_tree(tree);
+	free_data(data);
 }

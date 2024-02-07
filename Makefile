@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: dabdygal <dabdygal@student.42.fr>          +#+  +:+       +#+         #
+#    By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/15 15:43:23 by dabdygal          #+#    #+#              #
-#    Updated: 2024/02/07 14:47:41 by dabdygal         ###   ########.fr        #
+#    Updated: 2024/02/07 15:15:25 by akeryan          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,6 +31,10 @@ LIBFT_DIR = libft
 LIBFT_NAME = libft.a
 
 LIB1_NAME = libreadline.a
+
+PRINTF_DIR = ft_printf
+
+PRINTF_NAME = libftprintf.a
 
 INCLUDE_FILES = minishell.h \
 				tokens.h \
@@ -57,7 +61,7 @@ CFLAGS = -Wall -Wextra -Werror -I $(INCLUDE_DIR) -I .
 
 # ************************************RULES*********************************** #
 
-$(BIN_NAME): $(addprefix $(LIB1_DIR)/,$(LIB1_NAME)) $(addprefix $(LIBFT_DIR)/,$(LIBFT_NAME)) $(addprefix $(MAIN_DIR)/,$(MAIN_FILE)) $(addprefix $(OBJ_DIR)/,$(OBJ_FILES)) $(addprefix $(INCLUDE_DIR)/,$(INCLUDE_FILES))
+$(BIN_NAME): $(addprefix $(LIB1_DIR)/,$(LIB1_NAME)) $(addprefix $(LIBFT_DIR)/,$(LIBFT_NAME)) $(addprefix $(PRINTF_DIR)/,$(PRINTF_NAME)) $(addprefix $(MAIN_DIR)/,$(MAIN_FILE)) $(addprefix $(OBJ_DIR)/,$(OBJ_FILES)) $(addprefix $(INCLUDE_DIR)/,$(INCLUDE_FILES))
 	$(CC) $(CFLAGS) $(addprefix $(MAIN_DIR)/,$(MAIN_FILE)) $(addprefix $(SRC_DIR)/,$(SRC_FILES)) $(addprefix $(LIBFT_DIR)/,$(LIBFT_NAME)) -lreadline -o $(BIN_NAME)
 
 $(addprefix $(LIB1_DIR)/,$(LIB1_NAME)): | $(addprefix $(LIB1_DIR)/,Makefile)
@@ -74,16 +78,21 @@ $(addprefix $(OBJ_DIR)/,$(OBJ_FILES)): $(addprefix $(INCLUDE_DIR)/,$(INCLUDE_FIL
 $(addprefix $(LIBFT_DIR)/,$(LIBFT_NAME)):
 	make $(LIBFT_NAME) -C $(LIBFT_DIR)
 
+$(addprefix $(PRINTF_DIR)/,$(PRINTF_NAME)):
+	make $(PRINTF_NAME) -C $(PRINTF_DIR)
+
 all: $(BIN_NAME)
 
 clean:
 	rm -f $(addprefix $(OBJ_DIR)/,$(OBJ_FILES))
 	make clean -C $(LIBFT_DIR)
+	make clean -C $(PRINTF_DIR)
 	make clean -C $(LIB1_DIR)
 
 fclean: clean
 	rm -f $(BIN_NAME)
 	make fclean -C $(LIBFT_DIR)
+	make fclean -C $(PRINTF_DIR)
 
 re: fclean all
 
