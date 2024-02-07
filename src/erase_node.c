@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   erase_node.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dabdygal <dabdygal@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 15:37:12 by dabdygal          #+#    #+#             */
-/*   Updated: 2024/02/02 18:45:06 by dabdygal         ###   ########.fr       */
+/*   Updated: 2024/02/07 15:27:44 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "node.h"
+#include "data.h"
 #include "libft.h"
 
 void	erase_node(t_node **node)

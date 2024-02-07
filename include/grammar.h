@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   grammar.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dabdygal <dabdygal@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 15:24:27 by dabdygal          #+#    #+#             */
-/*   Updated: 2024/01/31 17:09:31 by dabdygal         ###   ########.fr       */
+/*   Updated: 2024/02/07 15:27:44 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # define MAX_INGS		4
 # define MAX_RECIPES	5
 
-# include "node.h"
+# include "data.h"
 
 typedef enum e_ingtype
 {

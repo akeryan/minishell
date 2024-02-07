@@ -6,7 +6,7 @@
 #    By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/15 15:43:23 by dabdygal          #+#    #+#              #
-#    Updated: 2024/02/07 15:15:25 by akeryan          ###   ########.fr        #
+#    Updated: 2024/02/07 15:27:44 by akeryan          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,8 +40,9 @@ INCLUDE_FILES = minishell.h \
 				tokens.h \
 				grammar.h \
 				libft.h \
-				node.h \
-				parse.h
+				data.h \
+				parse.h \
+				data.h
 
 MAIN_FILE = main.c
 

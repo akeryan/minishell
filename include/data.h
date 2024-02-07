@@ -5,13 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-<<<<<<< HEAD:include/node.h
-/*   Created: 2024/01/23 16:14:32 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/06 05:15:25 by dabdygal         ###   ########.fr       */
-=======
 /*   Created: 2024/02/04 11:59:34 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/06 10:36:39 by akeryan          ###   ########.fr       */
->>>>>>> v2.0/MSH-12-create-execute:include/data.h
+/*   Updated: 2024/02/07 15:29:18 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
