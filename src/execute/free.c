@@ -1,28 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rules.h                                            :+:      :+:    :+:   */
+/*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/04 11:47:48 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/07 17:28:19 by akeryan          ###   ########.fr       */
+/*   Created: 2024/02/07 17:00:00 by akeryan           #+#    #+#             */
+/*   Updated: 2024/02/07 17:09:56 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef RULES_H
-# define RULES_H
+#include <stdlib.h>
 
-# include "data.h"
-# include "word_list.h"
+void	free_split(char **str)
+{
+	int	i;
 
-int		program(t_node *head, t_data *data);
-int		pipeline(t_node *node, t_data *d);
-int		command(const t_node *node, t_data *d);
-int		prefix(t_node *node);
-int		suffix(t_node *node, t_word_node *head);
-int		redirect(t_node *node);
-int		newline_list(t_node *node);
-
-
-#endif
+	i = 0;
+	while (str[i])
+		free(str[i++]);
+	free(str);
+}

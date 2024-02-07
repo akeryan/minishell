@@ -6,24 +6,25 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 11:54:33 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/06 16:45:19 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/02/07 17:40:00 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "data.h"
 #include "fcntl.h"
+#include ""
 
 int	redirect(t_node *node)
 {
 	if (node == NULL)
 		return (1);
-	if (node->redir_type == LESS)
+	if (node->token_type == LESS)
 		return (redir_read(node->word));
-	if (node->redir_type == GREAT)
+	if (node->token_type == GREAT)
 		return (redir_write(node->word));
-	if (node->redir_type == DGREAT)
+	if (node->token_type == DGREAT)
 		return (redir_append(node->word));
-	if (node->redir_type == DLESS)
+	if (node->token_type == DLESS)
 		return (here_doc(node->word));
 	return (1);
 }

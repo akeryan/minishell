@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 11:46:35 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/05 14:05:30 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/02/07 17:37:08 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int	suffix(t_node *node, t_word_node *head)
 	if (redirect(node->left) == -1)
 		return (-1);
 	if (node->word)
-		add_word_back(&head, node->word);
+		add_word_back(&head, new_word(node->word));
 	if (suffix(node->right, head) == -1)
 		return (-1);
 	return (0);

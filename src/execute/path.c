@@ -6,15 +6,18 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 11:11:56 by akeryan           #+#    #+#             */
-/*   Updated: 2024/01/31 17:58:06 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/02/07 17:20:30 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
+#include "ft_printf.h"
+#include "libft.h"
 #include "execute.h"
+#include "free.h"
+#include "error_handling.h"
 
 static char	*cmd_in_path(char *path, char *cmd);
-static int	get_path_indx(void);
 
 /**
  * @brief Finds the location of the utility on the system
@@ -60,9 +63,12 @@ static char	*cmd_in_path(char *path, char *cmd)
 	char	*pth[2];
 
 	pth[0] = ft_strjoin(path, "/");
-	error_check(pth[0], "Mem alloc fail for strjoin in get_cmd_path", PTR);
 	pth[1] = ft_strjoin(pth[0], cmd);
-	error_check(pth[1], "Mem alloc fail for strjoin in get_cmd_path", PTR);
+	if (!pth[0] || !pth[1])
+	{
+		perror("malloc: ");
+		return (NULL);
+	}
 	free(pth[0]);
 	if (access(pth[1], F_OK) == 0)
 		return (pth[1]);

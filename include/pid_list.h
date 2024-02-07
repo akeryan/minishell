@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/28 10:56:04 by akeryan           #+#    #+#             */
-/*   Updated: 2024/01/29 14:50:07 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/02/07 17:24:39 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 */
 typedef struct s_pid_node
 {
-	unsigned int		pid;
+	int					pid;
 	struct s_pid_node	*next;
 }	t_pid_node;
 

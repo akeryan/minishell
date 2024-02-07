@@ -6,7 +6,7 @@
 #    By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/15 15:43:23 by dabdygal          #+#    #+#              #
-#    Updated: 2024/02/07 15:27:44 by akeryan          ###   ########.fr        #
+#    Updated: 2024/02/07 17:10:34 by akeryan          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,7 +42,16 @@ INCLUDE_FILES = minishell.h \
 				libft.h \
 				data.h \
 				parse.h \
-				data.h
+				data.h \
+				error_handling.h \
+				execute.h \
+				ft_printf.h \
+				pid_list.h \
+				pipe_list.h \
+				rules_utils.h \
+				rules.h \
+				word_list.h \
+				free.h
 
 MAIN_FILE = main.c
 
@@ -52,7 +61,20 @@ SRC_FILES = token_utils_0.c \
 			setup_grammar_utils.c \
 			erase_node.c \
 			here_file.c \
-			parse.c
+			parse.c \
+			execute/error_handling.c \
+			execute/execute.c \
+			execute/expansion.c \
+			execute/pid_list.c \
+			execute/pipe_list.c \
+			execute/word_list.c \
+			execute/path.c \
+			execute/rules_command.c \
+			execute/rules_pipeline.c \
+			execute/rules.c \
+			execute/rules_redirect.c \
+			execute/rules_utils.c \
+			execute/free.c
 
 OBJ_FILES = $(SRC_FILES:.c=.o)
 

@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 16:27:16 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/04 20:52:55 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/02/07 16:04:36 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ int	create_pipes(t_node *head, t_data *data)
 		pipe_node = new_pipe();
 		if (pipe_node == NULL)
 			return (-1);
-		add_pipe_front(data->pipe_list, pipe);
+		add_pipe_front(&data->pipe_list, pipe_node);
 		current = current->right;
 	}
 	return (0);

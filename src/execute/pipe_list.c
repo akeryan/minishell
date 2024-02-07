@@ -6,12 +6,13 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/28 12:07:55 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/04 20:52:02 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/02/07 17:21:48 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stddef.h>
 #include <stdlib.h>
+#include <unistd.h>
 #include "error_handling.h"
 #include "pipe_list.h"
 
@@ -32,12 +33,12 @@ t_pipe_node	*new_pipe(void)
 	new_node = (t_pipe_node *)malloc(sizeof(t_pipe_node));
 	if (new_node == NULL)
 	{
-		malloc_error_msg();
+		perror("malloc: ");
 		return (NULL);
 	}
 	if (pipe(new_node->fd) == -1)
 	{
-		ft_printf(2, "%s: %s\n", MSH_NAME, strerror(errno));
+		perror("pipe: ");	
 		return (NULL);
 	}
 	new_node->next = NULL;

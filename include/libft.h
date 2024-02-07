@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dabdygal <dabdygal@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 11:36:53 by dabdygal          #+#    #+#             */
-/*   Updated: 2024/01/24 15:40:34 by dabdygal         ###   ########.fr       */
+/*   Updated: 2024/02/07 16:47:40 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int		ft_putchar_fd(char c, int fd);
 int		ft_putstr_fd(const char *s, int fd);
 int		ft_putendl_fd(char *s, int fd);
 int		ft_putnbr_fd(int n, int fd);
-int		ft_printf(const char *format, ...);
+int		ft_printf(int fd, const char *format, ...);
 char	*get_next_line(int fd);
 int		cut_n_chars(char **str, ssize_t n, ssize_t len);
 int		ft_checkwarn_argc(int argc, int min_argc, int max_argc);

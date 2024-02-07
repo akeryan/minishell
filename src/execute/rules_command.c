@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/28 10:50:20 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/04 20:50:28 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/02/07 17:25:50 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,10 @@
 #include "word_list.h"
 #include "libft.h"
 #include "error_handling.h"
+#include "free.h"
 
 static int	ft_execve(char *cmd_name, char **argv);
-static char	**list_to_array(const t_word_node *head);
+static char	**list_to_array(t_word_node *head);
 static int	child_process(const t_node *const node, t_word_node *args_list,
 				char **argv, t_pid_node *const pid_node);
 
@@ -50,10 +51,12 @@ int	command(const t_node *const node, t_data *const d)
 		return (-1);
 	}
 	if (pid_node->pid == 0)
+	{
 		if (child_process(node, args_list, argv, pid_node) == -1)
 			return (-1);
+	}
 	else
-		add_pid_front(d->pid_list, pid_node);
+		add_pid_front(&d->pid_list, pid_node);
 	return (0);
 }
 
@@ -100,7 +103,7 @@ static int	ft_execve(char *cmd_name, char **argv)
  * @param head A pointer to the first node of the list 
  * @return A pointer to the array of strings
 */
-static char	**list_to_array(const t_word_node *head)
+static char	**list_to_array(t_word_node *head)
 {
 	char		**arr;
 	int			len;

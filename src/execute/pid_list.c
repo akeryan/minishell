@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/28 10:59:14 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/04 20:46:48 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/02/07 17:18:45 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ t_pid_node	*new_pid(void)
 	new_node = (t_pid_node *)malloc(sizeof(t_pid_node));
 	if (new_node == NULL)
 	{
-		malloc_error_msg();
+		perror("malloc: ");
 		return (NULL);
 	}
 	new_node->pid = 0;

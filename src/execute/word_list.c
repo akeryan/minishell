@@ -6,12 +6,12 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 13:48:45 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/04 19:38:35 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/02/07 16:26:09 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <word_list.h>
 #include <stdlib.h>
+#include "word_list.h"
 #include "libft.h"
 
 t_word_node	*new_empty_word(void)
@@ -48,7 +48,7 @@ t_word_node	*new_word(const char * const str)
  * @param head Pointer to the first node of the list
  * @param node Pointer to the node that needs to be added to the list
 */
-int	add_word_back(const t_word_node ** const head, const t_word_node *node)
+int	add_word_back(t_word_node ** const head, t_word_node *node)
 {
 	t_word_node	*temp;
 
@@ -89,7 +89,7 @@ void	free_word_list(t_word_node *head)
  * @param head A pointer to the first node of the list
  * @return A number of nodes in the list
 */
-int		word_list_len(const t_word_node *head)
+int		word_list_len(t_word_node *head)
 {
 	t_word_node		*tmp;
 	unsigned int	len;
@@ -97,6 +97,7 @@ int		word_list_len(const t_word_node *head)
 	if (head == NULL)
 		return (0);
 	tmp = head;
+	len = 0;
 	while (tmp)
 	{
 		len++;

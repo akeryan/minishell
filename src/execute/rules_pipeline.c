@@ -6,11 +6,12 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 16:32:04 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/04 20:45:37 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/02/07 17:26:55 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rules_utils.h"
+#include "rules.h"
 #include "data.h"
 
 /**
