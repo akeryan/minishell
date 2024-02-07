@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   token_utils.c                                      :+:      :+:    :+:   */
+/*   token_utils_0.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dabdygal <dabdygal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 11:21:48 by dabdygal          #+#    #+#             */
-/*   Updated: 2024/02/06 02:58:41 by dabdygal         ###   ########.fr       */
+/*   Updated: 2024/02/07 14:48:50 by dabdygal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,31 +20,13 @@
 
 static size_t	token_len(const char *cursor, t_token_type type)
 {
-	char	delim;
-	size_t	i;
-
 	if (type == EOF_TOKEN)
 		return (0);
 	else if (type == DLESS || type == DGREAT)
 		return (2);
 	else if (type != WORD)
 		return (1);
-	delim = ' ';
-	i = 0;
-	while (*(cursor + i) && (*(cursor + i) != ' ' || delim != ' '))
-	{
-		if (*(cursor + i) == '\"' || *(cursor + i) == '\'')
-		{
-			if (delim == ' ')
-				delim = *(cursor + i);
-			else if (*(cursor + i) == delim)
-				delim = ' ';
-		}
-		i++;
-	}
-	if (*(cursor + i) && delim != ' ')
-		i++;
-	return (i);
+	return (word_len(cursor));
 }
 
 //Order of check is important. Do the longest strings first.
@@ -52,22 +34,7 @@ static t_token	define_token(char *cursor)
 {
 	t_token	token;
 
-	if (!cursor)
-		token.type = EOF_TOKEN;
-	else if (*cursor == '\0')
-		token.type = NEWLINE_TOKEN;
-	else if (!ft_strncmp(cursor, OP_PIPE, ft_strlen(OP_PIPE)))
-		token.type = PIPE;
-	else if (!ft_strncmp(cursor, OP_DLESS, ft_strlen(OP_DLESS)))
-		token.type = DLESS;
-	else if (!ft_strncmp(cursor, OP_DGREAT, ft_strlen(OP_DGREAT)))
-		token.type = DGREAT;
-	else if (!ft_strncmp(cursor, OP_LESS, ft_strlen(OP_LESS)))
-		token.type = LESS;
-	else if (!ft_strncmp(cursor, OP_GREAT, ft_strlen(OP_GREAT)))
-		token.type = GREAT;
-	else
-		token.type = WORD;
+	token.type = typify_token(cursor);
 	token.slice.location = cursor;
 	token.slice.length = token_len(cursor, token.type);
 	return (token);
