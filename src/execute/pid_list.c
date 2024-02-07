@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/28 10:59:14 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/07 17:18:45 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/02/07 21:20:45 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,14 +59,17 @@ void	add_pid_front(t_pid_node **head, t_pid_node *node)
  * @brief The memory occupied by the linked list of t_pid_node type
  * @param head A pointer to the head of the linked list
 */
-void	free_pid_list(t_pid_node *head)
+int	free_pid_list(t_pid_node *head)
 {
 	t_pid_node	*tmp;
 
+	if (head == NULL)
+		return (1);
 	while (head != NULL)
 	{
 		tmp = head;
 		head = head->next;
 		free(tmp);
 	}
+	return (0);
 }

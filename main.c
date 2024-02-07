@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/25 19:21:52 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/07 21:00:16 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/02/07 21:35:28 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include <sys/errno.h>
 #include <errno.h>
 #include "libft.h"
+#include "ft_printf.h"
 #include "minishell.h"
 #include "parse.h"
 #include "rules.h"
@@ -141,13 +142,14 @@ int	main(void)
 			else
 			{
 				ft_printf(2, "syntax error near unexpected token: '%s'\n", token_type_to_a(peek_token().type));
-				while (consume_token().type != NEWLINE_TOKEN);
+				while (consume_token().type != NEWLINE_TOKEN)
+					;
 			}
 		}
 		data = new_data();
 		if (data == NULL)
 		{
-			ft_print(2, "t_data init failed\n");
+			ft_printf(2, "t_data init failed\n");
 			return (-1);
 		}
 		if (program(root, data) == -1)

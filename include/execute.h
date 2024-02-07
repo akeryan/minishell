@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/28 20:03:09 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/04 12:06:29 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/02/07 21:24:03 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ Copyright (C) 2007 Free Software Foundation, Inc. */
 
 # include "data.h"
 
-int		init_data(t_data *d);
 int		create_pipes(t_node *head, t_data *d);
 char	*get_cmd_path(char *cmd);
 
