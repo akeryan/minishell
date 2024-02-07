@@ -6,11 +6,13 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 16:33:30 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/04 20:53:21 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/02/07 20:05:58 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdarg.h>
+#include <stdio.h>
+#include <unistd.h>
 
 /**
  * @brief Duplicates an existing file descriptor and prints error

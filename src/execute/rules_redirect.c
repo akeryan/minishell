@@ -6,13 +6,19 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 11:54:33 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/07 17:40:00 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/02/07 20:04:51 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdio.h>
+#include <fcntl.h>
+#include "rules_utils.h"
 #include "data.h"
-#include "fcntl.h"
-#include ""
+
+static int	redir_read(char *file_name);
+static int	redir_write(char *file_name);
+static int	redir_append(char *file_name);
+static int	here_doc(char *file_name);
 
 int	redirect(t_node *node)
 {
@@ -41,7 +47,7 @@ static int	redir_read(char *file_name)
 		perror("open: ");
 		return (-1);
 	}
-	if (fd_dup2(fd, STDIN_FILENO) == -1)
+	if (ft_dup2(fd, STDIN_FILENO) == -1)
 		return (-1);
 	if (ft_close(1, fd) == -1)
 		return (-1);
@@ -60,7 +66,7 @@ static int	redir_write(char *file_name)
 		perror("open: ");
 		return (-1);
 	}
-	if (fd_dup2(fd, STDOUT_FILENO) == -1)
+	if (ft_dup2(fd, STDOUT_FILENO) == -1)
 		return (-1);
 	if (ft_close(1, fd) == -1)
 		return (-1);
@@ -79,7 +85,7 @@ static int	redir_append(char *file_name)
 		perror("open: ");
 		return (-1);
 	}
-	if (fd_dup2(fd, STDOUT_FILENO) == -1)
+	if (ft_dup2(fd, STDOUT_FILENO) == -1)
 		return (-1);
 	if (ft_close(1, fd) == -1)
 		return (-1);

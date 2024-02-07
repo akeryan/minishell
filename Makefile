@@ -6,7 +6,7 @@
 #    By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/15 15:43:23 by dabdygal          #+#    #+#              #
-#    Updated: 2024/02/07 17:10:34 by akeryan          ###   ########.fr        #
+#    Updated: 2024/02/07 20:14:00 by akeryan          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -85,7 +85,7 @@ CFLAGS = -Wall -Wextra -Werror -I $(INCLUDE_DIR) -I .
 # ************************************RULES*********************************** #
 
 $(BIN_NAME): $(addprefix $(LIB1_DIR)/,$(LIB1_NAME)) $(addprefix $(LIBFT_DIR)/,$(LIBFT_NAME)) $(addprefix $(PRINTF_DIR)/,$(PRINTF_NAME)) $(addprefix $(MAIN_DIR)/,$(MAIN_FILE)) $(addprefix $(OBJ_DIR)/,$(OBJ_FILES)) $(addprefix $(INCLUDE_DIR)/,$(INCLUDE_FILES))
-	$(CC) $(CFLAGS) $(addprefix $(MAIN_DIR)/,$(MAIN_FILE)) $(addprefix $(SRC_DIR)/,$(SRC_FILES)) $(addprefix $(LIBFT_DIR)/,$(LIBFT_NAME)) -lreadline -o $(BIN_NAME)
+	$(CC) $(CFLAGS) $(addprefix $(MAIN_DIR)/,$(MAIN_FILE)) $(addprefix $(SRC_DIR)/,$(SRC_FILES)) $(addprefix $(LIBFT_DIR)/,$(LIBFT_NAME)) $(addprefix $(PRINTF_DIR)/,$(PRINTF_NAME)) -lreadline -o $(BIN_NAME)
 
 $(addprefix $(LIB1_DIR)/,$(LIB1_NAME)): | $(addprefix $(LIB1_DIR)/,Makefile)
 	make -C $(LIB1_DIR)

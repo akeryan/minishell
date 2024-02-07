@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: dabdygal <dabdygal@student.42.fr>          +#+  +:+       +#+         #
+#    By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/07 14:51:38 by dabdygal          #+#    #+#              #
-#    Updated: 2024/01/12 15:23:18 by dabdygal         ###   ########.fr        #
+#    Updated: 2024/02/07 19:52:12 by akeryan          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,7 +52,6 @@ SRC_FILES 	= ft_memset.c \
 			  ft_putstr_fd.c \
 			  ft_putendl_fd.c \
 			  ft_putnbr_fd.c \
-			  ft_printf.c \
 			  get_next_line_utils.c \
 			  get_next_line.c \
 			  ft_checkwarn_argc.c \
