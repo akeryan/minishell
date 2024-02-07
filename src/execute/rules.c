@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 11:46:35 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/07 17:37:08 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/02/07 20:32:36 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 */
 int	program(t_node *head, t_data *data)
 {
-	if (!head || !data)
+	if (!head)
 		return (1);
 	if (newline_list(head->left) == -1)
 		return (-1);

@@ -6,17 +6,19 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/25 19:21:52 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/07 15:30:07 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/02/07 21:00:16 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
-#include "libft.h"
-#include "minishell.h"
 #include <stdlib.h>
-#include "parse.h"
 #include <sys/errno.h>
 #include <errno.h>
+#include "libft.h"
+#include "minishell.h"
+#include "parse.h"
+#include "rules.h"
+#include "main_utils.h"
 
 static char	*token_type_to_a(t_token_type type)
 {
@@ -120,6 +122,7 @@ int	main(void)
 {
 	t_grammar	grammar;
 	t_node		*root;
+	t_data		*data;
 
 	grammar = setup_grammar();
 	while (1)
@@ -137,16 +140,21 @@ int	main(void)
 			}
 			else
 			{
-				printf("syntax error near unexpected token: '%s'\n", token_type_to_a(peek_token().type));
+				ft_printf(2, "syntax error near unexpected token: '%s'\n", token_type_to_a(peek_token().type));
 				while (consume_token().type != NEWLINE_TOKEN);
 			}
+		}
+		data = new_data();
+		if (data == NULL)
+		{
+			ft_print(2, "t_data init failed\n");
+			return (-1);
+		}
+		if (program(root, data) == -1)
+		{
+			ft_printf(2, "Execution error\n");
+			free_all(root, data);
 		}
 	}
 	return (EXIT_SUCCESS);
 }
-
-// void clean_memory(t_node *tree, t_data *data)
-// {
-// 	free_tree(tree);
-// 	free_data(data);
-// }

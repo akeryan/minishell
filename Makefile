@@ -6,7 +6,7 @@
 #    By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/15 15:43:23 by dabdygal          #+#    #+#              #
-#    Updated: 2024/02/07 20:14:00 by akeryan          ###   ########.fr        #
+#    Updated: 2024/02/07 20:48:39 by akeryan          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -51,7 +51,8 @@ INCLUDE_FILES = minishell.h \
 				rules_utils.h \
 				rules.h \
 				word_list.h \
-				free.h
+				free.h \
+				main_utils.h
 
 MAIN_FILE = main.c
 
@@ -62,6 +63,7 @@ SRC_FILES = token_utils_0.c \
 			erase_node.c \
 			here_file.c \
 			parse.c \
+			main_utils.c \
 			execute/error_handling.c \
 			execute/execute.c \
 			execute/expansion.c \
