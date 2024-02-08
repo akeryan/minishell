@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 11:46:35 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/07 20:32:36 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/02/08 09:55:25 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,9 @@ int	program(t_node *head, t_data *data)
 {
 	if (!head)
 		return (1);
-	if (newline_list(head->left) == -1)
+	if (newline_list(head->newl_ptr) == -1)
 		return (-1);
-	if (pipeline(head->right, data) == -1)
+	if (pipeline(head->left, data) == -1)
 		return (-1);
 	return (0);
 }
@@ -62,6 +62,6 @@ int	newline_list(t_node *node)
 {
 	if (node == NULL)
 		return (1);
-	newline_list(node->left);
+	newline_list(node->newl_ptr);
 	return (0);
 }

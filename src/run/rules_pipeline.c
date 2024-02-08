@@ -6,10 +6,11 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 16:32:04 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/07 17:26:55 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/02/08 10:09:30 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdio.h>
 #include "rules_utils.h"
 #include "rules.h"
 #include "data.h"
@@ -28,7 +29,8 @@ int	pipeline(t_node *node, t_data *d)
 
 	if (!node || !d)
 		return (1);
-	else if (node->node_type == PROGRAM)
+	printf("node type: %d\n", node->node_type);
+	if (node->node_type == PROGRAM)
 		pipe = d->pipe_list;
 	if (pipe->prev)
 		if (ft_dup2(pipe->prev->fd[0], STDIN_FILENO) == -1)

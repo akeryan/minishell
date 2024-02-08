@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/25 19:21:52 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/07 21:35:28 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/02/08 18:56:48 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static char	*token_type_to_a(t_token_type type)
 static char	*node_type_to_a(t_node_type	type)
 {
 	if (type == PROGRAM)
-		return("PROGRAM");
+		return ("PROGRAM");
 	else if (type == PIPELINE)
 		return ("PIPELINE");
 	else if (type == COMMAND)
@@ -123,7 +123,6 @@ int	main(void)
 {
 	t_grammar	grammar;
 	t_node		*root;
-	t_data		*data;
 
 	grammar = setup_grammar();
 	while (1)
@@ -146,17 +145,7 @@ int	main(void)
 					;
 			}
 		}
-		data = new_data();
-		if (data == NULL)
-		{
-			ft_printf(2, "t_data init failed\n");
-			return (-1);
-		}
-		if (program(root, data) == -1)
-		{
-			ft_printf(2, "Execution error\n");
-			free_all(root, data);
-		}
+		run_cmd(root);
 	}
 	return (EXIT_SUCCESS);
 }

@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 11:47:48 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/07 17:28:19 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/02/08 09:30:07 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,5 @@ int		prefix(t_node *node);
 int		suffix(t_node *node, t_word_node *head);
 int		redirect(t_node *node);
 int		newline_list(t_node *node);
-
 
 #endif

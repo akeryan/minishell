@@ -6,7 +6,7 @@
 #    By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/15 15:43:23 by dabdygal          #+#    #+#              #
-#    Updated: 2024/02/07 20:48:39 by akeryan          ###   ########.fr        #
+#    Updated: 2024/02/08 18:50:54 by akeryan          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -64,25 +64,26 @@ SRC_FILES = token_utils_0.c \
 			here_file.c \
 			parse.c \
 			main_utils.c \
-			execute/error_handling.c \
-			execute/execute.c \
-			execute/expansion.c \
-			execute/pid_list.c \
-			execute/pipe_list.c \
-			execute/word_list.c \
-			execute/path.c \
-			execute/rules_command.c \
-			execute/rules_pipeline.c \
-			execute/rules.c \
-			execute/rules_redirect.c \
-			execute/rules_utils.c \
-			execute/free.c
+			run/error_handling.c \
+			run/execute.c \
+			run/expansion.c \
+			run/pid_list.c \
+			run/pipe_list.c \
+			run/word_list.c \
+			run/path.c \
+			run/rules_command.c \
+			run/rules_pipeline.c \
+			run/rules.c \
+			run/rules_redirect.c \
+			run/rules_utils.c \
+			run/free.c \
+			run/run.c
 
 OBJ_FILES = $(SRC_FILES:.c=.o)
 
 CC = cc
 
-CFLAGS = -Wall -Wextra -Werror -I $(INCLUDE_DIR) -I .
+CFLAGS = -Wall -Wextra -Werror -g -I $(INCLUDE_DIR) -I .
 
 # ************************************RULES*********************************** #
 

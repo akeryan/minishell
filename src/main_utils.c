@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 20:41:59 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/07 21:34:57 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/02/08 10:24:15 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include <stdio.h>
 #include "data.h"
 
-t_data *new_data(void)
+t_data	*new_data(void)
 {
 	t_data	*data;
 

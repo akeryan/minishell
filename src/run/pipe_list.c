@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/28 12:07:55 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/07 17:21:48 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/02/08 10:24:59 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ t_pipe_node	*new_pipe(void)
 	}
 	if (pipe(new_node->fd) == -1)
 	{
-		perror("pipe: ");	
+		perror("pipe: ");
 		return (NULL);
 	}
 	new_node->next = NULL;
