@@ -6,14 +6,13 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 11:11:56 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/07 17:20:30 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/02/10 16:24:31 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "ft_printf.h"
 #include "libft.h"
-#include "execute.h"
 #include "free.h"
 #include "error_handling.h"
 

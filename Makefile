@@ -6,7 +6,7 @@
 #    By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/15 15:43:23 by dabdygal          #+#    #+#              #
-#    Updated: 2024/02/08 18:50:54 by akeryan          ###   ########.fr        #
+#    Updated: 2024/02/10 16:29:09 by akeryan          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,11 +44,9 @@ INCLUDE_FILES = minishell.h \
 				parse.h \
 				data.h \
 				error_handling.h \
-				execute.h \
 				ft_printf.h \
 				pid_list.h \
 				pipe_list.h \
-				rules_utils.h \
 				rules.h \
 				word_list.h \
 				free.h \
@@ -65,7 +63,6 @@ SRC_FILES = token_utils_0.c \
 			parse.c \
 			main_utils.c \
 			run/error_handling.c \
-			run/execute.c \
 			run/expansion.c \
 			run/pid_list.c \
 			run/pipe_list.c \
@@ -75,7 +72,6 @@ SRC_FILES = token_utils_0.c \
 			run/rules_pipeline.c \
 			run/rules.c \
 			run/rules_redirect.c \
-			run/rules_utils.c \
 			run/free.c \
 			run/run.c
 

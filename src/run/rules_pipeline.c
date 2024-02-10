@@ -6,49 +6,55 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 16:32:04 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/08 10:09:30 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/02/10 17:06:56 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
-#include "rules_utils.h"
+#include <sys/wait.h>
+#include "error_handling.h"
 #include "rules.h"
 #include "data.h"
+
+int fork_(void)
+{
+	int	pid;
+
+	pid = fork();
+	if (pid == -1)
+		error_exit("fork");
+	return (pid);
+}
 
 /**
  * @brief	Implements 'pipeline' node of the parsing tree
  * @param	node Pointer to PIPELINE node	
- * @param	d Pointer to t_data structure
- * @return	0 - Successful execution;
- * @return	1 - Empty argument(s);
- * @return	-1 - Execution failed;
 */
-int	pipeline(t_node *node, t_data *d)
+void	pipeline(t_node *node)
 {
-	static t_pipe_node	*pipe;
+	int p[2];
 
-	if (!node || !d)
-		return (1);
-	printf("node type: %d\n", node->node_type);
-	if (node->node_type == PROGRAM)
-		pipe = d->pipe_list;
-	if (pipe->prev)
-		if (ft_dup2(pipe->prev->fd[0], STDIN_FILENO) == -1)
-			return (-1);
-	if (node->right)
+	if (pipe(p) == -1)
+		error_exit("pipe");
+	if (fork_() == 0)
 	{
-		if (ft_dup2(pipe->fd[1], STDOUT_FILENO) == -1)
-			return (-1);
-		if (ft_close(2, pipe->fd[0], pipe->fd[1]) == -1)
-			return (-1);
+		dup2(p[1], STDOUT_FILENO);
+		close(p[0]);
+		close(p[1]);
+		run_cmd(node->left);
 	}
-	if (command(node->left, d) == -1)
-		return (-1);
-	if (node->right)
+	if (fork_() == 0)
 	{
-		pipe = pipe->next;
-		if (pipeline(node->right, d) == -1)
-			return (-1);
+		dup2(p[0], STDIN_FILENO);
+		close(p[0]);
+		close(p[1]);
+		run_cmd(node->right);
 	}
-	return (0);
+	close(p[0]);
+	close(p[1]);
+	wait(NULL);
+	wait(NULL);
+	//probably first I should check whether the right branch is NULL or not
+	//if NULL then I should exit with exit status of left branch,
+	//otherwise with exit status of right branch 
 }

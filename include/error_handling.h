@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 17:09:25 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/07 17:19:16 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/02/10 13:06:57 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,5 +21,6 @@
 # include <errno.h>
 
 void	execve_error_msg(char *cmd_name);
+void	error_exit(char *str);
 
 #endif

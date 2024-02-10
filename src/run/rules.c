@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 11:46:35 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/08 09:55:25 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/02/10 16:41:45 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,39 +23,29 @@
  * @return -1 - Execution failed;
  * @return 1 - Empty input
 */
-int	program(t_node *head, t_data *data)
+int	program(t_node *head)
 {
-	if (!head)
-		return (1);
-	if (newline_list(head->newl_ptr) == -1)
-		return (-1);
-	if (pipeline(head->left, data) == -1)
-		return (-1);
+	run_cmd(head->newl_ptr);
+	run_cmd(head->left);
 	return (0);
 }
 
-int	prefix(t_node *node)
+void	prefix(t_node *node)
 {
 	if (node == NULL)
-		return (1);
-	if (redirect(node->left) == -1)
-		return (-1);
-	if (prefix(node->right) == -1)
-		return (-1);
-	return (0);
+		return ;
+	redirect(node->left);
+	prefix(node->right);
 }
 
-int	suffix(t_node *node, t_word_node *head)
+void	suffix(t_node *node, t_word_node *args)
 {
 	if (node == NULL)
-		return (1);
-	if (redirect(node->left) == -1)
-		return (-1);
+		return ;
+	redirect(node->left);
 	if (node->word)
-		add_word_back(&head, new_word(node->word));
-	if (suffix(node->right, head) == -1)
-		return (-1);
-	return (0);
+		add_word_back(&args, new_word(node->word));
+	suffix(node->right, args);
 }
 
 int	newline_list(t_node *node)
