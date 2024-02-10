@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 11:54:33 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/10 16:31:54 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/02/10 20:35:36 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,8 @@ static void	here_doc(char *file_name)
 
 void redirect(t_node *node)
 {
+	if (node == NULL)
+		return ;
 	if (node->token_type == LESS)
 		redir_read(node->word);
 	else if (node->token_type == GREAT)

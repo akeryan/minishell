@@ -6,11 +6,13 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 13:48:45 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/07 16:26:09 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/02/10 20:55:00 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
+#include <stdio.h>
+#include "error_handling.h"
 #include "word_list.h"
 #include "libft.h"
 
@@ -19,12 +21,11 @@ t_word_node	*new_empty_word(void)
 	t_word_node	*new_node;
 
 	new_node = (t_word_node *)malloc(sizeof(t_word_node));
-	{
-		//ft_printf(2, "%s\n", strerror(errno));
-		exit(EXIT_FAILURE);
-	}
+	if (new_node == NULL)
+		error_exit("malloc");	
 	new_node->word = NULL;
 	new_node->next = NULL;
+	return (new_node);
 }
 
 /**
@@ -48,10 +49,9 @@ t_word_node	*new_word(const char * const str)
  * @param head Pointer to the first node of the list
  * @param node Pointer to the node that needs to be added to the list
 */
-int	add_word_back(t_word_node ** const head, t_word_node *node)
+void	add_word_back(t_word_node ** const head, t_word_node *node)
 {
 	t_word_node	*temp;
-
 	if (head)
 	{
 		if (!*head)
@@ -64,7 +64,6 @@ int	add_word_back(t_word_node ** const head, t_word_node *node)
 			temp -> next = node;
 		}
 	}
-	return (0);
 }
 
 /**
