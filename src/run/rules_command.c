@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/28 10:50:20 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/10 16:31:22 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/02/10 20:25:03 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
  * @param cmd_name Name of the command to be executed
  * @param argv Arguments of the command
 */
-static int	ft_execve(char *cmd_name, char **argv)
+static void	ft_execve(char *cmd_name, char **argv)
 {
 	char	*path;
 
@@ -33,10 +33,11 @@ static int	ft_execve(char *cmd_name, char **argv)
 		path = get_cmd_path(cmd_name);
 	else
 		path = cmd_name;
+	ft_printf(2, "path: %s\n", path);//delete
 	if (execve(path, argv, NULL) == -1)
 		execve_error_msg(path);
 	free(path);
-	return (-1);
+	exit(EXIT_FAILURE);
 }
 
 /**
@@ -44,33 +45,34 @@ static int	ft_execve(char *cmd_name, char **argv)
  * @param head A pointer to the first node of the list 
  * @return A pointer to the array of strings
 */
-static char	**list_to_array(t_word_node *head)
+static char	**list_to_array(t_word_node *head, char *cmd_name)
 {
-	char		**arr;
+	char		**argv;
 	int			len;
 	int			i;
 
 	len = word_list_len(head);
-	arr = (char **)malloc((len + 1) * sizeof(char *));
-	if (arr == NULL)
+	argv= (char **)malloc((len + 2) * sizeof(char *));
+	if (argv == NULL)
 	{
 		perror("malloc (list_to_array): ");
 		return (NULL);
 	}
-	i = 0;
+	i = 1;
 	while (head)
 	{
-		arr[i] = ft_strdup(head->word);
-		if (arr[i] == NULL)
+		argv[i] = ft_strdup(head->word);
+		if (argv[i] == NULL)
 		{
 			while (--i >= 0)
-				free(arr[i]);
+				free(argv[i]);
 			return (NULL);
 		}
 		head = head->next;
 		i++;
 	}
-	return (arr[i] = NULL, arr);
+	return (argv[0] = cmd_name, argv[i] = NULL, argv);
+	
 }
 
 /**
@@ -85,13 +87,15 @@ void	command(t_node *const node)
 	t_word_node	*args_list;
 	char		**argv;
 
+	ft_printf(2, "Command started\n");//delete
+
 	args_list = NULL;
 	argv = NULL;
 	prefix(node->left);
 	suffix(node->right, args_list);
-	if (args_list != NULL)
-		argv = list_to_array(args_list);
+	argv = list_to_array(args_list, node->word);
 	free_word_list(args_list);
 	ft_execve(node->word, argv);
+	ft_printf(2, "execve failed\n");
 	free_split(argv);
 }

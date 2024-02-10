@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 14:31:45 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/10 16:50:32 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/02/10 19:35:34 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 #include <stdlib.h>
 #include "data.h"
 #include "main_utils.h"
-#include "ft_printf.h"
 #include "rules.h"
 
 //int	run_cmd(t_node *root)
@@ -30,8 +29,7 @@
 	//if (create_pipes(root, data) == -1)
 	//{
 		//ft_printf(2, "Creation of pipes failed\n");
-		//free_all(root, data);
-	//}
+		//free_all(root, data); //}
 	//if (program(root, data) == -1)
 	//{
 		//ft_printf(2, "Execution error\n");
@@ -46,19 +44,32 @@ void run_cmd(t_node *node)
 {
 	if (!node)
 		exit(EXIT_FAILURE);
-	if (node->node_type == PROGRAM)
+	if (node->node_type == PROGRAM) {
+		printf("ROGRAM node -> \n"); //delete
 		program(node);
-	else if (node->node_type == PIPELINE)
+	}
+	else if (node->node_type == PIPELINE) {
+		ft_printf(2, "PIPELINE node -> \n");//delete
 		pipeline(node);
+	}
 	else if (node->node_type == COMMAND)
+    {
+		ft_printf(2, "COMMAND node ->> \n");//delete
 		command(node);
+	}
 	//else if (node->node_type == PREFIX)
 		//prefix(node);
 	//else if (node->node_type == SUFFIX)
 		//suffix(node);
 	else if (node->node_type == IO_REDIR)
+	 {
+		printf("IO_REDIR node -> \n");//delete
 		redirect(node);
+	 }
 	else if (node->node_type == NEWLINE_LIST)
+	 {
+		printf("NEWLINE_LIST node -> \n");//delete
 		newline_list(node);		
+	 }
 	return ;
 }
