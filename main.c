@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/25 19:21:52 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/10 19:17:52 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/02/11 17:53:43 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,7 +145,7 @@ int	main(void)
 					;
 			}
 		}
-		run_cmd(root);
+		program(root);
 	}
 	return (EXIT_SUCCESS);
 }

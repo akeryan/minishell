@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 11:46:35 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/11 13:16:21 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/02/11 17:54:46 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@
 */
 int	program(t_node *head)
 {
-	run_cmd(head->newl_ptr);
-	run_cmd(head->left);
+	newline_list(head->newl_ptr);
+	pipeline(head->left);
 	return (0);
 }
 

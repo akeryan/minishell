@@ -6,7 +6,7 @@
 #    By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/15 15:43:23 by dabdygal          #+#    #+#              #
-#    Updated: 2024/02/10 16:29:09 by akeryan          ###   ########.fr        #
+#    Updated: 2024/02/11 17:56:18 by akeryan          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -72,8 +72,7 @@ SRC_FILES = token_utils_0.c \
 			run/rules_pipeline.c \
 			run/rules.c \
 			run/rules_redirect.c \
-			run/free.c \
-			run/run.c
+			run/free.c
 
 OBJ_FILES = $(SRC_FILES:.c=.o)
 
