@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 11:54:33 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/11 13:16:38 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/02/11 13:35:43 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ static void redir_append(char *file_name)
 
 	if (!file_name)
 		return ;
-	fd = open(file_name, O_WRONLY | O_CREAT, 0666);
+	fd = open(file_name, O_WRONLY | O_CREAT | O_APPEND, 0666);
 	if (fd == -1)
 		error_exit("open");
 	if (dup2(fd, STDOUT_FILENO) == -1)
