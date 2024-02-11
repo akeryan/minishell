@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 13:48:45 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/10 20:55:00 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/02/11 10:07:41 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ t_word_node	*new_word(const char * const str)
 void	add_word_back(t_word_node ** const head, t_word_node *node)
 {
 	t_word_node	*temp;
+
 	if (head)
 	{
 		if (!*head)
@@ -59,9 +60,9 @@ void	add_word_back(t_word_node ** const head, t_word_node *node)
 		else
 		{
 			temp = *head;
-			while (temp -> next)
-				temp = temp -> next;
-			temp -> next = node;
+			while (temp->next)
+				temp = temp->next;
+			temp->next = node;
 		}
 	}
 }

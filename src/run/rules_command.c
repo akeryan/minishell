@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/28 10:50:20 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/10 21:07:03 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/02/11 10:25:10 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,16 +93,11 @@ void	command(t_node *const node)
 	argv = NULL;
 	prefix(node->left);
 	suffix(node->right, &args_list);
-	printf("AR ====================LIST = %s\n", args_list->word);
-
 	if (args_list)
-		printf("ARGS: %s\n", args_list->word);
-
-
-
+		printf("AR ====================LIST = %s\n", args_list->word);//delete
 	argv = list_to_array(args_list, node->word);
-	free_word_list(args_list);
 	ft_execve(node->word, argv);
-	ft_printf(2, "execve failed\n");
+	free_word_list(args_list);
 	free_split(argv);
+	ft_printf(2, "EXACVE FAILED================>>>>\n");
 }
