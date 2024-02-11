@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 11:46:35 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/11 10:07:58 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/02/11 13:16:21 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ void	suffix(t_node *node, t_word_node **args)
 	redirect(node->left);
 	if (node->word)
 		add_word_back(args, new_word(node->word));
-	printf("ARGSSSSSSSSSSSSS ==== %s\n", (*args)->word);
 	suffix(node->right, args);
 }
 
