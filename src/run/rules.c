@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 11:46:35 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/11 17:54:46 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/02/11 19:50:08 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,12 @@
  * @return -1 - Execution failed;
  * @return 1 - Empty input
 */
-int	program(t_node *head)
+int	program(t_node *root)
 {
-	newline_list(head->newl_ptr);
-	pipeline(head->left);
+	if (root == NULL)
+		return (-1);
+	newline_list(root->newl_ptr);
+	pipeline(root->left);
 	return (0);
 }
 

@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 13:48:45 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/11 10:07:41 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/02/11 19:10:45 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ t_word_node	*new_empty_word(void)
 
 	new_node = (t_word_node *)malloc(sizeof(t_word_node));
 	if (new_node == NULL)
-		error_exit("malloc");	
+		error_exit("malloc");
 	new_node->word = NULL;
 	new_node->next = NULL;
 	return (new_node);
@@ -35,7 +35,7 @@ t_word_node	*new_empty_word(void)
  * @return Newly created node of t_word_node type
  */
 
-t_word_node	*new_word(const char * const str)
+t_word_node	*new_word(const char *const str)
 {
 	t_word_node	*new_node;
 
@@ -49,7 +49,7 @@ t_word_node	*new_word(const char * const str)
  * @param head Pointer to the first node of the list
  * @param node Pointer to the node that needs to be added to the list
 */
-void	add_word_back(t_word_node ** const head, t_word_node *node)
+void	add_word_back(t_word_node **const head, t_word_node *node)
 {
 	t_word_node	*temp;
 
@@ -89,7 +89,7 @@ void	free_word_list(t_word_node *head)
  * @param head A pointer to the first node of the list
  * @return A number of nodes in the list
 */
-int		word_list_len(t_word_node *head)
+int	word_list_len(t_word_node *head)
 {
 	t_word_node		*tmp;
 	unsigned int	len;

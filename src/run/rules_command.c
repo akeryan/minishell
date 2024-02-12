@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/28 10:50:20 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/11 14:32:04 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/02/11 19:10:03 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@
 #include "libft.h"
 #include "error_handling.h"
 #include "free.h"
-
 
 /**
  * @brief Executes command with execve system utility
@@ -33,11 +32,9 @@ static void	ft_execve(char *cmd_name, char **argv)
 		path = get_cmd_path(cmd_name);
 	else
 		path = cmd_name;
-	ft_printf(2, "path: %s\n", path);//delete
 	if (execve(path, argv, NULL) == -1)
 		execve_error_msg(path);
 	free(path);
-	ft_printf(2, "EXECVE FAILED\n");//delete
 	exit(EXIT_FAILURE);
 }
 
@@ -53,7 +50,7 @@ static char	**list_to_array(t_word_node *head, char *cmd_name)
 	int			i;
 
 	len = word_list_len(head);
-	argv= (char **)malloc((len + 2) * sizeof(char *));
+	argv = (char **)malloc((len + 2) * sizeof(char *));
 	if (argv == NULL)
 	{
 		perror("malloc (list_to_array): ");
@@ -73,7 +70,6 @@ static char	**list_to_array(t_word_node *head, char *cmd_name)
 		i++;
 	}
 	return (argv[0] = cmd_name, argv[i] = NULL, argv);
-	
 }
 
 /**
