@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 11:47:48 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/10 21:08:22 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/02/12 15:12:57 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,10 @@
 
 # include "data.h"
 # include "word_list.h"
-#include "ft_printf.h"
+# include "ft_printf.h"
 
 int		program(t_node *head);
-void	pipeline(t_node *node);
+void	pipeline(t_node *node, int *pipe);
 void	command(t_node *node);
 void	prefix(t_node *node);
 void	suffix(t_node *node, t_word_node **args);
