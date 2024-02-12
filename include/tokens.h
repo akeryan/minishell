@@ -6,7 +6,7 @@
 /*   By: dabdygal <dabdygal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 14:27:29 by dabdygal          #+#    #+#             */
-/*   Updated: 2024/02/07 14:50:09 by dabdygal         ###   ########.fr       */
+/*   Updated: 2024/02/12 15:19:29 by dabdygal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,8 @@ typedef struct s_token
 	t_slice			slice;
 }	t_token;
 
-t_token			peek_token(void);
-t_token			consume_token(void);
+t_token			peek_token(char *prompt);
+t_token			consume_token(char *prompt);
 t_token_type	typify_token(const char *cursor);
 size_t			word_len(const char *str);
 

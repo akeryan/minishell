@@ -6,7 +6,7 @@
 /*   By: dabdygal <dabdygal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 11:21:48 by dabdygal          #+#    #+#             */
-/*   Updated: 2024/02/07 14:48:50 by dabdygal         ###   ########.fr       */
+/*   Updated: 2024/02/12 14:58:18 by dabdygal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static t_token	define_token(char *cursor)
 	return (token);
 }
 
-static t_token	process_token(int consume)
+static t_token	process_token(int consume, char *prompt)
 {
 	static char		*line;
 	static char		*cursor;
@@ -50,7 +50,7 @@ static t_token	process_token(int consume)
 		return (token);
 	if (!line)
 	{
-		line = readline(MSH_PROMPT);
+		line = readline(prompt);
 		if (line)
 			add_history(line);
 		errno = 0;
@@ -74,9 +74,12 @@ static t_token	process_token(int consume)
  * @brief Peeks a current token from readline() function
  * @return Returns a recognised token of type t_token
 */
-t_token	peek_token(void)
+t_token	peek_token(char *prompt)
 {
-	return (process_token(0));
+	if (!prompt)
+		return (process_token(0, MSH_PROMPT));
+	else
+		return (process_token(0, prompt));
 }
 
 /**
@@ -85,7 +88,10 @@ t_token	peek_token(void)
  * cursor to the next token.
  * @return Returns a recognised token of type t_token
 */
-t_token	consume_token(void)
+t_token	consume_token(char *prompt)
 {
-	return (process_token(1));
+	if (!prompt)
+		return (process_token(1, MSH_PROMPT));
+	else
+		return (process_token(1, prompt));
 }
