@@ -6,7 +6,7 @@
 #    By: dabdygal <dabdygal@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/15 15:43:23 by dabdygal          #+#    #+#              #
-#    Updated: 2024/02/12 16:04:53 by dabdygal         ###   ########.fr        #
+#    Updated: 2024/02/12 17:44:20 by dabdygal         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,7 +41,8 @@ INCLUDE_FILES = minishell.h \
 
 MAIN_FILE = main.c
 
-SRC_FILES = token_utils_0.c \
+SRC_FILES = echo.c \
+			token_utils_0.c \
 			token_utils_1.c \
 			setup_grammar.c \
 			setup_grammar_utils.c \
