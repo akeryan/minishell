@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse.c                                            :+:      :+:    :+:   */
+/*   parse_0.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dabdygal <dabdygal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 14:42:18 by dabdygal          #+#    #+#             */
-/*   Updated: 2024/02/06 05:51:13 by dabdygal         ###   ########.fr       */
+/*   Updated: 2024/02/12 15:22:00 by dabdygal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,11 @@ static	t_book	*find_book(t_node_type node_type, t_grammar *grammar)
 	return (NULL);
 }
 
-static int	parse_token(t_node *node)
+static int	pars_tok(t_node *node, char *ps2)
 {
 	t_token	token;
 
-	token = consume_token();
+	token = consume_token(ps2);
 	if (token.type != WORD)
 		node->token_type = token.type;
 	else
@@ -57,13 +57,13 @@ static int	parse_token(t_node *node)
 	return (1);
 }
 
-static int	parse_ing(t_ingredient *ing, t_node *node, t_grammar *grammar)
+int	parse_ing(t_ingredient *ing, t_node *node, t_grammar *gr, char *ps2)
 {
 	t_node	*ptr;
 
 	if (ing->type == BOOK)
 	{
-		ptr = parse(ing->ing_data.book_type, grammar);
+		ptr = parse(ing->ing_data.book_type, gr, ps2);
 		if (!ptr)
 			return (0);
 		if (ing->ing_data.book_type == NEWLINE_LIST)
@@ -76,44 +76,16 @@ static int	parse_ing(t_ingredient *ing, t_node *node, t_grammar *grammar)
 				node->right = ptr;
 		}
 	}
-	else if (ing->ing_data.token == EMPTY && peek_token().type != EOF_TOKEN)
+	else if (ing->ing_data.token == EMPTY && peek_token(ps2).type != EOF_TOKEN)
 		return (1);
-	else if (peek_token().type == ing->ing_data.token && parse_token(node))
+	else if (peek_token(ps2).type == ing->ing_data.token && pars_tok(node, ps2))
 		return (1);
 	else
 		return (0);
 	return (1);
 }
 
-static int	fill_node(t_node *node, t_book *book, t_grammar *grammar)
-{
-	int				i;
-	int				j;
-
-	i = 0;
-	j = 0;
-	while (i < book->size)
-	{
-		while (j < book->recipe[i].size)
-		{
-			if (parse_ing(&book->recipe[i].ing[j], node, grammar) == 0)
-			{
-				if (errno == 0 && node->node_type == IO_REDIR && j > 0)
-					errno = MSH_SYNTAX;
-				break ;
-			}
-			j++;
-		}
-		if (j == book->recipe[i].size || errno != 0)
-			break ;
-		i++;
-	}
-	if (i == book->size || errno != 0)
-		return (0);
-	return (1);
-}
-
-t_node	*parse(t_node_type node_type, t_grammar *grammar)
+t_node	*parse(t_node_type node_type, t_grammar *grammar, char *ps2)
 {
 	t_node		*node;
 	t_book		*book;
@@ -128,7 +100,7 @@ t_node	*parse(t_node_type node_type, t_grammar *grammar)
 	node->token_type = EMPTY;
 	node->newl_ptr = NULL;
 	book = find_book(node_type, grammar);
-	if (!book || !fill_node(node, book, grammar))
+	if (!book || !fill_node(node, book, grammar, ps2))
 	{
 		if (node_type == PROGRAM && errno == MSH_SYNTAX)
 			errno = 0;

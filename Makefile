@@ -6,7 +6,7 @@
 #    By: dabdygal <dabdygal@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/15 15:43:23 by dabdygal          #+#    #+#              #
-#    Updated: 2024/02/07 14:47:41 by dabdygal         ###   ########.fr        #
+#    Updated: 2024/02/12 16:04:53 by dabdygal         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,13 +47,14 @@ SRC_FILES = token_utils_0.c \
 			setup_grammar_utils.c \
 			erase_node.c \
 			here_file.c \
-			parse.c
+			parse_0.c \
+			parse_1.c
 
 OBJ_FILES = $(SRC_FILES:.c=.o)
 
 CC = cc
 
-CFLAGS = -Wall -Wextra -Werror -I $(INCLUDE_DIR) -I .
+CFLAGS = -Wall -Wextra -Werror -I $(INCLUDE_DIR) -I . -fsanitize=address
 
 # ************************************RULES*********************************** #
 

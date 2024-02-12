@@ -6,7 +6,7 @@
 /*   By: dabdygal <dabdygal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/25 19:21:52 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/05 15:38:49 by dabdygal         ###   ########.fr       */
+/*   Updated: 2024/02/12 15:48:09 by dabdygal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,21 +124,21 @@ int	main(void)
 	grammar = setup_grammar();
 	while (1)
 	{
-		root = parse(PROGRAM, &grammar);
+		root = parse(PROGRAM, &grammar, NULL);
 		print_tree(root, 0);
 		if (errno != 0)
 			perror("ERRNO");
 		if (!root)
 		{
-			if (peek_token().type == EOF_TOKEN)
+			if (peek_token(NULL).type == EOF_TOKEN)
 			{
 				printf(EXIT_MSG);
 				return (EXIT_SUCCESS);
 			}
 			else
 			{
-				printf("syntax error near unexpected token: '%s'\n", token_type_to_a(peek_token().type));
-				while (consume_token().type != NEWLINE_TOKEN);
+				printf("syntax error near unexpected token: '%s'\n", token_type_to_a(peek_token(NULL).type));
+				while (consume_token(NULL).type != NEWLINE_TOKEN);
 			}
 		}
 	}
