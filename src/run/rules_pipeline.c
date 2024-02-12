@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 16:32:04 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/12 15:37:26 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/02/12 17:22:14 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 #include "rules.h"
 #include "data.h"
 
-int	fork_(void)
+static int	fork_(void)
 {
 	int	pid;
 
@@ -28,11 +28,34 @@ int	fork_(void)
 	return (pid);
 }
 
+static void	child_process(t_node *node, int *p, int *p_)
+{
+	if (p_)
+	{
+		if (dup2(*p_, STDIN_FILENO) == -1)
+			error_exit("dup2 in pipeline (p_)");
+		if (close(*p_) == -1)
+			error_exit("close in pipeline (p_)");
+	}
+	if (node->right)
+	{
+		if (dup2(p[1], STDOUT_FILENO) == -1)
+			error_exit("dup2 in pipeline");
+		if (close(p[0]) == -1)
+			error_exit("close in child (1)");
+		if (close(p[1]) == -1)
+			error_exit("close in child (2)");
+	}
+	command(node->left);
+	exit(42);
+}
+
 /**
  * @brief	Implements 'pipeline' node of the parsing tree
  * @param	node Pointer to PIPELINE node	
+ * @param	p_ pointer to the reading end of the preceding pipe
 */
-void	pipeline(t_node *node, int *_p)
+void	pipeline(t_node *node, int *p_)
 {
 	int	p[2];
 	int	pid;
@@ -49,32 +72,13 @@ void	pipeline(t_node *node, int *_p)
 	if (pid == -1)
 		error_exit("fork");
 	else if (pid == 0)
-	{
-		if (_p)
-		{
-			if (dup2(_p[0], STDIN_FILENO) == -1)
-				error_exit("dup2 in pipeline (-p)");
-			if (close(_p[0]) == -1)
-				error_exit("close in pipeline (_p)");
-		}
-		if (node->right)
-		{
-			if (dup2(p[1], STDOUT_FILENO) == -1)
-				error_exit("dup2 in pipeline");
-			if (close(p[0]) == -1)
-				error_exit("close in child (1)");
-			if (close(p[1]) == -1)
-				error_exit("close in child (2)");
-		}
-		command(node->left);
-		exit(42);
-	}
+		child_process(node, p, p_);
 	else if (pid > 0)
 	{
 		if (node->right)
 			if (close(p[1]) == -1)
 				error_exit("close in parent");
-		pipeline(node->right, p);
+		pipeline(node->right, &p[0]);
 		waitpid(pid, &status, 0);
 	}
 }
