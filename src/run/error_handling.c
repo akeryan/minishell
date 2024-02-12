@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 10:29:34 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/10 16:23:11 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/02/12 18:29:16 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@
 
 void	execve_error_msg(char *cmd_name)
 {
-	if (errno == EACCES | 
-		errno == EISDIR | 
-		errno == EPERM |
-		errno == ENOENT |
+	if (errno == EACCES | \
+		errno == EISDIR | \
+		errno == EPERM | \
+		errno == ENOENT | \
 		errno == ELOOP)
 		ft_printf (2, "%s: %s: %s\n", MSH_NAME, cmd_name, strerror(errno));
 	else

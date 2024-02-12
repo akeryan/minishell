@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 11:46:35 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/12 15:13:16 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/02/12 17:53:52 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,13 @@
 */
 int	program(t_node *root)
 {
+	static t_data	data;
+
 	if (root == NULL)
 		return (-1);
 	newline_list(root->newl_ptr);
-	pipeline(root->left, NULL);
+	pipeline(root->left, NULL, &data);
+	printf("exit status: %d\n", data.exit_status);
 	return (0);
 }
 

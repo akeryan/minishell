@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 11:59:34 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/11 19:08:44 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/02/12 18:14:22 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,11 @@
 # include "pipe_list.h"
 # include "pid_list.h"
 # include "tokens.h"
+
+typedef struct s_data
+{
+	unsigned char	exit_status;
+}	t_data;
 
 /** Types of nodes */
 typedef enum e_node_type

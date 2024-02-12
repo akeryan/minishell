@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 16:32:04 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/12 17:22:14 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/02/12 18:06:55 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ static void	child_process(t_node *node, int *p, int *p_)
 			error_exit("close in child (2)");
 	}
 	command(node->left);
-	exit(42);
 }
 
 /**
@@ -55,7 +54,7 @@ static void	child_process(t_node *node, int *p, int *p_)
  * @param	node Pointer to PIPELINE node	
  * @param	p_ pointer to the reading end of the preceding pipe
 */
-void	pipeline(t_node *node, int *p_)
+void	pipeline(t_node *node, int *p_, t_data *d)
 {
 	int	p[2];
 	int	pid;
@@ -78,7 +77,10 @@ void	pipeline(t_node *node, int *p_)
 		if (node->right)
 			if (close(p[1]) == -1)
 				error_exit("close in parent");
-		pipeline(node->right, &p[0]);
+		pipeline(node->right, &p[0], d);
 		waitpid(pid, &status, 0);
+		if (!node->right)
+			if (WIFEXITED(status))
+				d->exit_status = WEXITSTATUS(status);
 	}
 }
