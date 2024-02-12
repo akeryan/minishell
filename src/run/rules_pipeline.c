@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 16:32:04 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/12 15:07:35 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/02/12 15:37:26 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	fork_(void)
 */
 void	pipeline(t_node *node, int *_p)
 {
-	int	p_[2];
+	int	p[2];
 	int	pid;
 	int	status;
 
@@ -42,40 +42,39 @@ void	pipeline(t_node *node, int *_p)
 		return ;
 	if (node->right)
 	{
-		if (pipe(_p) == -1)
+		if (pipe(p) == -1)
 			error_exit("pipe");
 	}
 	pid = fork_();
-	if (pid == 0)
+	if (pid == -1)
+		error_exit("fork");
+	else if (pid == 0)
 	{
 		if (_p)
 		{
 			if (dup2(_p[0], STDIN_FILENO) == -1)
 				error_exit("dup2 in pipeline (-p)");
 			if (close(_p[0]) == -1)
-				error_exit("close in pipeline (child 1)");
+				error_exit("close in pipeline (_p)");
 		}
 		if (node->right)
 		{
-			if (dup2(p_[1], STDOUT_FILENO) == -1)
+			if (dup2(p[1], STDOUT_FILENO) == -1)
 				error_exit("dup2 in pipeline");
-			if (close(p_[1]) == -1)
-				error_exit("close in pipeline (child 1)");
+			if (close(p[0]) == -1)
+				error_exit("close in child (1)");
+			if (close(p[1]) == -1)
+				error_exit("close in child (2)");
 		}
 		command(node->left);
 		exit(42);
 	}
-	pipeline(node->right, p_);
-	if (pid > 0)
+	else if (pid > 0)
 	{
+		if (node->right)
+			if (close(p[1]) == -1)
+				error_exit("close in parent");
+		pipeline(node->right, p);
 		waitpid(pid, &status, 0);
-		//if (!node->right)
-		//{
-			//if (WIFEXITED(status))
-				//exit(WEXITSTATUS(status));
-		//}
 	}
-	//probably first I should check whether the right branch is NULL or not
-	//if NULL then I should exit with exit status of left branch,
-	//otherwise with exit status of right branch 
 }
