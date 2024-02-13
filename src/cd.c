@@ -6,7 +6,7 @@
 /*   By: dabdygal <dabdygal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 17:46:12 by dabdygal          #+#    #+#             */
-/*   Updated: 2024/02/13 17:14:57 by dabdygal         ###   ########.fr       */
+/*   Updated: 2024/02/13 17:35:25 by dabdygal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,11 @@
 #include <stdlib.h>
 #include "libft.h"
 
-static int	change_dir(char *str, char **envp)
+static int	change_dir(char *path, char **envp)
 {
 	char	*oldpwd;
 
-	if (getenv("OLDPWD"))
+	if (ft_getenv("OLDPWD", envp))
 	{
 		oldpwd = getcwd(NULL, 0);
 		if (oldpwd == NULL)
