@@ -6,7 +6,7 @@
 /*   By: dabdygal <dabdygal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 12:37:41 by dabdygal          #+#    #+#             */
-/*   Updated: 2024/01/12 14:40:08 by dabdygal         ###   ########.fr       */
+/*   Updated: 2024/02/13 14:45:26 by dabdygal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ char	*ft_strdup(const char *s1)
 	char	*ptr;
 	int		i;
 
+	if (!s1)
+		return (NULL);
 	i = 0;
 	while (s1[i])
 		i++;
