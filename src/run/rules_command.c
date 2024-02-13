@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/28 10:50:20 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/12 19:08:51 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/02/12 21:49:01 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,17 @@ static void	ft_execve(char *cmd_name, char **argv)
 	char	*path;
 
 	if (!ft_strchr(cmd_name, '/'))
+	{
 		path = get_cmd_path(cmd_name);
+		if (!path)
+			path_error_msg(cmd_name);
+	}
 	else
 		path = cmd_name;
 	if (execve(path, argv, NULL) == -1)
-		execve_error_msg(path);
+		path_error_msg(path);//STOPPED HERE 
+		//explore all the possible values of errno that occure when execve returns -1
+		//currently it executes path_error_msg, which outputs path related errors...
 	free(path);
 	exit(EXIT_FAILURE);
 }
@@ -84,6 +90,8 @@ void	command(t_node *const node)
 	t_word_node	*args_list;
 	char		**argv;
 
+	if (!node)
+		return ;
 	args_list = NULL;
 	argv = NULL;
 	prefix(node->left);

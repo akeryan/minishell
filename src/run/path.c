@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 11:11:56 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/10 16:24:31 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/02/12 21:42:01 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,10 @@ char	*get_cmd_path(char *cmd)
 	int		i;
 
 	if (cmd == NULL)
-	{
-		ft_printf(2, "Error: command is empty\n");
-		return (NULL);
-	}
+		path_error_msg(NULL);
 	paths = ft_split(getenv("PATH"), ':');
-	//error_check(paths, "Memory allocation failed in ft_split()", PTR);
+	if (paths == NULL)
+		malloc_error_msg();
 	i = 0;
 	while (paths[++i])
 	{
@@ -46,9 +44,8 @@ char	*get_cmd_path(char *cmd)
 			return (pth);
 		}
 	}
-	//ft_printf(2, "Error: command not found: %s\n", cmd);
 	free_split(paths);
-	return (NULL);	
+	return (NULL);
 }
 
 /**
@@ -64,10 +61,7 @@ static char	*cmd_in_path(char *path, char *cmd)
 	pth[0] = ft_strjoin(path, "/");
 	pth[1] = ft_strjoin(pth[0], cmd);
 	if (!pth[0] || !pth[1])
-	{
-		perror("malloc: ");
-		return (NULL);
-	}
+		malloc_error_msg();
 	free(pth[0]);
 	if (access(pth[1], F_OK) == 0)
 		return (pth[1]);
