@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 11:11:56 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/12 21:42:01 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/02/14 20:37:10 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ char	*get_cmd_path(char *cmd)
 		path_error_msg(NULL);
 	paths = ft_split(getenv("PATH"), ':');
 	if (paths == NULL)
-		malloc_error_msg();
+		panic_malloc();
 	i = 0;
 	while (paths[++i])
 	{
@@ -61,7 +61,7 @@ static char	*cmd_in_path(char *path, char *cmd)
 	pth[0] = ft_strjoin(path, "/");
 	pth[1] = ft_strjoin(pth[0], cmd);
 	if (!pth[0] || !pth[1])
-		malloc_error_msg();
+		panic_malloc();
 	free(pth[0]);
 	if (access(pth[1], F_OK) == 0)
 		return (pth[1]);

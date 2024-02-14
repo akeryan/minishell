@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 10:29:34 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/12 19:43:17 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/02/14 20:36:31 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	path_error_msg(char *cmd_name)
 	exit(127);
 }
 
-void	malloc_error_msg(void)
+void	panic_malloc(void)
 {
 	ft_printf(2, "%s: %s\n", MSH_NAME, strerror(errno));
 	exit(EXIT_FAILURE);
