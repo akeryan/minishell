@@ -6,7 +6,7 @@
 /*   By: dabdygal <dabdygal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 17:46:12 by dabdygal          #+#    #+#             */
-/*   Updated: 2024/02/13 17:35:25 by dabdygal         ###   ########.fr       */
+/*   Updated: 2024/02/14 16:30:35 by dabdygal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,19 +15,55 @@
 #include <stdlib.h>
 #include "libft.h"
 
-static int	change_dir(char *path, char **envp)
+static int	resetenv(const char *name, const char *value, char ***envp)
 {
-	char	*oldpwd;
+	size_t	i;
+	size_t	len;
 
-	if (ft_getenv("OLDPWD", envp))
+	i = 0;
+	len = ft_strlen(name);
+	while (envp[0][i])
 	{
-		oldpwd = getcwd(NULL, 0);
-		if (oldpwd == NULL)
-			return (-1);
+		if (ft_strncmp(name, envp[0][i], len) == 0)
+		{
+			if (envp[0][i][len] == '\0' || envp[0][i][len] == '=')
+			{
+				if (ft_setenv(name, value, 1, envp) < 0)
+					return (-1);
+				return (0);
+			}
+		}
+		i++;
 	}
+	return (0);
 }
 
-int	cd(const char *argv[], char **envp)
+static int	change_dir(char *path, char ***envp)
+{
+	char	*str;
+
+	str = getcwd(NULL, 0);
+	if (str == NULL)
+		return (-1);
+	if (chdir(path) < 0 || resetenv("OLDPWD", str, envp) < 0)
+	{
+		free(str);
+		return (-1);
+	}
+	free (str);
+	str = getcwd(NULL, 0);
+	if (str == NULL)
+		return (-1);
+	if (resetenv("PWD", str, envp) < 0)
+	{
+		free(str);
+		return (-1);
+	}
+	free(str);
+	return (0);
+}
+
+int	cd(const char *argv[], char ***envp)
 {
 	char	*path;
 
@@ -39,7 +75,7 @@ int	cd(const char *argv[], char **envp)
 	path = argv[1];
 	if (path == NULL)
 	{
-		path = ft_getenv("HOME", envp);
+		path = ft_getenv("HOME", *envp);
 		if (path == NULL)
 		{
 			write(STDERR_FILENO, "minishell: cd: HOME not set\n", 28);
