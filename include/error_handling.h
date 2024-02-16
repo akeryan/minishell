@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 17:09:25 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/14 20:37:10 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/02/16 21:58:26 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,6 @@ void	execve_error_msg(char *cmd_name);
 void	path_error_msg(char *cmd_name);
 void	error_exit(char *str);
 void	panic_malloc(void);
+void	panic(char *txt);
 
 #endif

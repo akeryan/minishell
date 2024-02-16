@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 10:29:34 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/14 20:36:31 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/02/16 21:46:11 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,12 @@ void	path_error_msg(char *cmd_name)
 {
 	ft_printf (2, "%s: %s: %s\n", MSH_NAME, cmd_name, PATH_ERR);
 	exit(127);
+}
+
+void panic(char *txt)
+{
+	ft_printf(2, "%s\n", txt);
+	exit(EXIT_FAILURE);
 }
 
 void	panic_malloc(void)

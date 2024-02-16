@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 11:59:34 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/16 13:59:54 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/02/16 22:38:36 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,5 +53,13 @@ typedef struct s_node
 	struct s_node	*newl_ptr;
 	struct s_node	*right;
 }	t_node;
+
+typedef struct s_tilde_vars
+{
+	char	*slash;
+	char	*usr_name;
+	char	*usrs_dir;
+	char	*home_dir;
+}	t_tilde_vars;
 
 #endif

@@ -135,7 +135,6 @@ int	main(void)
 	t_node		*root;
 
 	init_data(&data);
-
 	grammar = setup_grammar();
 	while (1)
 	{
