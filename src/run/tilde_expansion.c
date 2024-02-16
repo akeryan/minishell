@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 20:10:13 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/14 20:37:18 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/02/14 20:50:05 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ char	*tilde_expansion(char **word)
 	usr_name = "akeryan";
 	usrs_dir = "/Users/";
 	home_dir = "/Users/akeryan";
-
 	if (!word)
 		return (NULL);
 	if (*word[0] != '~')
