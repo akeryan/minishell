@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 11:59:34 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/12 18:14:22 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/02/16 13:59:54 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 typedef struct s_data
 {
 	unsigned char	exit_status;
+	char			***env;
 }	t_data;
 
 /** Types of nodes */

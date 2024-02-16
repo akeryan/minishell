@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/25 19:21:52 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/16 13:41:34 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/02/16 14:35:10 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include <stdlib.h>
 #include <sys/errno.h>
 #include <errno.h>
+#include <unistd.h>
 #include "libft.h"
 #include "ft_printf.h"
 #include "minishell.h"
@@ -119,10 +120,21 @@ static void	print_tree(t_node *node, int level)
 	}
 }
 
+void	init_data(t_data *data)
+{
+	extern char	**environ;
+
+	data->env = &environ;
+	data->exit_status = 0;
+}
+
 int	main(void)
 {
 	t_grammar	grammar;
+	t_data		data;
 	t_node		*root;
+
+	init_data(&data);
 
 	grammar = setup_grammar();
 	while (1)
@@ -140,12 +152,12 @@ int	main(void)
 			}
 			else
 			{
-				ft_printf(2, "syntax error near unexpected token: '%s'\n", token_type_to_a(peek_token().type));
-				while (consume_token().type != NEWLINE_TOKEN)
+				ft_printf(2, "syntax error near unexpected token: '%s'\n", token_type_to_a(peek_token(NULL).type));
+				while (consume_token(NULL).type != NEWLINE_TOKEN)
 					;
 			}
 		}
-		program(root);
+		program(root, &data);
 	}
 	return (EXIT_SUCCESS);
 }

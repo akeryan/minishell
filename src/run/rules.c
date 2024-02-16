@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 11:46:35 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/12 17:53:52 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/02/16 16:12:42 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include "rules.h"
 #include "error_handling.h"
 #include "word_list.h"
+#include "expansion.h"
 
 /**
  * @brief Implements 'program' node of the parsing tree
@@ -24,15 +25,13 @@
  * @return -1 - Execution failed;
  * @return 1 - Empty input
 */
-int	program(t_node *root)
+int	program(t_node *root, t_data *data)
 {
-	static t_data	data;
-
 	if (root == NULL)
 		return (-1);
 	newline_list(root->newl_ptr);
-	pipeline(root->left, NULL, &data);
-	printf("exit status: %d\n", data.exit_status);
+	pipeline(root->left, NULL, data);
+	printf("exit status: %d\n", data->exit_status);
 	return (0);
 }
 
@@ -44,14 +43,17 @@ void	prefix(t_node *node)
 	prefix(node->right);
 }
 
-void	suffix(t_node *node, t_word_node **args)
+void	suffix(t_node *node, t_word_node **args, char ***env)
 {
 	if (node == NULL)
 		return ;
 	redirect(node->left);
 	if (node->word)
+	{
+		apply_expansions(&node->word, env);
 		add_word_back(args, new_word(node->word));
-	suffix(node->right, args);
+	}
+	suffix(node->right, args, env);
 }
 
 int	newline_list(t_node *node)

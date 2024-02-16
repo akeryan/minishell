@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 16:18:15 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/16 13:22:38 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/02/16 16:57:30 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,4 +75,20 @@ char	*is_there_unquoted_slash(char *word)
 		}
 	}
 	return (slash);
+}
+
+char	*ft_getenv(char *word, char **env)
+{
+	if (!word || !env)
+	{
+		ft_printf(2, "Empty args in ft_getenv\n");
+		return (NULL);
+	}
+	while (*env)
+	{
+		if (ft_strncmp(word, *env, ft_strlen(word)) == 0)
+			return (*env + ft_strlen(word) + 1);
+		env++;
+	}
+	return (NULL);
 }

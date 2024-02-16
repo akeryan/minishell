@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/28 10:50:20 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/12 21:49:01 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/02/16 18:14:20 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 #include "libft.h"
 #include "error_handling.h"
 #include "free.h"
+#include "expansion.h"
 
 /**
  * @brief Executes command with execve system utility
@@ -65,7 +66,7 @@ static char	**list_to_array(t_word_node *head, char *cmd_name)
 	i = 1;
 	while (head)
 	{
-		argv[i] = ft_strdup(head->word);
+		argv[i] = ft_strdup(head->word, ft_strlen(head->word));
 		if (argv[i] == NULL)
 		{
 			while (--i >= 0)
@@ -85,7 +86,7 @@ static char	**list_to_array(t_word_node *head, char *cmd_name)
  * @return 0: Successful execution;
  * @return -1: Execution failed;
 */
-void	command(t_node *const node)
+void	command(t_node *const node, char ***env)
 {
 	t_word_node	*args_list;
 	char		**argv;
@@ -95,8 +96,9 @@ void	command(t_node *const node)
 	args_list = NULL;
 	argv = NULL;
 	prefix(node->left);
-	suffix(node->right, &args_list);
+	suffix(node->right, &args_list, env);
 	argv = list_to_array(args_list, node->word);
+	//apply_expansions(&node->word, env);	
 	ft_execve(node->word, argv);
 	free_word_list(args_list);
 	free_split(argv);

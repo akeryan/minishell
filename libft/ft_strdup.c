@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dabdygal <dabdygal@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 12:37:41 by dabdygal          #+#    #+#             */
-/*   Updated: 2024/01/12 14:40:08 by dabdygal         ###   ########.fr       */
+/*   Updated: 2024/02/16 18:09:23 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include <errno.h>
+#include <stdio.h>
 
 /**
  * @brief Save a copy of a string.
@@ -21,19 +22,19 @@
  * @param s1 A string to be copied.
  * @return A pointer to a new copied string. NULL if error occured.
 */
-char	*ft_strdup(const char *s1)
+char	*ft_strdup(const char *s1, size_t len)
 {
 	char	*ptr;
-	int		i;
+	size_t	i;
 
 	i = 0;
-	while (s1[i])
+	while (s1[i] && i < len)
 		i++;
 	ptr = malloc(sizeof(char) * (i + 1));
 	if (ptr)
 	{
 		i = 0;
-		while (s1[i])
+		while (i < len)
 		{
 			ptr[i] = s1[i];
 			i++;

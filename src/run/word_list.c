@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 13:48:45 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/11 19:10:45 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/02/16 18:13:52 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ t_word_node	*new_word(const char *const str)
 	t_word_node	*new_node;
 
 	new_node = new_empty_word();
-	new_node->word = ft_strdup(str);
+	new_node->word = ft_strdup(str, ft_strlen(str));
 	return (new_node);
 }
 

@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 16:32:04 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/12 18:06:55 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/02/16 14:43:12 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static int	fork_(void)
 	return (pid);
 }
 
-static void	child_process(t_node *node, int *p, int *p_)
+static void	child_process(t_node *node, int *p, int *p_, t_data *d)
 {
 	if (p_)
 	{
@@ -46,7 +46,7 @@ static void	child_process(t_node *node, int *p, int *p_)
 		if (close(p[1]) == -1)
 			error_exit("close in child (2)");
 	}
-	command(node->left);
+	command(node->left, d->env);
 }
 
 /**
@@ -71,7 +71,7 @@ void	pipeline(t_node *node, int *p_, t_data *d)
 	if (pid == -1)
 		error_exit("fork");
 	else if (pid == 0)
-		child_process(node, p, p_);
+		child_process(node, p, p_, d);
 	else if (pid > 0)
 	{
 		if (node->right)
