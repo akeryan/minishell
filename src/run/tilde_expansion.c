@@ -6,12 +6,14 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 20:10:13 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/14 20:50:05 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/02/16 13:22:21 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "libft.h"
+#include "error_handling.h"
+#include "expansion.h"
 
 char	*tilde_expansion(char **word)
 {

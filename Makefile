@@ -6,7 +6,7 @@
 #    By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/15 15:43:23 by dabdygal          #+#    #+#              #
-#    Updated: 2024/02/11 17:56:18 by akeryan          ###   ########.fr        #
+#    Updated: 2024/02/16 13:20:25 by akeryan          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,6 +50,7 @@ INCLUDE_FILES = minishell.h \
 				rules.h \
 				word_list.h \
 				free.h \
+				expansion.h \
 				main_utils.h
 
 MAIN_FILE = main.c
@@ -63,7 +64,6 @@ SRC_FILES = token_utils_0.c \
 			parse.c \
 			main_utils.c \
 			run/error_handling.c \
-			run/expansion.c \
 			run/pid_list.c \
 			run/pipe_list.c \
 			run/word_list.c \
@@ -72,6 +72,8 @@ SRC_FILES = token_utils_0.c \
 			run/rules_pipeline.c \
 			run/rules.c \
 			run/rules_redirect.c \
+			run/expansion_utils.c \
+			run/tilde_expansion.c \
 			run/free.c
 
 OBJ_FILES = $(SRC_FILES:.c=.o)

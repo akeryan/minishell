@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 16:18:15 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/14 20:35:29 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/02/16 13:22:38 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,10 +63,10 @@ char	*is_there_unquoted_slash(char *word)
 	{
 		slash = ft_strchr(_word, '/');
 		if (!slash)
-			break ;	
+			break ;
 		if (!is_quoted(word, slash))
 			break ;
-		if (*(slash + 1) != '\0') 
+		if (*(slash + 1) != '\0')
 			_word = (slash + 1);
 		else
 		{
