@@ -6,7 +6,7 @@
 /*   By: dabdygal <dabdygal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/26 17:28:57 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/05 14:23:57 by dabdygal         ###   ########.fr       */
+/*   Updated: 2024/02/16 10:52:39 by dabdygal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,5 +20,9 @@
 
 /** EXIT_MSG - exit message */
 # define EXIT_MSG "exit\n"
+
+int	echo(const char *argv[]);
+int	cd(const char *argv[], char ***envp);
+int	pwd(char *argv[]);
 
 #endif

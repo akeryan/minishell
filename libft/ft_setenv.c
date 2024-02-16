@@ -6,7 +6,7 @@
 /*   By: dabdygal <dabdygal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 16:33:00 by dabdygal          #+#    #+#             */
-/*   Updated: 2024/02/14 17:38:20 by dabdygal         ###   ########.fr       */
+/*   Updated: 2024/02/16 14:41:35 by dabdygal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,11 +57,13 @@ static int	index_expand_env(char ***envp)
 	return (size);
 }
 
-static char	*join_3_str(const char *s1, const char *s2, const char *s3)
+static char	*create_entry(const char *s1, const char *s2, const char *s3)
 {
 	char	*tmp;
 	char	*str;
 
+	if (s3 == NULL)
+		return (ft_strdup(s1));
 	tmp = ft_strjoin(s1, s2);
 	if (tmp == NULL)
 		return (NULL);
@@ -83,7 +85,7 @@ int	ft_setenv(const char *name, const char *value, int overw, char ***envp)
 	index = index_envar(name, *envp);
 	if (index < 0 || overw)
 	{
-		str = join_3_str(name, "=", value);
+		str = create_entry(name, "=", value);
 		if (str == NULL)
 			return (-1);
 		if (index < 0)

@@ -6,13 +6,14 @@
 /*   By: dabdygal <dabdygal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 17:46:12 by dabdygal          #+#    #+#             */
-/*   Updated: 2024/02/14 16:30:35 by dabdygal         ###   ########.fr       */
+/*   Updated: 2024/02/16 10:51:22 by dabdygal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include <unistd.h>
 #include <stdlib.h>
+#include <errno.h>
 #include "libft.h"
 
 static int	resetenv(const char *name, const char *value, char ***envp)
@@ -86,6 +87,7 @@ int	cd(const char *argv[], char ***envp)
 	{
 		write(STDERR_FILENO, "minishell: cd: ", 15);
 		perror(path);
+		errno = 0;
 		return (EXIT_FAILURE);
 	}
 	return (EXIT_SUCCESS);
