@@ -6,7 +6,7 @@
 /*   By: dabdygal <dabdygal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 15:36:53 by dabdygal          #+#    #+#             */
-/*   Updated: 2024/02/04 23:00:09 by dabdygal         ###   ########.fr       */
+/*   Updated: 2024/02/12 16:01:33 by dabdygal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,16 +39,20 @@ static t_book	book_program(void)
 	t_book	program;
 
 	program.type = PROGRAM;
-	program.size = 2;
+	program.size = 3;
 	{
-		program.recipe[0].size = 2;
-		program.recipe[0].ing[0] = book_to_ing(NEWLINE_LIST);
-		program.recipe[0].ing[1] = book_to_ing(PIPELINE);
+		program.recipe[0].size = 1;
+		program.recipe[0].ing[0] = token_to_ing(NEWLINE_TOKEN);
 	}
 	{
 		program.recipe[1].size = 2;
 		program.recipe[1].ing[0] = book_to_ing(NEWLINE_LIST);
-		program.recipe[1].ing[1] = token_to_ing(EOF_TOKEN);
+		program.recipe[1].ing[1] = book_to_ing(PIPELINE);
+	}
+	{
+		program.recipe[2].size = 2;
+		program.recipe[2].ing[0] = book_to_ing(NEWLINE_LIST);
+		program.recipe[2].ing[1] = token_to_ing(EOF_TOKEN);
 	}
 	return (program);
 }

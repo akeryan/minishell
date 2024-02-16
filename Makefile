@@ -6,7 +6,7 @@
 #    By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/15 15:43:23 by dabdygal          #+#    #+#              #
-#    Updated: 2024/02/16 13:20:25 by akeryan          ###   ########.fr        #
+#    Updated: 2024/02/16 13:40:32 by akeryan          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -61,7 +61,8 @@ SRC_FILES = token_utils_0.c \
 			setup_grammar_utils.c \
 			erase_node.c \
 			here_file.c \
-			parse.c \
+			parse_0.c \
+			parse_1.c \
 			main_utils.c \
 			run/error_handling.c \
 			run/pid_list.c \

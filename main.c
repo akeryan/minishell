@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/25 19:21:52 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/11 17:53:43 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/02/16 13:41:34 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,13 +127,13 @@ int	main(void)
 	grammar = setup_grammar();
 	while (1)
 	{
-		root = parse(PROGRAM, &grammar);
+		root = parse(PROGRAM, &grammar, NULL);
 		print_tree(root, 0);
 		if (errno != 0)
 			perror("ERRNO");
 		if (!root)
 		{
-			if (peek_token().type == EOF_TOKEN)
+			if (peek_token(NULL).type == EOF_TOKEN)
 			{
 				printf(EXIT_MSG);
 				return (EXIT_SUCCESS);

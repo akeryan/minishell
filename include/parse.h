@@ -6,7 +6,7 @@
 /*   By: dabdygal <dabdygal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 15:00:39 by dabdygal          #+#    #+#             */
-/*   Updated: 2024/02/07 14:53:23 by dabdygal         ###   ########.fr       */
+/*   Updated: 2024/02/12 15:22:40 by dabdygal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,11 @@
 
 # define MSH_SYNTAX 200
 
-t_node	*parse(t_node_type node_type, t_grammar *grammar);
+t_node	*parse(t_node_type node_type, t_grammar *grammar, char *ps2);
 char	*here_file(t_token token);
 void	erase_node(t_node **node);
 char	*here_file(t_token token);
+int		fill_node(t_node *node, t_book *book, t_grammar *grammar, char *ps2);
+int		parse_ing(t_ingredient *ing, t_node *node, t_grammar *gr, char *ps2);
 
 #endif
