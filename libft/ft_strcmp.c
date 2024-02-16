@@ -1,31 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_getenv.c                                        :+:      :+:    :+:   */
+/*   ft_strcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dabdygal <dabdygal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/13 15:39:18 by dabdygal          #+#    #+#             */
-/*   Updated: 2024/02/16 17:44:04 by dabdygal         ###   ########.fr       */
+/*   Created: 2024/02/16 16:40:04 by dabdygal          #+#    #+#             */
+/*   Updated: 2024/02/16 16:56:53 by dabdygal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_getenv(const char *name, char **envp)
+int	ft_strcmp(const char *s1, const char *s2)
 {
-	size_t	len;
-	size_t	i;
+	int	i;
 
-	if (!name || !envp || ft_strchr(name, '='))
-		return (NULL);
-	len = ft_strlen(name);
 	i = 0;
-	while (envp[i])
+	while (s1[i] && s2[i])
 	{
-		if (!ft_strncmp(name, envp[i], len) && envp[i][len] == '=')
-			return ((char *)(envp[i] + len + 1));
+		if (s1[i] != s2[i])
+			return ((unsigned char) s1[i] - (unsigned char) s2[i]);
 		i++;
 	}
-	return (NULL);
+	return ((unsigned char) s1[i] - (unsigned char) s2[i]);
 }

@@ -6,7 +6,7 @@
 /*   By: dabdygal <dabdygal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/26 17:28:57 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/16 10:52:39 by dabdygal         ###   ########.fr       */
+/*   Updated: 2024/02/16 17:45:07 by dabdygal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,5 +24,7 @@
 int	echo(const char *argv[]);
 int	cd(const char *argv[], char ***envp);
 int	pwd(char *argv[]);
+int	ft_export(char *argv[], char ***envp);
+int	export_print(char **envp);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: dabdygal <dabdygal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 11:36:53 by dabdygal          #+#    #+#             */
-/*   Updated: 2024/02/14 17:38:24 by dabdygal         ###   ########.fr       */
+/*   Updated: 2024/02/16 17:44:34 by dabdygal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,8 @@ char	**ft_split_wspace(char const *s);
 int		ft_min(int x, int y);
 int		ft_dim(int x, int y);
 void	ft_free(void **ptr);
-char	*ft_getenv(const char *name, const char **envp);
+char	*ft_getenv(const char *name, char **envp);
 int		ft_setenv(const char *name, const char *value, int overw, char ***envp);
+int		ft_strcmp(const char *s1, const char *s2);
 
 #endif

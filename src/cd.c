@@ -6,7 +6,7 @@
 /*   By: dabdygal <dabdygal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 17:46:12 by dabdygal          #+#    #+#             */
-/*   Updated: 2024/02/16 10:51:22 by dabdygal         ###   ########.fr       */
+/*   Updated: 2024/02/16 17:43:48 by dabdygal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ int	cd(const char *argv[], char ***envp)
 		write(STDERR_FILENO, "minishell: cd: too many arguments\n", 34);
 		return (EXIT_FAILURE);
 	}
-	path = argv[1];
+	path = (char *) argv[1];
 	if (path == NULL)
 	{
 		path = ft_getenv("HOME", *envp);

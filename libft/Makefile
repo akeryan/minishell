@@ -6,7 +6,7 @@
 #    By: dabdygal <dabdygal@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/07 14:51:38 by dabdygal          #+#    #+#              #
-#    Updated: 2024/02/14 17:38:39 by dabdygal         ###   ########.fr        #
+#    Updated: 2024/02/16 16:54:20 by dabdygal         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -67,7 +67,8 @@ SRC_FILES 	= ft_memset.c \
 			  ft_free.c \
 			  ft_copy_strv.c \
 			  ft_getenv.c \
-			  ft_setenv.c
+			  ft_setenv.c \
+			  ft_strcmp.c
 
 OBJECTS		= $(SRC_FILES:.c=.o)
 
