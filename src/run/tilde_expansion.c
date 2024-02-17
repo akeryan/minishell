@@ -6,7 +6,11 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 20:10:13 by akeryan           #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2024/02/17 14:55:27 by akeryan          ###   ########.fr       */
+=======
+/*   Updated: 2024/02/17 13:16:11 by akeryan          ###   ########.fr       */
+>>>>>>> 9585be07d50108eeacaae09b0c0a88e884735ded
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,4 +109,13 @@ void	tilde_expansion(char **word, char ***env)
 	free(v.usrs_dir);
 	free(*word);
 	*word = tmp;
+<<<<<<< HEAD
+=======
+}
+
+int	apply_expansions(char **word, char ***env)
+{
+	tilde_expansion(word, env);
+	return (0);
+>>>>>>> 9585be07d50108eeacaae09b0c0a88e884735ded
 }
