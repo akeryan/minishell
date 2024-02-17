@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/28 10:50:20 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/16 22:59:09 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/02/17 12:37:07 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ void	command(t_node *const node, char ***env)
 		return ;
 	args_list = NULL;
 	argv = NULL;
-	prefix(node->left);
+	prefix(node->left, env);
 	suffix(node->right, &args_list, env);
 	argv = list_to_array(args_list, node->word);
 	apply_expansions(&node->word, env);	

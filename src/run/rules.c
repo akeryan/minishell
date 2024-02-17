@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 11:46:35 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/16 16:12:42 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/02/17 12:40:03 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,19 +35,19 @@ int	program(t_node *root, t_data *data)
 	return (0);
 }
 
-void	prefix(t_node *node)
+void	prefix(t_node *node, char ***env)
 {
 	if (node == NULL)
 		return ;
-	redirect(node->left);
-	prefix(node->right);
+	redirect(node->left, env);
+	prefix(node->right, env);
 }
 
 void	suffix(t_node *node, t_word_node **args, char ***env)
 {
 	if (node == NULL)
 		return ;
-	redirect(node->left);
+	redirect(node->left, env);
 	if (node->word)
 	{
 		apply_expansions(&node->word, env);

@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 11:47:48 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/16 16:11:48 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/02/17 12:40:32 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@
 int		program(t_node *head, t_data *data);
 void	pipeline(t_node *node, int *p_, t_data *data);
 void	command(t_node *node, char ***env);
-void	prefix(t_node *node);
+void	prefix(t_node *node, char ***env);
 void	suffix(t_node *node, t_word_node **args, char ***env);
-int		redirect(t_node *node);
+int		redirect(t_node *node, char ***env);
 int		newline_list(t_node *node);
 char	*get_cmd_path(char *cmd);
 
