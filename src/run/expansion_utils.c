@@ -6,13 +6,14 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 16:18:15 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/16 16:57:30 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/02/17 13:43:28 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include <stdio.h>
 #include <stdbool.h>
+#include <sys/stat.h>
 #include "libft.h"
 
 /**
@@ -77,18 +78,39 @@ char	*is_there_unquoted_slash(char *word)
 	return (slash);
 }
 
-char	*ft_getenv(char *word, char **env)
+/**
+ * @brief Obtains the current value of the environment variable, name
+ * @param name The name of the environment variable
+ * @param env Pointer to the environmet variables
+ * @return Value of the env. variable if exists, otherwise NULL
+*/
+char	*ft_getenv(char *name, char **env)
 {
-	if (!word || !env)
+	if (!name || !env)
 	{
 		ft_printf(2, "Empty args in ft_getenv\n");
 		return (NULL);
 	}
 	while (*env)
 	{
-		if (ft_strncmp(word, *env, ft_strlen(word)) == 0)
-			return (*env + ft_strlen(word) + 1);
+		if (ft_strncmp(name, *env, ft_strlen(name)) == 0)
+			return (*env + ft_strlen(name) + 1);
 		env++;
 	}
 	return (NULL);
+}
+
+/**
+ * @brief Checks whether directory exists
+ * @param path Path to the directory in question
+ * @return 0 if directory exists
+ * @return -1 if directory doesn't exist
+*/
+int does_directory_exist(const char *path)
+{
+	struct stat status;
+    if (stat(path, &status) != 0) {
+        return 0;
+    }
+    return S_ISDIR(status.st_mode);
 }
