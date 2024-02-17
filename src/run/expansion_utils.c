@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 16:18:15 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/17 13:55:49 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/02/17 17:03:35 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,22 @@ bool	is_quoted(const char *str, const char *target)
 		current++;
 	}
 	return (dbl_quoted || sgl_quoted);
+}
+
+bool	is_single_quoted(const char *str, const char *target)
+{
+	const char	*current;
+	bool		sgl_quoted;
+
+	current = str;
+	sgl_quoted = false;
+	while (current <= target)
+	{
+		if (*current == '\'')
+			sgl_quoted = !sgl_quoted;
+		current++;
+	}
+	return (sgl_quoted);
 }
 
 /**
