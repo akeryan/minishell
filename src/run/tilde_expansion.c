@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 20:10:13 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/16 22:37:22 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/02/17 13:23:04 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,15 +50,15 @@ static char	*get_expansion(t_tilde_vars *v, char **word)
 	return (ptr);
 }
 
-char	*tilde_expansion(char **word, char ***env)
+void	tilde_expansion(char **word, char ***env)
 {
 	t_tilde_vars	v;
 	char			*tmp;
 
 	if (!word)
-		return (NULL);
+		return ;
 	if (*word[0] != '~')
-		return (NULL);
+		return ;
 	init_vars(&v, env);
 	v.slash = is_there_unquoted_slash(*word);
 	tmp = get_expansion(&v, word);
@@ -66,7 +66,6 @@ char	*tilde_expansion(char **word, char ***env)
 		panic_malloc();
 	free(*word);
 	*word = tmp;
-	return (*word);
 }
 
 int	apply_expansions(char **word, char ***env)
