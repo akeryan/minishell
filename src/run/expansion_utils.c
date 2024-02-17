@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 16:18:15 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/17 13:43:28 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/02/17 13:55:49 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,10 +103,10 @@ char	*ft_getenv(char *name, char **env)
 /**
  * @brief Checks whether directory exists
  * @param path Path to the directory in question
- * @return 0 if directory exists
- * @return -1 if directory doesn't exist
+ * @return non-zero if directory exists
+ * @return 0 if directory doesn't exist
 */
-int does_directory_exist(const char *path)
+int does_dir_exist(const char *path)
 {
 	struct stat status;
     if (stat(path, &status) != 0) {

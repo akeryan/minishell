@@ -6,7 +6,7 @@
 #    By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/15 15:43:23 by dabdygal          #+#    #+#              #
-#    Updated: 2024/02/16 13:40:32 by akeryan          ###   ########.fr        #
+#    Updated: 2024/02/17 16:36:48 by akeryan          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -75,6 +75,7 @@ SRC_FILES = token_utils_0.c \
 			run/rules_redirect.c \
 			run/expansion_utils.c \
 			run/tilde_expansion.c \
+			run/dollar_expansion.c \
 			run/free.c
 
 OBJ_FILES = $(SRC_FILES:.c=.o)
