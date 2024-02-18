@@ -6,7 +6,7 @@
 #    By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/15 15:43:23 by dabdygal          #+#    #+#              #
-#    Updated: 2024/02/17 16:36:48 by akeryan          ###   ########.fr        #
+#    Updated: 2024/02/18 23:33:29 by akeryan          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -51,6 +51,7 @@ INCLUDE_FILES = minishell.h \
 				word_list.h \
 				free.h \
 				expansion.h \
+				dollar_expansion.h \
 				main_utils.h
 
 MAIN_FILE = main.c
@@ -76,6 +77,7 @@ SRC_FILES = token_utils_0.c \
 			run/expansion_utils.c \
 			run/tilde_expansion.c \
 			run/dollar_expansion.c \
+			run/dollar_expansion_2.c \
 			run/free.c
 
 OBJ_FILES = $(SRC_FILES:.c=.o)
