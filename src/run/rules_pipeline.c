@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 16:32:04 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/16 14:43:12 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/02/18 16:11:12 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static void	child_process(t_node *node, int *p, int *p_, t_data *d)
 		if (close(p[1]) == -1)
 			error_exit("close in child (2)");
 	}
-	command(node->left, d->env);
+	command(node->left, d);
 }
 
 /**

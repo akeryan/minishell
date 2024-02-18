@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/28 10:50:20 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/17 12:37:07 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/02/18 16:10:51 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ static char	**list_to_array(t_word_node *head, char *cmd_name)
  * @return 0: Successful execution;
  * @return -1: Execution failed;
 */
-void	command(t_node *const node, char ***env)
+void	command(t_node *const node, t_data *data)
 {
 	t_word_node	*args_list;
 	char		**argv;
@@ -95,10 +95,10 @@ void	command(t_node *const node, char ***env)
 		return ;
 	args_list = NULL;
 	argv = NULL;
-	prefix(node->left, env);
-	suffix(node->right, &args_list, env);
+	prefix(node->left, data);
+	suffix(node->right, &args_list, data);
 	argv = list_to_array(args_list, node->word);
-	apply_expansions(&node->word, env);	
+	apply_expansions(&node->word, data);	
 	ft_execve(node->word, argv);
 	free_word_list(args_list);
 	free_split(argv);

@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 16:18:15 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/17 17:03:35 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/02/18 13:43:32 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ bool	is_single_quoted(const char *str, const char *target)
 }
 
 /**
- * @brief Checks whether there is an unquoted slach in the input string
+ * @brief Checks whether there is an unquoted slash in the input string
  * @param word input string
  * @return Pointer to the unquoted slash or NULL
  * 
@@ -92,6 +92,37 @@ char	*is_there_unquoted_slash(char *word)
 		}
 	}
 	return (slash);
+}
+
+/**
+ * @brief Checks whether there is an unquoted dollar in the input string
+ * @param word input string
+ * @return Pointer to the unquoted slash or NULL
+ * 
+*/
+char	*is_there_unquoted_dollar(char *word)
+{
+	char	*_word;
+	char	*dollar;
+
+	_word = word;
+	dollar = NULL;
+	while (1)
+	{
+		dollar = ft_strchr(_word, '$');
+		if (!dollar)
+			break ;
+		if (!is_single_quoted(word, dollar))
+			break ;
+		if (*(dollar + 1) != '\0')
+			_word = (dollar + 1);
+		else
+		{
+			dollar = NULL;
+			break ;
+		}
+	}
+	return (dollar);
 }
 
 /**
@@ -130,3 +161,4 @@ int does_dir_exist(const char *path)
     }
     return S_ISDIR(status.st_mode);
 }
+

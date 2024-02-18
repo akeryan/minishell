@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 12:26:44 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/10 20:42:09 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/02/18 17:01:10 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ t_word_node	*new_empty_word(void);
  * the program exits with EXIT_FAILURE and doesn't return 
 */
 t_word_node	*new_word(const char *const str);
+
+t_word_node	*new_word_m(char *const str);
 
 /**
  * @brief Adds node to the beginning of the list

@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/25 19:21:52 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/16 14:35:10 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/02/18 19:59:32 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,7 +125,8 @@ void	init_data(t_data *data)
 	extern char	**environ;
 
 	data->env = &environ;
-	data->exit_status = 0;
+	data->exit_status = 42;
+	data->dbl_dollar = getpid();
 }
 
 int	main(void)

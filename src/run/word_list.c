@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 13:48:45 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/16 18:13:52 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/02/18 17:01:25 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ t_word_node	*new_empty_word(void)
 
 	new_node = (t_word_node *)malloc(sizeof(t_word_node));
 	if (new_node == NULL)
-		error_exit("malloc");
+		panic_malloc();
 	new_node->word = NULL;
 	new_node->next = NULL;
 	return (new_node);
@@ -41,6 +41,15 @@ t_word_node	*new_word(const char *const str)
 
 	new_node = new_empty_word();
 	new_node->word = ft_strdup(str, ft_strlen(str));
+	return (new_node);
+}
+
+t_word_node	*new_word_m(char *const str)
+{
+	t_word_node	*new_node;
+
+	new_node = new_empty_word();
+	new_node->word = str;
 	return (new_node);
 }
 

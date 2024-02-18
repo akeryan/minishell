@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 11:59:34 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/17 22:15:17 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/02/18 14:18:37 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,9 @@
 
 typedef struct s_data
 {
-	unsigned char	exit_status;
 	char			***env;
+	unsigned char	exit_status;
+	pid_t			dbl_dollar;
 }	t_data;
 
 /** Types of nodes */
@@ -61,5 +62,6 @@ typedef struct s_tilde_vars
 	char	*usrs_dir;
 	char	*home_dir;
 }	t_tilde_vars;
+
 
 #endif

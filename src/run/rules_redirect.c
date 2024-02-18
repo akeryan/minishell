@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 11:54:33 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/17 12:39:08 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/02/18 16:09:07 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,11 +68,11 @@ static void	here_doc(char *file_name)
 		error_exit("unlink");
 }
 
-void	redirect(t_node *node, char ***env)
+void	redirect(t_node *node, t_data *data)
 {
 	if (node == NULL)
 		return ;
-	apply_expansions(&node->word, env);
+	apply_expansions(&node->word, data);
 	if (node->token_type == LESS)
 		redir_read(node->word);
 	else if (node->token_type == GREAT)
