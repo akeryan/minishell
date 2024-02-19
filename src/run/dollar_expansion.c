@@ -6,15 +6,17 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 14:55:06 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/19 14:28:23 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/02/19 17:28:51 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
+#include <stdlib.h>
 #include "dollar_expansion.h"
 #include "expansion.h"
 #include "libft.h"
 #include "word_list.h"
+#include "error_handling.h"
 
 static int	func_6(t_word_node **head, char **current)
 {
@@ -26,6 +28,56 @@ static int	func_7(t_word_node **head)
 {
 	add_word_back(head, new_word("$"));
 	return (1);
+}
+
+void	expand_word(t_word_node *node, char ***env)
+{
+	char	*value;
+	char	*tmp;
+
+	if (*node->word == '$' && ft_strlen(node->word) > 1)
+	{
+		value = ft_getenv(node->word + 1, *env);
+		printf("ENV_value: %s\n", value);
+		if (value)
+		{
+			tmp = ft_strdup(value);
+			if (!tmp)
+				panic_malloc();
+		}
+		else
+			tmp = NULL;
+		free (node->word);
+		node->word = tmp;
+	}
+}
+
+char	*join_words(t_word_node *head, char ***env)
+{
+	char	*out;
+	char	*tmp;	
+
+	out = NULL;
+	while (head)
+	{
+		expand_word(head, env);
+		if (head->word)
+		{
+			if (!out)
+				tmp = ft_strdup(head->word);
+			else
+				tmp = ft_strjoin(out, head->word);
+			if (!tmp)
+				panic_malloc();
+			free (out);
+			out = tmp;
+		}
+		if (head->next)
+			head = head->next;
+		else
+			head = NULL;
+	}
+	return (out);
 }
 
 void	dollar_expansion(char **word, t_data *data)
@@ -48,50 +100,11 @@ void	dollar_expansion(char **word, t_data *data)
 		}
 		if (*(ptr + 1) == '\0' && func_7(&head))
 			break ;
-		if (*(ptr + 1) == '$' || *(ptr + 1) == '?')
-		{
-			func_3(&ptr, &head, data, &current);
+		if (func_3(&ptr, &head, data, &current))
 			continue ;
-		}
 		func_4(&ptr, &current, &head);
 	}
-
-	t_word_node *tmp;
-
-	tmp = head;
-	while (1)
-	{
-		if (tmp)
-			printf("EXIT: %s\n", tmp->word);
-		if (tmp->next)
-			tmp = tmp->next;
-		else
-			break ;
-	}
-}
-
-int	apply_expansions(char **word, t_data *d)
-{
-	dollar_expansion(word, d);
-	tilde_expansion(word, d->env);
-	return (0);
-}
-
-void expand_word(t_word_node *node, char ***env)
-{
-	char	*value;
-
-	if (*node->word == '$')
-		value =	ft_getenv(node->word + 1, *env);
-	free (node->word);
-	node->word = ft_strdup(value);
-}
-
-
-char	*join_words(t_word_node *head)
-{
-	char	*str;
-
-	str = NULL;
-	return (str);
+	free(*word);
+	*word = join_words(head, data->env);
+	free_word_list(head);
 }

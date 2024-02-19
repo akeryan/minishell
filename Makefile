@@ -6,7 +6,7 @@
 #    By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/15 15:43:23 by dabdygal          #+#    #+#              #
-#    Updated: 2024/02/18 23:33:29 by akeryan          ###   ########.fr        #
+#    Updated: 2024/02/19 17:32:13 by akeryan          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -69,12 +69,14 @@ SRC_FILES = token_utils_0.c \
 			run/pid_list.c \
 			run/pipe_list.c \
 			run/word_list.c \
+			run/word_list_2.c \
 			run/path.c \
 			run/rules_command.c \
 			run/rules_pipeline.c \
 			run/rules.c \
 			run/rules_redirect.c \
 			run/expansion_utils.c \
+			run/expansion_utils_2.c \
 			run/tilde_expansion.c \
 			run/dollar_expansion.c \
 			run/dollar_expansion_2.c \
