@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 17:06:26 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/19 17:11:51 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/02/19 17:47:15 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	does_dir_exist(const char *path)
 
 int	apply_expansions(char **word, t_data *d)
 {
-	dollar_expansion(word, d);
 	tilde_expansion(word, d->env);
+	dollar_expansion(word, d);
 	return (0);
 }
