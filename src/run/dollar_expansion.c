@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 14:55:06 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/18 23:32:15 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/02/19 14:28:23 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,19 @@ void	dollar_expansion(char **word, t_data *data)
 		}
 		func_4(&ptr, &current, &head);
 	}
+
+	t_word_node *tmp;
+
+	tmp = head;
+	while (1)
+	{
+		if (tmp)
+			printf("EXIT: %s\n", tmp->word);
+		if (tmp->next)
+			tmp = tmp->next;
+		else
+			break ;
+	}
 }
 
 int	apply_expansions(char **word, t_data *d)
@@ -62,4 +75,23 @@ int	apply_expansions(char **word, t_data *d)
 	dollar_expansion(word, d);
 	tilde_expansion(word, d->env);
 	return (0);
+}
+
+void expand_word(t_word_node *node, char ***env)
+{
+	char	*value;
+
+	if (*node->word == '$')
+		value =	ft_getenv(node->word + 1, *env);
+	free (node->word);
+	node->word = ft_strdup(value);
+}
+
+
+char	*join_words(t_word_node *head)
+{
+	char	*str;
+
+	str = NULL;
+	return (str);
 }

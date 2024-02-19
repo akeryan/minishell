@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/28 10:50:20 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/18 16:10:51 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/02/19 14:31:04 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ static char	**list_to_array(t_word_node *head, char *cmd_name)
 	i = 1;
 	while (head)
 	{
-		argv[i] = ft_strdup(head->word, ft_strlen(head->word));
+		argv[i] = ft_strdup(head->word);
 		if (argv[i] == NULL)
 		{
 			while (--i >= 0)

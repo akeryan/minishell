@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 12:37:41 by dabdygal          #+#    #+#             */
-/*   Updated: 2024/02/16 18:09:23 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/02/19 14:25:44 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,19 +22,19 @@
  * @param s1 A string to be copied.
  * @return A pointer to a new copied string. NULL if error occured.
 */
-char	*ft_strdup(const char *s1, size_t len)
+char	*ft_strdup(const char *s1)
 {
 	char	*ptr;
-	size_t	i;
+	int		i;
 
 	i = 0;
-	while (s1[i] && i < len)
+	while (s1[i])
 		i++;
 	ptr = malloc(sizeof(char) * (i + 1));
 	if (ptr)
 	{
 		i = 0;
-		while (i < len)
+		while (s1[i])
 		{
 			ptr[i] = s1[i];
 			i++;
