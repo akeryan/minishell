@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 16:18:15 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/19 17:00:57 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/02/20 19:34:46 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,17 +131,17 @@ char	*is_there_unquoted_dollar(char *word)
  * @param env Pointer to the environmet variables
  * @return Value of the env. variable if exists, otherwise NULL
 */
-char	*ft_getenv(char *name, char **env)
+char	*ft_getenv_aram(char *name, char **env)
 {
+	size_t	len;
+
 	if (!name || !env)
-	{
-		ft_printf(2, "Empty args in ft_getenv\n");
 		return (NULL);
-	}
+	len = ft_strlen(name);
 	while (*env)
 	{
-		if (ft_strncmp(name, *env, ft_strlen(name)) == 0)
-			return (*env + ft_strlen(name) + 1);
+		if (ft_strncmp(name, *env, len) == 0)
+			return (*env + len + 1);
 		env++;
 	}
 	return (NULL);

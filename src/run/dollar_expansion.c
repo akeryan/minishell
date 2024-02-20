@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 14:55:06 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/20 16:54:05 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/02/20 19:41:47 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	expand_word(t_word_node *node, char ***env)
 
 	if (*node->word == '$' && ft_strlen(node->word) > 1)
 	{
-		value = ft_getenv(node->word + 1, *env);
+		value = ft_getenv_aram(node->word + 1, *env);
 		if (value)
 		{
 			tmp = ft_strdup(value);

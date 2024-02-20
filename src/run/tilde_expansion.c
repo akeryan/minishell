@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 20:10:13 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/19 14:34:16 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/02/20 19:42:11 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@
 
 static void	init_vars(t_tilde_vars *v, char ***env)
 {
-	v->usr_name = ft_getenv("USER", *env);
+	v->usr_name = ft_getenv_aram("USER", *env);
 	if (!v->usr_name)
 		panic("Error: USER is unset");
-	v->home_dir = ft_getenv("HOME", *env);
+	v->home_dir = ft_getenv_aram("HOME", *env);
 	if (!v->home_dir)
 		panic("Error: HOME is unset");
 	v->usrs_dir = ft_substr(v->home_dir, 0, ft_strlen(v->home_dir) - \
