@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 16:32:04 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/18 16:11:12 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/02/20 19:47:57 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,10 +63,8 @@ void	pipeline(t_node *node, int *p_, t_data *d)
 	if (node == NULL)
 		return ;
 	if (node->right)
-	{
 		if (pipe(p) == -1)
 			error_exit("pipe");
-	}
 	pid = fork_();
 	if (pid == -1)
 		error_exit("fork");

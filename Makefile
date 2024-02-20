@@ -6,7 +6,7 @@
 #    By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/15 15:43:23 by dabdygal          #+#    #+#              #
-#    Updated: 2024/02/20 19:12:57 by akeryan          ###   ########.fr        #
+#    Updated: 2024/02/20 20:06:21 by akeryan          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -73,19 +73,19 @@ SRC_FILES = echo.c \
 			run/error_handling.c \
 			run/pid_list.c \
 			run/pipe_list.c \
-			run/word_list.c \
-			run/word_list_2.c \
+			run/word_list_0.c \
+			run/word_list_1.c \
 			run/path.c \
 			run/rules_command.c \
 			run/rules_pipeline.c \
 			run/rules.c \
 			run/rules_redirect.c \
-			run/expansion_utils.c \
-			run/expansion_utils_2.c \
+			run/expansion_utils_0.c \
+			run/expansion_utils_1.c \
 			run/tilde_expansion.c \
-			run/dollar_expansion.c \
+			run/dollar_expansion_0.c \
+			run/dollar_expansion_1.c \
 			run/dollar_expansion_2.c \
-			run/dollar_expansion_3.c \
 			run/free.c
 
 OBJ_FILES = $(SRC_FILES:.c=.o)
