@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 17:06:26 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/20 14:25:15 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/02/20 16:27:54 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,6 @@ int	does_dir_exist(const char *path)
 
 void	apply_expansions(char **word, t_data *d)
 {
-	printf("BEFORE EXPANSIONS: %s\n", *word);
 	tilde_expansion(word, d->env);
-	printf("AFTER TILDE EXPANSION: %s\n", *word);
 	dollar_expansion(word, d);
-	printf("AFTER DOLLAR EXPANSION: %s\n", *word);
 }

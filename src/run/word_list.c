@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 13:48:45 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/20 16:21:05 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/02/20 16:26:46 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,12 +64,8 @@ void	add_word_back(t_word_node **head, t_word_node *node)
 
 	if (head)
 	{
-		printf("				add_word_back: head is not null\n");
 		if (!*head)
-		{
-			printf("				*head is NULL\n");
 			(*head) = node;
-		}
 		else
 		{
 			temp = *head;
@@ -78,8 +74,6 @@ void	add_word_back(t_word_node **head, t_word_node *node)
 			temp->next = node;
 		}
 	}
-	printf("				DONE WITH add_word_back");
-	printf("				HEAD: %s\n", (*head)->word);
 }
 
 /**

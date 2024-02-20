@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 11:46:35 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/20 14:32:31 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/02/20 16:28:10 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,7 @@ void	suffix(t_node *node, t_word_node **args, t_data *data)
 	redirect(node->left, data);
 	if (node->word)
 	{
-		printf("	SUFFIX BEFORE: %s\n", node->word);
 		apply_expansions(&node->word, data);
-		printf("	SUFFIX AFTER: %s\n", node->word);
 		add_word_back(args, new_word(node->word));
 	}
 	suffix(node->right, args, data);

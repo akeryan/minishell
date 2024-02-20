@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 23:25:10 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/20 16:11:00 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/02/20 16:26:16 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,7 @@ void	func_2(t_word_node **head, char **current, char **ptr)
 	if (!substr)
 		panic("ft_substr failed");
 	node = new_word_m(substr);
-	printf("				Node word: %s\n", node->word);
-	printf("				ONE_1_1\n");
 	add_word_back(head, node);
-	printf("				ONE_1_2\n");
 	*current = *ptr;
 }
 

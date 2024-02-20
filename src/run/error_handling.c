@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 10:29:34 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/16 21:46:11 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/02/20 16:27:40 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	path_error_msg(char *cmd_name)
 	exit(127);
 }
 
-void panic(char *txt)
+void	panic(char *txt)
 {
 	ft_printf(2, "%s\n", txt);
 	exit(EXIT_FAILURE);
