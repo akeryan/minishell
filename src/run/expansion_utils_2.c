@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 17:06:26 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/20 17:36:48 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/02/20 17:39:56 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,14 +30,14 @@ void	remove_quotation_marks(char **word)
 	char	*str;
 
 	str = *word;
-	while (*str != '\0')	
+	while (*str != '\0')
 	{
 		if (*str == '"' || *str == '\'')
 		{
-			ft_strlcpy(str, str + 1, ft_strlen(str));			
+			ft_strlcpy(str, str + 1, ft_strlen(str));
 			continue ;
 		}
-		str++;		
+		str++;
 	}
 }
 
