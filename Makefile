@@ -6,7 +6,7 @@
 #    By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/15 15:43:23 by dabdygal          #+#    #+#              #
-#    Updated: 2024/02/19 17:32:13 by akeryan          ###   ########.fr        #
+#    Updated: 2024/02/20 16:52:29 by akeryan          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -80,6 +80,7 @@ SRC_FILES = token_utils_0.c \
 			run/tilde_expansion.c \
 			run/dollar_expansion.c \
 			run/dollar_expansion_2.c \
+			run/dollar_expansion_3.c \
 			run/free.c
 
 OBJ_FILES = $(SRC_FILES:.c=.o)
