@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 11:36:53 by dabdygal          #+#    #+#             */
-/*   Updated: 2024/02/19 14:26:08 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/02/20 19:10:43 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,5 +62,8 @@ char	**ft_split_wspace(char const *s);
 int		ft_min(int x, int y);
 int		ft_dim(int x, int y);
 void	ft_free(void **ptr);
+char	*ft_getenv(const char *name, char **envp);
+int		ft_setenv(const char *name, const char *value, int overw, char ***envp);
+int		ft_strcmp(const char *s1, const char *s2);
 
 #endif

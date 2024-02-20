@@ -1,31 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strchr.c                                        :+:      :+:    :+:   */
+/*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dabdygal <dabdygal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/04 18:42:49 by dabdygal          #+#    #+#             */
-/*   Updated: 2024/02/13 16:57:55 by dabdygal         ###   ########.fr       */
+/*   Created: 2024/02/12 17:10:03 by dabdygal          #+#    #+#             */
+/*   Updated: 2024/02/16 17:35:44 by dabdygal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stddef.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include "libft.h"
 
-char	*ft_strchr(const char *s, int c)
+int	echo(const char *argv[])
 {
-	size_t	i;
+	int	n;
+	int	i;
 
-	i = 0;
-	while (s[i])
+	n = 1;
+	i = 1;
+	if (argv[i] && ft_strncmp(argv[i], "-n", 3) == 0)
 	{
-		if (s[i] == (char) c)
-			return ((char *)(s + i));
+		n = 0;
 		i++;
 	}
-	if (c == 0)
+	while (argv[i])
 	{
-		return ((char *)(s + i));
+		if (printf("%s", argv[i]) < 0)
+			return (EXIT_FAILURE);
+		if (argv[i + 1])
+		{
+			if (printf(" ") < 0)
+				return (EXIT_FAILURE);
+		}
+		i++;
 	}
-	return (NULL);
+	if (n)
+		printf ("\n");
+	return (EXIT_SUCCESS);
 }

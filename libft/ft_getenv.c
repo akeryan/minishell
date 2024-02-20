@@ -1,31 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strchr.c                                        :+:      :+:    :+:   */
+/*   ft_getenv.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dabdygal <dabdygal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/04 18:42:49 by dabdygal          #+#    #+#             */
-/*   Updated: 2024/02/13 16:57:55 by dabdygal         ###   ########.fr       */
+/*   Created: 2024/02/13 15:39:18 by dabdygal          #+#    #+#             */
+/*   Updated: 2024/02/16 17:44:04 by dabdygal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stddef.h>
+#include "libft.h"
 
-char	*ft_strchr(const char *s, int c)
+char	*ft_getenv(const char *name, char **envp)
 {
+	size_t	len;
 	size_t	i;
 
+	if (!name || !envp || ft_strchr(name, '='))
+		return (NULL);
+	len = ft_strlen(name);
 	i = 0;
-	while (s[i])
+	while (envp[i])
 	{
-		if (s[i] == (char) c)
-			return ((char *)(s + i));
+		if (!ft_strncmp(name, envp[i], len) && envp[i][len] == '=')
+			return ((char *)(envp[i] + len + 1));
 		i++;
-	}
-	if (c == 0)
-	{
-		return ((char *)(s + i));
 	}
 	return (NULL);
 }

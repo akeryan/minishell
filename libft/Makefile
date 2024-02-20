@@ -6,7 +6,7 @@
 #    By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/07 14:51:38 by dabdygal          #+#    #+#              #
-#    Updated: 2024/02/07 19:52:12 by akeryan          ###   ########.fr        #
+#    Updated: 2024/02/20 19:15:00 by akeryan          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -63,7 +63,11 @@ SRC_FILES 	= ft_memset.c \
 			  ft_split_wspace.c \
 			  ft_min.c \
 			  ft_dim.c \
-			  ft_free.c
+			  ft_free.c \
+			  ft_copy_strv.c \
+			  ft_getenv.c \
+			  ft_setenv.c \
+			  ft_strcmp.c
 
 OBJECTS		= $(SRC_FILES:.c=.o)
 

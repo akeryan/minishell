@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 12:37:41 by dabdygal          #+#    #+#             */
-/*   Updated: 2024/02/19 14:25:44 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/02/20 19:14:46 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ char	*ft_strdup(const char *s1)
 	char	*ptr;
 	int		i;
 
+	if (!s1)
+		return (NULL);
 	i = 0;
 	while (s1[i])
 		i++;

@@ -1,31 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strchr.c                                        :+:      :+:    :+:   */
+/*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dabdygal <dabdygal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/04 18:42:49 by dabdygal          #+#    #+#             */
-/*   Updated: 2024/02/13 16:57:55 by dabdygal         ###   ########.fr       */
+/*   Created: 2024/02/12 18:27:25 by dabdygal          #+#    #+#             */
+/*   Updated: 2024/02/16 10:51:55 by dabdygal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stddef.h>
+#include <unistd.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <errno.h>
 
-char	*ft_strchr(const char *s, int c)
+int	pwd(char *argv[])
 {
-	size_t	i;
+	char	*path;
 
-	i = 0;
-	while (s[i])
+	path = getcwd(NULL, 0);
+	if (!path)
 	{
-		if (s[i] == (char) c)
-			return ((char *)(s + i));
-		i++;
+		perror(NULL);
+		errno = 0;
+		return (EXIT_FAILURE);
 	}
-	if (c == 0)
+	if (printf("%s\n", path) < 0)
 	{
-		return ((char *)(s + i));
+		free(path);
+		return (EXIT_FAILURE);
 	}
-	return (NULL);
+	free(path);
+	return (EXIT_SUCCESS);
 }
