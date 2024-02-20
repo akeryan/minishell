@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 13:19:10 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/19 17:12:51 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/02/20 14:17:00 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include <stdbool.h>
 # include "data.h"
 
-int		apply_expansions(char **word, t_data *data);
+void	apply_expansions(char **word, t_data *data);
 void	dollar_expansion(char **word, t_data *data);
 void	tilde_expansion(char **word, char ***env);
 bool	is_quoted(const char *str, const char *target);

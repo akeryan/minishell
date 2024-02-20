@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 17:30:33 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/19 17:31:40 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/02/20 14:50:58 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,4 +36,21 @@ int	word_list_len(t_word_node *head)
 		tmp = tmp->next;
 	}
 	return (len);
+}
+
+void	print_word_list(t_word_node *head)
+{
+	int	i;
+
+	if (!head)
+		return ;
+	i = 0;
+	while (head)
+	{
+		printf("Node %d: %s\n", ++i, head->word);
+		if (head->next)
+			head = head->next;
+		else
+			head = NULL;
+	}
 }
