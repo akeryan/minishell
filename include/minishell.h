@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/26 17:28:57 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/20 19:13:46 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/02/21 18:01:56 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,11 @@
 
 int	echo(const char *argv[]);
 int	cd(const char *argv[], char ***envp);
-int	pwd(char *argv[]);
+int	pwd(void);
 int	ft_export(char *argv[], char ***envp);
 int	export_print(char **envp);
+int	unset(char *argv[], char **envp);
+int	env(char *argv[], char **envp);
+int	ft_exit(char *argv[]);
 
 #endif

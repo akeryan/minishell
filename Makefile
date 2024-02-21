@@ -6,7 +6,7 @@
 #    By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/15 15:43:23 by dabdygal          #+#    #+#              #
-#    Updated: 2024/02/20 20:06:21 by akeryan          ###   ########.fr        #
+#    Updated: 2024/02/21 18:02:37 by akeryan          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -61,6 +61,9 @@ SRC_FILES = echo.c \
 			export_0.c \
 			export_1.c \
 			pwd.c \
+			unset.c \
+			env.c \
+			ft_exit.c \
 			token_utils_0.c \
 			token_utils_1.c \
 			setup_grammar.c \
