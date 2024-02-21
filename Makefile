@@ -6,7 +6,7 @@
 #    By: dabdygal <dabdygal@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/15 15:43:23 by dabdygal          #+#    #+#              #
-#    Updated: 2024/02/21 10:54:22 by dabdygal         ###   ########.fr        #
+#    Updated: 2024/02/21 14:39:02 by dabdygal         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,6 +47,7 @@ SRC_FILES = echo.c \
 			export_1.c \
 			pwd.c \
 			unset.c \
+			env.c \
 			token_utils_0.c \
 			token_utils_1.c \
 			setup_grammar.c \

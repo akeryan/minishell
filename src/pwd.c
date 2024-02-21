@@ -6,7 +6,7 @@
 /*   By: dabdygal <dabdygal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 18:27:25 by dabdygal          #+#    #+#             */
-/*   Updated: 2024/02/16 10:51:55 by dabdygal         ###   ########.fr       */
+/*   Updated: 2024/02/21 14:37:59 by dabdygal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include <stdlib.h>
 #include <errno.h>
 
-int	pwd(char *argv[])
+int	pwd(void)
 {
 	char	*path;
 
