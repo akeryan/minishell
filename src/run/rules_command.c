@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/28 10:50:20 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/21 18:11:34 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/02/21 20:26:39 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 #include "error_handling.h"
 #include "free.h"
 #include "expansion.h"
+#include "builtins.h"
 
 /**
  * @brief Executes command with execve system utility
@@ -77,6 +78,25 @@ static char	**list_to_array(t_word_node *head, char *cmd_name)
 		i++;
 	}
 	return (argv[0] = cmd_name, argv[i] = NULL, argv);
+}
+
+static int	run_builtin(char *cmd, char **argv, char ***envp)
+{
+	if (cmd == "echo")
+		return (echo(argv));
+	if (cmd == "cd")
+		return (cd(argv, envp));
+	if (cmd == "pwd")
+		return (pwd());
+	if (cmd == "export")
+		return (ft_export(argv, envp));
+	if (cmd == "unset")
+		return (unset(argv, envp));
+	if (cmd == "env")
+		return (env(argv, envp));
+	if (cmd == "exit")
+		return (ft_exit(argv));
+	return (42);
 }
 
 /**
