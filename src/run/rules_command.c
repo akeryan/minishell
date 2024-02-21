@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/28 10:50:20 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/20 13:54:15 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/02/21 18:11:34 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,5 +102,5 @@ void	command(t_node *const node, t_data *data)
 	ft_execve(node->word, argv);
 	free_word_list(args_list);
 	free_split(argv);
-	exit(42);
+	exit(1);
 }
