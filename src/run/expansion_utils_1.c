@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 17:06:26 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/20 20:04:48 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/02/21 14:42:41 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	remove_quotation_marks(char **word)
 
 void	apply_expansions(char **word, t_data *d)
 {
-	tilde_expansion(word, d->env);
+	tilde_expansion(word, &d->env);
 	dollar_expansion(word, d);
 	remove_quotation_marks(word);
 }

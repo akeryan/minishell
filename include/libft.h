@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 11:36:53 by dabdygal          #+#    #+#             */
-/*   Updated: 2024/02/20 19:10:43 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/02/21 14:47:47 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,5 +65,6 @@ void	ft_free(void **ptr);
 char	*ft_getenv(const char *name, char **envp);
 int		ft_setenv(const char *name, const char *value, int overw, char ***envp);
 int		ft_strcmp(const char *s1, const char *s2);
+char	**ft_copy_strv(const char **strv);
 
 #endif

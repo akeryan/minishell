@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 14:55:06 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/20 20:02:22 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/02/21 14:43:11 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,6 @@ void	dollar_expansion(char **word, t_data *data)
 	head = NULL;
 	tokenizer(&ptr, &current, &head, data);
 	free(*word);
-	*word = join_words(head, data->env);
+	*word = join_words(head, &data->env);
 	free_word_list(head);
 }

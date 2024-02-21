@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 11:59:34 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/18 14:18:37 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/02/21 14:33:37 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 
 typedef struct s_data
 {
-	char			***env;
+	char			**env;
 	unsigned char	exit_status;
 	pid_t			dbl_dollar;
 }	t_data;
