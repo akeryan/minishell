@@ -3,16 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dabdygal <dabdygal@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 09:53:33 by dabdygal          #+#    #+#             */
-/*   Updated: 2024/02/21 10:55:07 by dabdygal         ###   ########.fr       */
+/*   Updated: 2024/02/21 18:07:57 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
 #include <errno.h>
 #include <stdlib.h>
+#include <stdio.h>
+#include "libft.h"
 
 static int	is_valid_entry(char *str)
 {

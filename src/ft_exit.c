@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dabdygal <dabdygal@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 14:42:11 by dabdygal          #+#    #+#             */
-/*   Updated: 2024/02/21 16:11:33 by dabdygal         ###   ########.fr       */
+/*   Updated: 2024/02/21 18:08:24 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
 #include <errno.h>
+#include <stdio.h>
+#include "libft.h"
 
 static int	inval_arg_warn(char *str)
 {
