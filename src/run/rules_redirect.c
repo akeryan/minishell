@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 11:54:33 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/18 16:09:07 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/02/22 21:25:02 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static void	redir_write(char *file_name)
 	if (fd == -1)
 		error_exit("open");
 	if (dup2(fd, STDOUT_FILENO) == -1)
-		error_exit("dupe2");
+		error_exit("dup2");
 	if (close(fd) == -1)
 		error_exit("close");
 }

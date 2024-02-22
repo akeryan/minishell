@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 16:32:04 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/22 20:19:23 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/02/22 21:20:39 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,8 +101,12 @@ void	pipeline(t_node *node, int *p_, t_data *d)
 			pipeline(node->right, &p[0], d);
 			waitpid(pid, &status, 0);
 			if (!node->right)
+			{
 				if (WIFEXITED(status))
 					d->exit_status = WEXITSTATUS(status);
+				else
+					ft_printf(2, "EXIT ERROR: %d", status);
+			}
 		}
 
 	}
