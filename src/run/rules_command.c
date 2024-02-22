@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/28 10:50:20 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/22 21:31:03 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/02/22 22:38:27 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,22 +82,25 @@ static char	**list_to_array(t_word_node *head, char *cmd_name)
 
 static int	run_builtin(char *cmd, char **argv, char ***envp)
 {
-	if (ft_strcmp(cmd, "echo") == 0)
-		return (echo((const char **)argv));
-	if (ft_strcmp(cmd, "cd") == 0)
-		return (cd((const char **)argv, envp));
-	if (ft_strcmp(cmd, "pwd") == 0)
-		return (pwd());
-	if (ft_strcmp(cmd, "export") == 0)
-		return (ft_export(argv, envp));
-	if (ft_strcmp(cmd, "unset") == 0)
-		return (unset(argv, *envp));
-	if (ft_strcmp(cmd, "env") == 0)
-		return (env(argv, *envp));
-	if (ft_strcmp(cmd, "exit") == 0)
-		if (ft_exit(argv) == 0)
-			exit(EXIT_SUCCESS);
-	return (42);
+	if (cmd)
+	{
+		if (ft_strcmp(cmd, "echo") == 0)
+			return (echo((const char **)argv));
+		if (ft_strcmp(cmd, "cd") == 0)
+			return (cd((const char **)argv, envp));
+		if (ft_strcmp(cmd, "pwd") == 0)
+			return (pwd());
+		if (ft_strcmp(cmd, "export") == 0)
+			return (ft_export(argv, envp));
+		if (ft_strcmp(cmd, "unset") == 0)
+			return (unset(argv, *envp));
+		if (ft_strcmp(cmd, "env") == 0)
+			return (env(argv, *envp));
+		if (ft_strcmp(cmd, "exit") == 0)
+			if (ft_exit(argv) == 0)
+				exit(EXIT_SUCCESS);
+	}
+	return (-100);
 }
 
 /**
@@ -107,14 +110,14 @@ static int	run_builtin(char *cmd, char **argv, char ***envp)
  * @return 0: Successful execution;
  * @return -1: Execution failed;
 */
-void	command(t_node *const node, t_data *data)
+int	command(t_node *const node, t_data *data)
 {
 	t_word_node	*args_list;
 	char		**argv;
 	int			builtin_status;
 
 	if (!node)
-		return ;
+		return (EXIT_FAILURE);
 	args_list = NULL;
 	argv = NULL;
 	prefix(node->left, data);
@@ -122,10 +125,9 @@ void	command(t_node *const node, t_data *data)
 	argv = list_to_array(args_list, node->word);
 	apply_expansions(&node->word, data);
 	builtin_status = run_builtin(node->word, argv, &data->env);
-	if (builtin_status == 42)
+	if (builtin_status == -100 && node->word)
 		ft_execve(node->word, argv);
 	free_word_list(args_list);
 	free_split(argv);
-	if (builtin_status != 42)
-		exit(builtin_status);
+	return (builtin_status);
 }

@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 16:32:04 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/22 21:20:39 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/02/22 22:18:41 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,26 @@ static int	fork_(void)
 	return (pid);
 }
 
+bool	run_cmd_in_parent(int *p_, char *cmd)
+{
+	if (p_ == NULL && cmd)
+	{
+		if (ft_strcmp(cmd, "cd") == 0)	
+			return (true);
+		if (ft_strcmp(cmd, "export") == 0)
+			return (true);
+		if (ft_strcmp(cmd, "unset") == 0)
+			return (true);
+		if (ft_strcmp(cmd, "exit") == 0)
+			return (true);
+	}
+	return (false);
+}
+
 static void	child_process(t_node *node, int *p, int *p_, t_data *d)
 {
+	int	status;
+
 	if (p_)
 	{
 		if (dup2(*p_, STDIN_FILENO) == -1)
@@ -47,24 +65,13 @@ static void	child_process(t_node *node, int *p, int *p_, t_data *d)
 		if (close(p[1]) == -1)
 			error_exit("close in child (2)");
 	}
-	command(node->left, d);
+	status = command(node->left, d);
+	if (!run_cmd_in_parent(p_, node->left->word))
+		exit(status);
+	else
+		d->exit_status = status;
 }
 
-bool	run_cmd_in_parent(int *p_, char *cmd)
-{
-	if (p_ == NULL && cmd)
-	{
-		if (ft_strcmp(cmd, "cd") == 0)	
-			return (true);
-		if (ft_strcmp(cmd, "export") == 0)
-			return (true);
-		if (ft_strcmp(cmd, "unset") == 0)
-			return (true);
-		if (ft_strcmp(cmd, "exit") == 0)
-			return (true);
-	}
-	return (false);
-}
 /**
  * @brief	Implements 'pipeline' node of the parsing tree
  * @param	node Pointer to PIPELINE node	
