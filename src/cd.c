@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dabdygal <dabdygal@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 17:46:12 by dabdygal          #+#    #+#             */
-/*   Updated: 2024/02/16 17:43:48 by dabdygal         ###   ########.fr       */
+/*   Updated: 2024/02/22 15:47:00 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ static int	change_dir(char *path, char ***envp)
 int	cd(const char *argv[], char ***envp)
 {
 	char	*path;
+	printf("CD IN ACTION\n");
 
 	if (argv[1] && argv[2])
 	{

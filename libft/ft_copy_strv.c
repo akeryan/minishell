@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 14:28:26 by dabdygal          #+#    #+#             */
-/*   Updated: 2024/02/21 14:47:55 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/02/22 14:40:31 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,23 +39,25 @@ char	**ft_copy_strv(const char **strv)
 {
 	int		size;
 	char	**envp;
+	int		i;
 
 	if (strv == NULL)
 		return (NULL);
-	size = strv_size(strv);
-	envp = (char **) malloc(sizeof(char *) * (size + 1));
+	size = strv_size((const char **)strv);
+	envp = (char **)malloc(sizeof(char *) * (size + 1));
 	if (!envp)
 		return (NULL);
-	envp[size + 1] = NULL;
-	while (size >= 0)
+	i = 0;
+	while (i < size)
 	{
-		envp[size] = ft_strdup(strv[size]);
-		if (envp[size] == NULL)
+		envp[i] = ft_strdup(strv[i]);
+		if (envp[i] == NULL)
 		{
 			free_strv(envp + size + 1);
 			return (NULL);
 		}
-		size--;
+		i++;
 	}
+	envp[i] = NULL;
 	return (envp);
 }

@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/28 10:50:20 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/21 20:45:34 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/02/22 16:57:53 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,8 @@ static int	run_builtin(char *cmd, char **argv, char ***envp)
 	if (ft_strcmp(cmd, "env") == 0)
 		return (env(argv, *envp));
 	if (ft_strcmp(cmd, "exit") == 0)
-		return (ft_exit(argv));
+		if (ft_exit(argv) == 0)
+			exit(EXIT_SUCCESS);
 	return (42);
 }
 
@@ -125,5 +126,6 @@ void	command(t_node *const node, t_data *data)
 		ft_execve(node->word, argv);
 	free_word_list(args_list);
 	free_split(argv);
-	exit(builtin_status);
+	if (builtin_status == 42)
+		exit(builtin_status);
 }

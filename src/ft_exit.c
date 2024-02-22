@@ -6,10 +6,11 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 14:42:11 by dabdygal          #+#    #+#             */
-/*   Updated: 2024/02/21 18:08:24 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/02/22 16:56:11 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdio.h>
 #include <errno.h>
 #include <stdio.h>
 #include "libft.h"

@@ -6,13 +6,14 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 16:32:04 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/20 19:47:57 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/02/22 16:49:47 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include <sys/wait.h>
 #include <stdlib.h>
+#include <stdbool.h>
 #include "libft.h"
 #include "error_handling.h"
 #include "rules.h"
@@ -49,6 +50,21 @@ static void	child_process(t_node *node, int *p, int *p_, t_data *d)
 	command(node->left, d);
 }
 
+bool	run_cmd_in_parent(int *p_, char *cmd)
+{
+	if (p_ == NULL)
+	{
+		if (ft_strcmp(cmd, "cd") == 0)	
+			return (true);
+		if (ft_strcmp(cmd, "export") == 0)
+			return (true);
+		if (ft_strcmp(cmd, "unset") == 0)
+			return (true);
+		if (ft_strcmp(cmd, "exit") == 0)
+			return (true);
+	}
+	return (false);
+}
 /**
  * @brief	Implements 'pipeline' node of the parsing tree
  * @param	node Pointer to PIPELINE node	
@@ -65,20 +81,29 @@ void	pipeline(t_node *node, int *p_, t_data *d)
 	if (node->right)
 		if (pipe(p) == -1)
 			error_exit("pipe");
-	pid = fork_();
-	if (pid == -1)
-		error_exit("fork");
-	else if (pid == 0)
-		child_process(node, p, p_, d);
-	else if (pid > 0)
+	if (run_cmd_in_parent(p_, node->left->word))
 	{
-		if (node->right)
-			if (close(p[1]) == -1)
-				error_exit("close in parent");
+		child_process(node, p, p_, d);
 		pipeline(node->right, &p[0], d);
-		waitpid(pid, &status, 0);
-		if (!node->right)
-			if (WIFEXITED(status))
-				d->exit_status = WEXITSTATUS(status);
+	}
+	else
+	{
+		pid = fork_();
+		if (pid == -1)
+			error_exit("fork");
+		else if (pid == 0)
+			child_process(node, p, p_, d);
+		else if (pid > 0)
+		{
+			if (node->right)
+				if (close(p[1]) == -1)
+					error_exit("close in parent");
+			pipeline(node->right, &p[0], d);
+			waitpid(pid, &status, 0);
+			if (!node->right)
+				if (WIFEXITED(status))
+					d->exit_status = WEXITSTATUS(status);
+		}
+
 	}
 }

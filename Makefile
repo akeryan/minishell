@@ -6,7 +6,7 @@
 #    By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/15 15:43:23 by dabdygal          #+#    #+#              #
-#    Updated: 2024/02/21 18:02:37 by akeryan          ###   ########.fr        #
+#    Updated: 2024/02/21 23:55:30 by akeryan          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -95,7 +95,8 @@ OBJ_FILES = $(SRC_FILES:.c=.o)
 
 CC = cc
 
-CFLAGS = -Wall -Wextra -Werror -g -I $(INCLUDE_DIR) -I .
+#CFLAGS = -Wall -Wextra -Werror -g -I $(INCLUDE_DIR) -I .
+CFLAGS = -g -I $(INCLUDE_DIR) -I .
 
 # ************************************RULES*********************************** #
 

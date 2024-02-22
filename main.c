@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/25 19:21:52 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/21 20:56:53 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/02/22 14:43:51 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,6 +136,7 @@ int	main(void)
 	t_node		*root;
 
 	init_data(&data);
+
 	grammar = setup_grammar();
 	while (1)
 	{
