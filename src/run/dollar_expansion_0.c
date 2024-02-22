@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 14:55:06 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/23 00:07:12 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/02/23 02:12:18 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,25 +18,41 @@
 #include "word_list.h"
 #include "error_handling.h"
 
-void	expand_word(t_word_node *node, char ***env)
+static void	no_space_case(char **word, char **env)
 {
-	char	*value;
 	char	*tmp;
 
-	if (*node->word == '$' && *(node->word + 1) != ' ' && ft_strlen(node->word) > 1)
+	tmp = ft_getenv_aram(*word + 1, env);
+	free (*word);
+	*word = ft_strdup(tmp);
+	if (!*word)
+		panic_malloc();
+}
+
+void	expand_word(t_word_node *node, char ***env)
+{
+	char	*tmp;
+	char	*tmp2;
+	char	*space;
+
+	if (*node->word != '$')
+		return ;
+	if (*(node->word + 1) == ' ' || *(node->word + 1) == '\0')
+		return ;
+	space = strchr(node->word, ' ');
+	if (space)
 	{
-		value = ft_getenv_aram(node->word + 1, *env);
-		if (value)
-		{
-			tmp = ft_strdup(value);
-			if (!tmp)
-				panic_malloc();
-		}
-		else
-			tmp = NULL;
+		tmp2 = ft_substr(node->word + 1, 0, space - node->word - 1);
+		if (!tmp2)
+			panic_malloc();
+		tmp = ft_getenv_aram(tmp2, *env);
+		free (tmp2);
+		tmp2 = ft_strjoin(tmp, space);
 		free (node->word);
-		node->word = tmp;
+		node->word = tmp2;
 	}
+	else
+		no_space_case(&node->word, *env);
 }
 
 static char	*join_words(t_word_node *head, char ***env)
