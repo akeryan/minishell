@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 16:18:15 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/20 20:04:30 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/02/22 23:31:07 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,8 @@ char	*is_there_unquoted_slash(char *word)
 }
 
 /**
- * @brief Checks whether there is an unquoted dollar in the input string
+ * @brief Checks whether there is an unquoted dollar in the input string.
+ * Unquoted means that the $ is NOT in a single quotation marks 
  * @param word input string
  * @return Pointer to the unquoted slash or NULL
  * 

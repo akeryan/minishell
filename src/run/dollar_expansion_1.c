@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 23:25:10 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/20 20:02:33 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/02/23 00:08:20 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,14 +54,20 @@ int	func_3(char **ptr, t_word_node **head, t_data *data, char **current)
 
 void	func_4(char **ptr, char **current, t_word_node **head)
 {
-	while (*(*ptr + 1) != '$' && *(*ptr + 1) != '\0' && *(*ptr + 1) \
-		!= '"' && *(*ptr + 1) != '\'')
+	char		*substr;
+	t_word_node	*node;
+
+	while (*(*ptr + 1) != '$' && *(*ptr + 1) != '\0' && *(*ptr + 1) != '"' \
+					&& *(*ptr + 1) != '\'')
 		(*ptr)++;
 	(*ptr)++;
 	if (*ptr != *current)
 	{
-		add_word_back(head, \
-			new_word_m(ft_substr(*current, 0, *ptr - *current)));
+		substr = ft_substr(*current, 0, *ptr - *current);
+		if (!substr)
+			panic_malloc();
+		node = new_word_m(substr);
+		add_word_back(head, node);
 		*current = *ptr;
 	}
 }

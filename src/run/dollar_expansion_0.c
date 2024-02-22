@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 14:55:06 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/21 14:43:11 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/02/23 00:07:12 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	expand_word(t_word_node *node, char ***env)
 	char	*value;
 	char	*tmp;
 
-	if (*node->word == '$' && ft_strlen(node->word) > 1)
+	if (*node->word == '$' && *(node->word + 1) != ' ' && ft_strlen(node->word) > 1)
 	{
 		value = ft_getenv_aram(node->word + 1, *env);
 		if (value)
