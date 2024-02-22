@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 16:32:04 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/22 16:49:47 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/02/22 20:19:23 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ static void	child_process(t_node *node, int *p, int *p_, t_data *d)
 
 bool	run_cmd_in_parent(int *p_, char *cmd)
 {
-	if (p_ == NULL)
+	if (p_ == NULL && cmd)
 	{
 		if (ft_strcmp(cmd, "cd") == 0)	
 			return (true);
