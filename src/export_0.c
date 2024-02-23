@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 10:54:20 by dabdygal          #+#    #+#             */
-/*   Updated: 2024/02/23 16:39:06 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/02/23 20:58:51 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,9 @@ static int	inval_arg_warn(char *str)
 
 int	ft_export(char *argv[], char ***envp)
 {
+	int	status;
+
+	status = 0;
 	if (argv[1] == NULL && export_print(*envp) < 0)
 	{
 		perror("minishell: export");
@@ -103,8 +106,8 @@ int	ft_export(char *argv[], char ***envp)
 			}
 		}
 		else if (inval_arg_warn(*argv) < 0)
-			return (EXIT_FAILURE);
+			status = EXIT_FAILURE;
 		argv++;
 	}
-	return (EXIT_SUCCESS);
+	return (status);
 }
