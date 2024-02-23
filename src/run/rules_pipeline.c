@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 16:32:04 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/22 22:18:41 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/02/23 13:12:09 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ bool	run_cmd_in_parent(int *p_, char *cmd)
 {
 	if (p_ == NULL && cmd)
 	{
-		if (ft_strcmp(cmd, "cd") == 0)	
+		if (ft_strcmp(cmd, "cd") == 0)
 			return (true);
 		if (ft_strcmp(cmd, "export") == 0)
 			return (true);
@@ -115,6 +115,6 @@ void	pipeline(t_node *node, int *p_, t_data *d)
 					ft_printf(2, "EXIT ERROR: %d", status);
 			}
 		}
-
 	}
 }
+

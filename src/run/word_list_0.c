@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 13:48:45 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/22 23:55:10 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/02/23 12:55:17 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ t_word_node	*new_word(const char *const str)
 
 	new_node = new_empty_word();
 	new_node->word = ft_strdup(str);
+	if (new_node->word == NULL)
+		panic_malloc();
 	return (new_node);
 }
 

@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/28 10:50:20 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/22 22:38:27 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/02/23 13:09:38 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ static char	**list_to_array(t_word_node *head, char *cmd_name)
 		head = head->next;
 		i++;
 	}
-	return (argv[0] = cmd_name, argv[i] = NULL, argv);
+	return (argv[0] = ft_strdup(cmd_name), argv[i] = NULL, argv);
 }
 
 static int	run_builtin(char *cmd, char **argv, char ***envp)
