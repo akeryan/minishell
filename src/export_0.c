@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 10:54:20 by dabdygal          #+#    #+#             */
-/*   Updated: 2024/02/23 20:58:51 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/02/23 21:06:58 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,18 +82,11 @@ static int	inval_arg_warn(char *str)
 	return (0);
 }
 
-int	ft_export(char *argv[], char ***envp)
+static int	run_through_args(char **argv, char ***envp)
 {
 	int	status;
 
 	status = 0;
-	if (argv[1] == NULL && export_print(*envp) < 0)
-	{
-		perror("minishell: export");
-		errno = 0;
-		return (EXIT_FAILURE);
-	}
-	argv++;
 	while (*argv)
 	{
 		if (is_valid_entry(*argv))
@@ -109,5 +102,20 @@ int	ft_export(char *argv[], char ***envp)
 			status = EXIT_FAILURE;
 		argv++;
 	}
+	return (status);
+}
+
+int	ft_export(char *argv[], char ***envp)
+{
+	int	status;
+
+	if (argv[1] == NULL && export_print(*envp) < 0)
+	{
+		perror("minishell: export");
+		errno = 0;
+		return (EXIT_FAILURE);
+	}
+	argv++;
+	status = run_through_args(argv, envp);
 	return (status);
 }
