@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 17:46:12 by dabdygal          #+#    #+#             */
-/*   Updated: 2024/02/23 13:30:05 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/02/23 16:05:44 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,11 +68,6 @@ int	cd(const char *argv[], char ***envp)
 {
 	char	*path;
 
-	if (argv[1] && argv[2])
-	{
-		write(STDERR_FILENO, "minishell: cd: too many arguments\n", 34);
-		return (EXIT_FAILURE);
-	}
 	path = (char *) argv[1];
 	if (path == NULL)
 	{
