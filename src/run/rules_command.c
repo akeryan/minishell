@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/28 10:50:20 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/23 13:09:38 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/02/23 15:53:57 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,25 +80,35 @@ static char	**list_to_array(t_word_node *head, char *cmd_name)
 	return (argv[0] = ft_strdup(cmd_name), argv[i] = NULL, argv);
 }
 
-static int	run_builtin(char *cmd, char **argv, char ***envp)
+static int	run_builtin(char *cmd, char **argv, t_data *data)
 {
+	int	status;
+
 	if (cmd)
 	{
 		if (ft_strcmp(cmd, "echo") == 0)
 			return (echo((const char **)argv));
 		if (ft_strcmp(cmd, "cd") == 0)
-			return (cd((const char **)argv, envp));
+			return (cd((const char **)argv, &data->env));
 		if (ft_strcmp(cmd, "pwd") == 0)
 			return (pwd());
 		if (ft_strcmp(cmd, "export") == 0)
-			return (ft_export(argv, envp));
+			return (ft_export(argv, &data->env));
 		if (ft_strcmp(cmd, "unset") == 0)
-			return (unset(argv, *envp));
+			return (unset(argv, data->env));
 		if (ft_strcmp(cmd, "env") == 0)
-			return (env(argv, *envp));
+			return (env(argv, data->env));
 		if (ft_strcmp(cmd, "exit") == 0)
-			if (ft_exit(argv) == 0)
-				exit(EXIT_SUCCESS);
+		{
+			status = ft_exit(argv);
+			if (status != 1)
+				exit (status);
+			else
+			{
+				data->exit_status = 1;
+				return (EXIT_FAILURE);
+			}
+		}
 	}
 	return (-100);
 }
@@ -124,7 +134,7 @@ int	command(t_node *const node, t_data *data)
 	suffix(node->right, &args_list, data);
 	argv = list_to_array(args_list, node->word);
 	apply_expansions(&node->word, data);
-	builtin_status = run_builtin(node->word, argv, &data->env);
+	builtin_status = run_builtin(node->word, argv, data);
 	if (builtin_status == -100 && node->word)
 		ft_execve(node->word, argv);
 	free_word_list(args_list);
