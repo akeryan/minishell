@@ -6,7 +6,7 @@
 /*   By: dabdygal <dabdygal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 15:02:17 by dabdygal          #+#    #+#             */
-/*   Updated: 2024/02/04 23:21:57 by dabdygal         ###   ########.fr       */
+/*   Updated: 2024/02/23 19:16:07 by dabdygal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,13 @@
 #include "tokens.h"
 #include "minishell.h"
 #include "libft.h"
-#include "readline/readline.h"
 #include <fcntl.h>
 #include <errno.h>
 #include <stdlib.h>
+#include <signal.h>
+#include <errno.h>
+
+extern int	g_signal;
 
 static int	create_open_file(char **ptr)
 {
@@ -48,12 +51,44 @@ static int	create_open_file(char **ptr)
 	return (fd);
 }
 
+void	here_sig(int x)
+{
+	g_signal = x;
+}
+
+static char	*here_read(char *prompt)
+{
+	char				*line;
+	size_t				len;
+	struct sigaction	s_act;
+	struct sigaction	s_old;
+
+	s_act.__sigaction_u.__sa_handler = here_sig;
+	s_act.sa_flags = 0;
+	s_act.sa_mask = 0;
+	if (sigaction(SIGINT, &s_act, &s_old) < 0)
+		return (NULL);
+	if (ft_putstr_fd(prompt, STDERR_FILENO) < 0)
+		return (NULL);
+	line = get_next_line(STDIN_FILENO);
+	if (g_signal == SIGINT)
+		errno = 0;
+	if (sigaction(SIGINT, &s_old, NULL) < 0)
+		return (NULL);
+	if (!line)
+		return (NULL);
+	len = ft_strlen(line);
+	if (line[len - 1] == '\n')
+		line[len - 1] = '\0';
+	return (line);
+}
+
 static int	fill_file(int fd, char *delim, size_t len)
 {
 	char	*line;
 	size_t	line_len;
 
-	line = readline(MSH_PS2);
+	line = here_read(MSH_PS2);
 	while (line)
 	{
 		line_len = ft_strlen(line);
@@ -65,9 +100,11 @@ static int	fill_file(int fd, char *delim, size_t len)
 			return (-1);
 		}
 		ft_free((void **) &line);
-		line = readline(MSH_PS2);
+		line = here_read(MSH_PS2);
 	}
 	ft_free((void **) &line);
+	if (g_signal == SIGINT)
+		return (-1);
 	return (0);
 }
 

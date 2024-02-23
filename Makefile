@@ -6,7 +6,7 @@
 #    By: dabdygal <dabdygal@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/15 15:43:23 by dabdygal          #+#    #+#              #
-#    Updated: 2024/02/23 14:10:05 by dabdygal         ###   ########.fr        #
+#    Updated: 2024/02/23 16:38:48 by dabdygal         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,15 +22,11 @@ SRC_DIR = src
 
 OBJ_DIR = src
 
-LIB1_DIR = readline
-
-LIB1_GIT = git://git.savannah.gnu.org/readline.git
+LIBREAD_DIR = /usr/local/Cellar/readline/8.1/lib
 
 LIBFT_DIR = libft
 
 LIBFT_NAME = libft.a
-
-LIB1_NAME = libreadline.a
 
 PRINTF_DIR = ft_printf
 
@@ -96,22 +92,13 @@ OBJ_FILES = $(SRC_FILES:.c=.o)
 
 CC = cc
 
-CFLAGS = -Wall -Wextra -Werror -g -I $(INCLUDE_DIR) -I .
+#CFLAGS = -Wall -Wextra -Werror -g -I $(INCLUDE_DIR) -I .
 CFLAGS = -g -I $(INCLUDE_DIR) -I .
 
 # ************************************RULES*********************************** #
 
-$(BIN_NAME): $(addprefix $(LIB1_DIR)/,$(LIB1_NAME)) $(addprefix $(LIBFT_DIR)/,$(LIBFT_NAME)) $(addprefix $(PRINTF_DIR)/,$(PRINTF_NAME)) $(addprefix $(MAIN_DIR)/,$(MAIN_FILE)) $(addprefix $(OBJ_DIR)/,$(OBJ_FILES)) $(addprefix $(INCLUDE_DIR)/,$(INCLUDE_FILES))
-	$(CC) $(CFLAGS) $(addprefix $(MAIN_DIR)/,$(MAIN_FILE)) $(addprefix $(SRC_DIR)/,$(SRC_FILES)) $(addprefix $(LIBFT_DIR)/,$(LIBFT_NAME)) $(addprefix $(PRINTF_DIR)/,$(PRINTF_NAME)) -lreadline -o $(BIN_NAME)
-
-$(addprefix $(LIB1_DIR)/,$(LIB1_NAME)): | $(addprefix $(LIB1_DIR)/,Makefile)
-	make -C $(LIB1_DIR)
-
-$(addprefix $(LIB1_DIR)/,Makefile): | $(LIB1_DIR)
-	(cd $(LIB1_DIR); ./configure)
-
-$(LIB1_DIR):
-	git clone $(LIB1_GIT)
+$(BIN_NAME): $(addprefix $(LIBFT_DIR)/,$(LIBFT_NAME)) $(addprefix $(PRINTF_DIR)/,$(PRINTF_NAME)) $(addprefix $(MAIN_DIR)/,$(MAIN_FILE)) $(addprefix $(OBJ_DIR)/,$(OBJ_FILES)) $(addprefix $(INCLUDE_DIR)/,$(INCLUDE_FILES))
+	$(CC) $(CFLAGS) $(addprefix $(MAIN_DIR)/,$(MAIN_FILE)) $(addprefix $(SRC_DIR)/,$(SRC_FILES)) $(addprefix $(LIBFT_DIR)/,$(LIBFT_NAME)) $(addprefix $(PRINTF_DIR)/,$(PRINTF_NAME)) -L$(LIBREAD_DIR) -lreadline -o $(BIN_NAME)
 
 $(addprefix $(OBJ_DIR)/,$(OBJ_FILES)): $(addprefix $(INCLUDE_DIR)/,$(INCLUDE_FILES))
 
@@ -127,7 +114,6 @@ clean:
 	rm -f $(addprefix $(OBJ_DIR)/,$(OBJ_FILES))
 	make clean -C $(LIBFT_DIR)
 	make clean -C $(PRINTF_DIR)
-	make clean -C $(LIB1_DIR)
 
 fclean: clean
 	rm -f $(BIN_NAME)
