@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/28 10:50:20 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/23 15:53:57 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/02/23 16:49:33 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,21 @@ static char	**list_to_array(t_word_node *head, char *cmd_name)
 	return (argv[0] = ft_strdup(cmd_name), argv[i] = NULL, argv);
 }
 
+static int	run_exit(char **argv, t_data *data)
+{
+	int	status;
+
+	status = ft_exit(argv);
+	if (status != 1)
+		exit (status);
+	else
+	{
+		data->exit_status = 1;
+		return (EXIT_FAILURE);
+	}
+	return (status);
+}
+
 static int	run_builtin(char *cmd, char **argv, t_data *data)
 {
 	int	status;
@@ -99,16 +114,7 @@ static int	run_builtin(char *cmd, char **argv, t_data *data)
 		if (ft_strcmp(cmd, "env") == 0)
 			return (env(argv, data->env));
 		if (ft_strcmp(cmd, "exit") == 0)
-		{
-			status = ft_exit(argv);
-			if (status != 1)
-				exit (status);
-			else
-			{
-				data->exit_status = 1;
-				return (EXIT_FAILURE);
-			}
-		}
+			return (run_exit(argv, data));
 	}
 	return (-100);
 }

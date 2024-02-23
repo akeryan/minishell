@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 16:32:04 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/23 14:55:25 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/02/23 16:56:45 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,33 @@ static void	child_process(t_node *node, int *p, int *p_, t_data *d)
 		d->exit_status = status;
 }
 
+static void	run_cmd_in_child(t_node *node, int *p, int *p_, t_data *d)
+{
+	int	pid;
+	int	status;
+
+	pid = fork_();
+	if (pid == -1)
+		error_exit("fork");
+	else if (pid == 0)
+		child_process(node, p, p_, d);
+	else if (pid > 0)
+	{
+		if (node->right)
+			if (close(p[1]) == -1)
+				error_exit("close in parent");
+		pipeline(node->right, &p[0], d);
+		waitpid(pid, &status, 0);
+		if (!node->right)
+		{
+			if (WIFEXITED(status))
+				d->exit_status = WEXITSTATUS(status);
+			else
+				ft_printf(2, "EXIT ERROR: %d", status);
+		}
+	}
+}
+
 /**
  * @brief	Implements 'pipeline' node of the parsing tree
  * @param	node Pointer to PIPELINE node	
@@ -92,27 +119,5 @@ void	pipeline(t_node *node, int *p_, t_data *d)
 		pipeline(node->right, &p[0], d);
 	}
 	else
-	{
-		pid = fork_();
-		if (pid == -1)
-			error_exit("fork");
-		else if (pid == 0)
-			child_process(node, p, p_, d);
-		else if (pid > 0)
-		{
-			if (node->right)
-				if (close(p[1]) == -1)
-					error_exit("close in parent");
-			pipeline(node->right, &p[0], d);
-			waitpid(pid, &status, 0);
-			if (!node->right)
-			{
-				if (WIFEXITED(status))
-					d->exit_status = WEXITSTATUS(status);
-				else
-					ft_printf(2, "EXIT ERROR: %d", status);
-			}
-		}
-	}
+		run_cmd_in_child(node, p, p_, d);
 }
-
