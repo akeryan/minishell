@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 16:32:04 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/23 16:56:45 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/02/23 20:04:20 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,8 +105,6 @@ static void	run_cmd_in_child(t_node *node, int *p, int *p_, t_data *d)
 void	pipeline(t_node *node, int *p_, t_data *d)
 {
 	int	p[2];
-	int	pid;
-	int	status;
 
 	if (node == NULL)
 		return ;

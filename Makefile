@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: dabdygal <dabdygal@student.42.fr>          +#+  +:+       +#+         #
+#    By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/15 15:43:23 by dabdygal          #+#    #+#              #
-#    Updated: 2024/02/23 16:38:48 by dabdygal         ###   ########.fr        #
+#    Updated: 2024/02/23 20:01:39 by akeryan          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -92,8 +92,7 @@ OBJ_FILES = $(SRC_FILES:.c=.o)
 
 CC = cc
 
-#CFLAGS = -Wall -Wextra -Werror -g -I $(INCLUDE_DIR) -I .
-CFLAGS = -g -I $(INCLUDE_DIR) -I .
+CFLAGS = -Wall -Wextra -Werror -g -I $(INCLUDE_DIR) -I .
 
 # ************************************RULES*********************************** #
 

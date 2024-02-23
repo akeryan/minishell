@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_1.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dabdygal <dabdygal@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 15:18:18 by dabdygal          #+#    #+#             */
-/*   Updated: 2024/02/23 19:40:15 by dabdygal         ###   ########.fr       */
+/*   Updated: 2024/02/23 20:03:13 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ t_node	*build_tree(t_grammar *grammar, char *ps2)
 {
 	t_node	*root;
 
-	root = parse(PROGRAM, grammar, NULL);
+	root = parse(PROGRAM, grammar, ps2);
 	while (!root && g_signal == SIGINT)
 	{
 		while (consume_token(MSH_PROMPT).type != NEWLINE_TOKEN)
@@ -73,7 +73,7 @@ t_node	*build_tree(t_grammar *grammar, char *ps2)
 		}
 		ft_putchar_fd('\n', STDERR_FILENO);
 		g_signal = 0;
-		root = parse(PROGRAM, grammar, NULL);
+		root = parse(PROGRAM, grammar, ps2);
 	}
 	return (root);
 }

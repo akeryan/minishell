@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/28 10:50:20 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/23 16:49:33 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/02/23 20:03:50 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,8 +97,6 @@ static int	run_exit(char **argv, t_data *data)
 
 static int	run_builtin(char *cmd, char **argv, t_data *data)
 {
-	int	status;
-
 	if (cmd)
 	{
 		if (ft_strcmp(cmd, "echo") == 0)
