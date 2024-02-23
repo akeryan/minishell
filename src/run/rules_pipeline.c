@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 16:32:04 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/23 20:04:20 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/02/23 21:49:17 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ static void	child_process(t_node *node, int *p, int *p_, t_data *d)
 	status = command(node->left, d);
 	if (!run_cmd_in_parent(p_, node->left->word))
 		exit(status);
-	else
+	else if (!node->right)
 		d->exit_status = status;
 }
 
