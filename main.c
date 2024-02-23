@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
+/*   By: dabdygal <dabdygal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/25 19:21:52 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/23 11:09:01 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/02/23 19:33:18 by dabdygal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,11 +135,16 @@ int	main(void)
 	t_data		data;
 	t_node		*root;
 
+	if (setup_sigs() < 0)
+	{
+		perror("setup signals");
+		return (EXIT_FAILURE);
+	}
 	init_data(&data);
 	grammar = setup_grammar();
 	while (1)
 	{
-		root = parse(PROGRAM, &grammar, NULL);
+		root = build_tree(&grammar, NULL);
 		print_tree(root, 0);
 		if (errno != 0)
 			perror("ERRNO");
