@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export_0.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dabdygal <dabdygal@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 10:54:20 by dabdygal          #+#    #+#             */
-/*   Updated: 2024/02/16 17:33:37 by dabdygal         ###   ########.fr       */
+/*   Updated: 2024/02/23 16:39:06 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ static int	is_valid_entry(const char *str)
 	if (*str == '\0' || ft_isdigit(*str))
 		return (0);
 	i = 0;
+	if (str[i] && str[i] == '=')
+		return (0);
 	while (str[i] && str[i] != '=')
 	{
 		if (ft_isalnum(str[i]) == 0 && str[i] != '_')
@@ -64,19 +66,16 @@ static int	inval_arg_warn(char *str)
 {
 	if (ft_putstr_fd("minishell: export: `", STDERR_FILENO) < 0)
 	{
-		perror("minishell: export");
 		errno = 0;
 		return (-1);
 	}
 	if (ft_putstr_fd(str, STDERR_FILENO) < 0)
 	{
-		perror("minishell: export");
 		errno = 0;
 		return (-1);
 	}
 	if (ft_putstr_fd("': not a valid identifier\n", STDERR_FILENO))
 	{
-		perror("minishell: export");
 		errno = 0;
 		return (-1);
 	}
