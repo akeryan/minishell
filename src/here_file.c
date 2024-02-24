@@ -6,7 +6,7 @@
 /*   By: dabdygal <dabdygal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 15:02:17 by dabdygal          #+#    #+#             */
-/*   Updated: 2024/02/23 19:16:07 by dabdygal         ###   ########.fr       */
+/*   Updated: 2024/02/24 12:59:07 by dabdygal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,10 +72,11 @@ static char	*here_read(char *prompt)
 		return (NULL);
 	line = get_next_line(STDIN_FILENO);
 	if (g_signal == SIGINT)
+	{
+		g_signal = 0;
 		errno = 0;
-	if (sigaction(SIGINT, &s_old, NULL) < 0)
-		return (NULL);
-	if (!line)
+	}
+	if (sigaction(SIGINT, &s_old, NULL) < 0 || !line)
 		return (NULL);
 	len = ft_strlen(line);
 	if (line[len - 1] == '\n')
