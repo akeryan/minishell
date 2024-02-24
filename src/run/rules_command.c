@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/28 10:50:20 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/24 19:55:50 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/02/24 20:53:04 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ static void	ft_execve(char *cmd_name, char **argv, char **envp)
 	}
 	else
 		path = get_cmd_path(cmd_name, envp);
-	printf("COMMAND NAME: %s\n", path);
 	if (execve(path, argv, envp) == -1)
 		cmd_error_msg(cmd_name);//STOPPED HERE 
 		//explore all the possible values of errno that occure when execve returns -1
@@ -144,6 +143,8 @@ int	command(t_node *const node, t_data *data)
 	suffix(node->right, &args_list, data);
 	argv = list_to_array(args_list, node->word);
 	apply_expansions(&node->word, data);
+	if (ft_strcmp(node->word, "") == 0)
+		exit(EXIT_SUCCESS);
 	builtin_status = run_builtin(node->word, argv, data);
 	if (builtin_status == -100 && node->word)
 		ft_execve(node->word, argv, data->env);

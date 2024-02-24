@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 14:55:06 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/23 02:12:18 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/02/24 20:54:35 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,10 @@ static void	no_space_case(char **word, char **env)
 
 	tmp = ft_getenv_aram(*word + 1, env);
 	free (*word);
-	*word = ft_strdup(tmp);
+	if (tmp == NULL)
+		*word = ft_strdup("");
+	else
+		*word = ft_strdup(tmp);
 	if (!*word)
 		panic_malloc();
 }
