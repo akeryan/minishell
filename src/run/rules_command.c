@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/28 10:50:20 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/23 20:03:50 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/02/24 15:36:06 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,10 @@
  * @param cmd_name Name of the command to be executed
  * @param argv Arguments of the command
 */
-static void	ft_execve(char *cmd_name, char **argv)
+static void	ft_execve(char *cmd_name, char **argv, char **envp)
 {
 	char	*path;
+	char	*tmp;
 
 	if (!ft_strchr(cmd_name, '/'))
 	{
@@ -37,8 +38,15 @@ static void	ft_execve(char *cmd_name, char **argv)
 			path_error_msg(cmd_name);
 	}
 	else
+	{
 		path = cmd_name;
-	if (execve(path, argv, NULL) == -1)
+		tmp = ft_strdup(ft_strrchr(argv[0], '/') + 1);
+		if (tmp == NULL)
+			panic_malloc();
+		free(argv[0]);
+		argv[0] = tmp;
+	}
+	if (execve(path, argv, envp) == -1)
 		path_error_msg(path);//STOPPED HERE 
 		//explore all the possible values of errno that occure when execve returns -1
 		//currently it executes path_error_msg, which outputs path related errors...
@@ -137,10 +145,11 @@ int	command(t_node *const node, t_data *data)
 	prefix(node->left, data);
 	suffix(node->right, &args_list, data);
 	argv = list_to_array(args_list, node->word);
+	printf("argv[0] incommand: %s\n", argv[0]);
 	apply_expansions(&node->word, data);
 	builtin_status = run_builtin(node->word, argv, data);
 	if (builtin_status == -100 && node->word)
-		ft_execve(node->word, argv);
+		ft_execve(node->word, argv, data->env);
 	free_word_list(args_list);
 	free_split(argv);
 	return (builtin_status);
