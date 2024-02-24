@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dabdygal <dabdygal@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/25 19:21:52 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/24 13:45:23 by dabdygal         ###   ########.fr       */
+/*   Updated: 2024/02/24 14:14:09 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,10 +88,7 @@ static char	*str_or_null(char *str)
 static void	print_tree(t_node *node, int level)
 {
 	if (!node)
-	{
-		printf("(null)\n");
 		return ;
-	}
 	if (level != 0)
 	{
 		printf("\n");
@@ -146,7 +143,6 @@ int	main(void)
 	{
 		root = build_tree(&grammar, NULL);
 		print_tree(root, 0);
-		printf("***********EXECUTION**************\n");
 		if (errno != 0)
 			perror("ERRNO");
 		if (!root)

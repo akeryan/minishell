@@ -1,4 +1,5 @@
 readline
 .*
 *.gch
+*.dSYM
 !.gitignore
