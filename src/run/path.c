@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 11:11:56 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/24 18:25:43 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/02/24 19:54:06 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ char	*get_cmd_path(char *cmd, char **envp)
 	int		i;
 
 	if (cmd == NULL)
-		path_error_msg(NULL);
+		return (NULL);
 	path = ft_getenv("PATH", envp);
 	if (path == NULL)
 	{

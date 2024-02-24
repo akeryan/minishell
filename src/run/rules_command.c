@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/28 10:50:20 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/24 18:27:02 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/02/24 19:55:50 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,13 +42,10 @@ static void	ft_execve(char *cmd_name, char **argv, char **envp)
 		argv[0] = tmp;
 	}
 	else
-	{
 		path = get_cmd_path(cmd_name, envp);
-		if (!path)
-			path_error_msg(cmd_name);
-	}
+	printf("COMMAND NAME: %s\n", path);
 	if (execve(path, argv, envp) == -1)
-		path_error_msg(path);//STOPPED HERE 
+		cmd_error_msg(cmd_name);//STOPPED HERE 
 		//explore all the possible values of errno that occure when execve returns -1
 		//currently it executes path_error_msg, which outputs path related errors...
 	free(path);

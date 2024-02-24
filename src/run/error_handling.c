@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 10:29:34 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/20 16:27:40 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/02/24 19:52:29 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include <ft_printf.h>
 #include "error_handling.h"
 
-void	path_error_msg(char *cmd_name)
+void	cmd_error_msg(char *cmd_name)
 {
 	ft_printf (2, "%s: %s: %s\n", MSH_NAME, cmd_name, PATH_ERR);
 	exit(127);
