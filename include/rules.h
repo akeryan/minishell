@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 11:47:48 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/22 22:15:33 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/02/24 17:55:02 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,6 @@ void	prefix(t_node *node, t_data *data);
 void	suffix(t_node *node, t_word_node **args, t_data *data);
 int		redirect(t_node *node, t_data *data);
 int		newline_list(t_node *node);
-char	*get_cmd_path(char *cmd);
+char	*get_cmd_path(char *cmd, char **envp);
 
 #endif

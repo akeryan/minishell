@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/28 10:50:20 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/24 15:46:30 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/02/24 18:27:02 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 #include "free.h"
 #include "expansion.h"
 #include "builtins.h"
+#include "main_utils.h"
 
 /**
  * @brief Executes command with execve system utility
@@ -31,13 +32,7 @@ static void	ft_execve(char *cmd_name, char **argv, char **envp)
 	char	*path;
 	char	*tmp;
 
-	if (!ft_strchr(cmd_name, '/'))
-	{
-		path = get_cmd_path(cmd_name);
-		if (!path)
-			path_error_msg(cmd_name);
-	}
-	else
+	if (ft_strchr(cmd_name, '/'))
 	{
 		path = cmd_name;
 		tmp = ft_strdup(ft_strrchr(argv[0], '/') + 1);
@@ -45,6 +40,12 @@ static void	ft_execve(char *cmd_name, char **argv, char **envp)
 			panic_malloc();
 		free(argv[0]);
 		argv[0] = tmp;
+	}
+	else
+	{
+		path = get_cmd_path(cmd_name, envp);
+		if (!path)
+			path_error_msg(cmd_name);
 	}
 	if (execve(path, argv, envp) == -1)
 		path_error_msg(path);//STOPPED HERE 

@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 11:11:56 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/14 20:37:10 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/02/24 18:25:43 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,15 +23,22 @@ static char	*cmd_in_path(char *path, char *cmd);
  * @param cmd Name of the utility
  * @return Path to the location of the utility
 */
-char	*get_cmd_path(char *cmd)
+char	*get_cmd_path(char *cmd, char **envp)
 {
 	char	**paths;
+	char	*path;
 	char	*pth;
 	int		i;
 
 	if (cmd == NULL)
 		path_error_msg(NULL);
-	paths = ft_split(getenv("PATH"), ':');
+	path = ft_getenv("PATH", envp);
+	if (path == NULL)
+	{
+		ft_printf(2, "minishell: %s: No such file of directory\n", cmd);
+		exit(127);
+	}
+	paths = ft_split(path, ':');
 	if (paths == NULL)
 		panic_malloc();
 	i = 0;
@@ -39,13 +46,9 @@ char	*get_cmd_path(char *cmd)
 	{
 		pth = cmd_in_path(paths[i], cmd);
 		if (pth)
-		{
-			free_split(paths);
-			return (pth);
-		}
+			return (free_split(paths), pth);
 	}
-	free_split(paths);
-	return (NULL);
+	return (free_split(paths), NULL);
 }
 
 /**
