@@ -6,7 +6,7 @@
 /*   By: dabdygal <dabdygal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/25 19:21:52 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/24 13:45:23 by dabdygal         ###   ########.fr       */
+/*   Updated: 2024/02/24 14:11:45 by dabdygal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,7 +158,7 @@ int	main(void)
 			}
 			else
 			{
-				ft_printf(2, "syntax error near unexpected token '%s'\n", token_type_to_a(peek_token(NULL).type));
+				ft_printf(2, "minishell: syntax error near unexpected token '%s'\n", token_type_to_a(peek_token(NULL).type));
 				while (consume_token(NULL).type != NEWLINE_TOKEN)
 					;
 			}
