@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/28 10:50:20 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/24 15:36:06 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/02/24 15:46:30 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,7 +145,6 @@ int	command(t_node *const node, t_data *data)
 	prefix(node->left, data);
 	suffix(node->right, &args_list, data);
 	argv = list_to_array(args_list, node->word);
-	printf("argv[0] incommand: %s\n", argv[0]);
 	apply_expansions(&node->word, data);
 	builtin_status = run_builtin(node->word, argv, data);
 	if (builtin_status == -100 && node->word)
