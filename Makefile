@@ -6,7 +6,7 @@
 #    By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/15 15:43:23 by dabdygal          #+#    #+#              #
-#    Updated: 2024/02/24 16:37:27 by akeryan          ###   ########.fr        #
+#    Updated: 2024/02/24 23:18:19 by akeryan          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -89,6 +89,8 @@ SRC_FILES = signals.c \
 			run/dollar_expansion_1.c \
 			run/dollar_expansion_2.c \
 			run/utils.c \
+			run/get_next_line.c \
+			run/get_next_line_utils.c \
 			run/free.c
 
 OBJ_FILES = $(SRC_FILES:.c=.o)

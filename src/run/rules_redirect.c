@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 11:54:33 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/22 21:25:02 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/02/25 00:12:41 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 #include "error_handling.h"
 #include "expansion.h"
 #include "data.h"
+#include "get_next_line.h"
+#include "libft.h"
 
 static void	redir_read(char *file_name)
 {
@@ -61,11 +63,33 @@ static void	redir_append(char *file_name)
 		error_exit("close");
 }
 
-static void	here_doc(char *file_name)
+static void	here_doc(char *file_name, t_data *data)
 {
-	redir_read(file_name);
+	int		fd;
+	char	*str;
+	char    n = '\n';
+
+	if (!file_name)
+		return ;
+	fd = open(file_name, O_RDONLY);
+	if (fd == -1)
+		error_exit("open");
+	while(1)
+	{
+		str = get_next_line(fd);
+		if(str == NULL)
+			break;
+		*(ft_strchr(str, '\n')) = '\0';
+		dollar_expansion(&str, data);
+		write(STDIN_FILENO, str, ft_strlen(str));
+		write(STDIN_FILENO, &n, 1);
+		free(str);
+	}
+	if (close(fd) == -1)
+		error_exit("close");
 	if (unlink(file_name) == -1)
 		error_exit("unlink");
+	exit(EXIT_SUCCESS);
 }
 
 void	redirect(t_node *node, t_data *data)
@@ -80,5 +104,5 @@ void	redirect(t_node *node, t_data *data)
 	else if (node->token_type == DGREAT)
 		redir_append(node->word);
 	else if (node->token_type == DLESS)
-		here_doc(node->word);
+		here_doc(node->word, data);
 }
