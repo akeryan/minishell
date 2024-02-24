@@ -6,7 +6,7 @@
 /*   By: dabdygal <dabdygal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/25 19:21:52 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/23 19:33:18 by dabdygal         ###   ########.fr       */
+/*   Updated: 2024/02/24 13:45:23 by dabdygal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static char	*token_type_to_a(t_token_type type)
 	else if (type == NEWLINE_TOKEN)
 		return ("NEWLINE");
 	else if (type == PIPE)
-		return ("PIPE");
+		return ("|");
 	else if (type == DLESS)
 		return ("DLESS");
 	else if (type == DGREAT)
@@ -146,6 +146,7 @@ int	main(void)
 	{
 		root = build_tree(&grammar, NULL);
 		print_tree(root, 0);
+		printf("***********EXECUTION**************\n");
 		if (errno != 0)
 			perror("ERRNO");
 		if (!root)
@@ -157,7 +158,7 @@ int	main(void)
 			}
 			else
 			{
-				ft_printf(2, "syntax error near unexpected token: '%s'\n", token_type_to_a(peek_token(NULL).type));
+				ft_printf(2, "syntax error near unexpected token '%s'\n", token_type_to_a(peek_token(NULL).type));
 				while (consume_token(NULL).type != NEWLINE_TOKEN)
 					;
 			}

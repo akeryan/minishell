@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+         #
+#    By: dabdygal <dabdygal@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/15 15:43:23 by dabdygal          #+#    #+#              #
-#    Updated: 2024/02/23 20:01:39 by akeryan          ###   ########.fr        #
+#    Updated: 2024/02/24 12:44:53 by dabdygal         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,6 +23,8 @@ SRC_DIR = src
 OBJ_DIR = src
 
 LIBREAD_DIR = /usr/local/Cellar/readline/8.1/lib
+
+LIBREAD_INC = /usr/local/Cellar/readline/8.1/include
 
 LIBFT_DIR = libft
 
@@ -92,7 +94,7 @@ OBJ_FILES = $(SRC_FILES:.c=.o)
 
 CC = cc
 
-CFLAGS = -Wall -Wextra -Werror -g -I $(INCLUDE_DIR) -I .
+CFLAGS = -Wall -Wextra -Werror -g -I $(INCLUDE_DIR) -I $(LIBREAD_INC)
 
 # ************************************RULES*********************************** #
 
