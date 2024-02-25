@@ -6,7 +6,7 @@
 /*   By: dabdygal <dabdygal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/25 19:21:52 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/25 16:10:43 by dabdygal         ###   ########.fr       */
+/*   Updated: 2024/02/25 17:31:16 by dabdygal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@
 #include "parse.h"
 #include "rules.h"
 #include "main_utils.h"
+
+extern int	g_signal;
 
 static char	*token_type_to_a(t_token_type type)
 {
@@ -165,7 +167,9 @@ int	main(void)
 					;
 			}
 		}
+		g_signal = 1;
 		program(root, &data);
+		g_signal = 0;
 	}
 	return (EXIT_SUCCESS);
 }

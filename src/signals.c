@@ -6,7 +6,7 @@
 /*   By: dabdygal <dabdygal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 13:49:09 by dabdygal          #+#    #+#             */
-/*   Updated: 2024/02/24 13:16:34 by dabdygal         ###   ########.fr       */
+/*   Updated: 2024/02/25 17:27:45 by dabdygal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,14 @@ int	g_signal;
 
 void	handle_sigint(int x)
 {
-	x = 0;
 	write(STDERR_FILENO, "\n", 1);
-	rl_replace_line("", 1);
-	rl_on_new_line();
-	rl_redisplay();
+	if (g_signal == 0)
+	{
+		x = 0;
+		rl_replace_line("", 1);
+		rl_on_new_line();
+		rl_redisplay();
+	}
 }
 
 int	setup_sigs(void)
