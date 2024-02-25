@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 16:32:04 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/23 21:49:17 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/02/25 15:52:39 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static int	fork_(void)
 	return (pid);
 }
 
-bool	run_cmd_in_parent(int *p_, char *cmd)
+bool	check_if_in_parent(int *p_, char *cmd)
 {
 	if (p_ == NULL && cmd)
 	{
@@ -64,7 +64,7 @@ static void	child_process(t_node *node, int *p, int *p_, t_data *d)
 			error_exit("close in child (2)");
 	}
 	status = command(node->left, d);
-	if (!run_cmd_in_parent(p_, node->left->word))
+	if (!check_if_in_parent(p_, node->left->word))
 		exit(status);
 	else if (!node->right)
 		d->exit_status = status;
@@ -82,10 +82,11 @@ static void	run_cmd_in_child(t_node *node, int *p, int *p_, t_data *d)
 		child_process(node, p, p_, d);
 	else if (pid > 0)
 	{
-		if (node->right)
-			if (close(p[1]) == -1)
-				error_exit("close in parent");
+		if (node->right && close(p[1]) == -1)
+			error_exit("close in parent");
 		pipeline(node->right, &p[0], d);
+		if (node->right && close(p[0]) == -1)
+			error_exit("close in parent");
 		waitpid(pid, &status, 0);
 		if (!node->right)
 		{
@@ -111,7 +112,7 @@ void	pipeline(t_node *node, int *p_, t_data *d)
 	if (node->right)
 		if (pipe(p) == -1)
 			error_exit("pipe");
-	if (run_cmd_in_parent(p_, node->left->word))
+	if (check_if_in_parent(p_, node->left->word))
 	{
 		child_process(node, p, p_, d);
 		pipeline(node->right, &p[0], d);
