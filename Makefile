@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+         #
+#    By: dabdygal <dabdygal@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/15 15:43:23 by dabdygal          #+#    #+#              #
-#    Updated: 2024/02/24 23:18:19 by akeryan          ###   ########.fr        #
+#    Updated: 2024/02/25 16:09:47 by dabdygal         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -71,6 +71,7 @@ SRC_FILES = signals.c \
 			here_file.c \
 			parse_0.c \
 			parse_1.c \
+			shlvl.c \
 			main_utils.c \
 			run/error_handling.c \
 			run/pid_list.c \

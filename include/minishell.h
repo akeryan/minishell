@@ -6,7 +6,7 @@
 /*   By: dabdygal <dabdygal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/26 17:28:57 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/23 15:49:02 by dabdygal         ###   ########.fr       */
+/*   Updated: 2024/02/25 16:09:22 by dabdygal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,5 +30,6 @@ int	unset(char *argv[], char **envp);
 int	env(char *argv[], char **envp);
 int	ft_exit(char *argv[]);
 int	setup_sigs(void);
+int	handle_shlvl(char ***envp);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: dabdygal <dabdygal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/25 19:21:52 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/25 13:39:41 by dabdygal         ###   ########.fr       */
+/*   Updated: 2024/02/25 16:10:43 by dabdygal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,21 +27,21 @@ static char	*token_type_to_a(t_token_type type)
 	if (type == EOF_TOKEN)
 		return ("EOF");
 	else if (type == NEWLINE_TOKEN)
-		return ("NEWLINE");
+		return ("newline");
 	else if (type == PIPE)
 		return ("|");
 	else if (type == DLESS)
-		return ("DLESS");
+		return ("<<");
 	else if (type == DGREAT)
-		return ("DGREAT");
+		return (">>");
 	else if (type == LESS)
-		return ("LESS");
+		return ("<");
 	else if (type == GREAT)
-		return ("GREAT");
+		return (">");
 	else if (type == WORD)
-		return ("WORD");
+		return ("word");
 	else if (type == EMPTY)
-		return ("EMPTY");
+		return ("empty");
 	return ("ERROR!!!");
 }
 
@@ -141,6 +141,8 @@ int	main(void)
 		return (EXIT_FAILURE);
 	}
 	init_data(&data);
+	if (handle_shlvl(&data.env) < 0)
+		return (EXIT_FAILURE);
 	grammar = setup_grammar();
 	while (1)
 	{

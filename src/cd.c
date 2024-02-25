@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
+/*   By: dabdygal <dabdygal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 17:46:12 by dabdygal          #+#    #+#             */
-/*   Updated: 2024/02/23 16:05:44 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/02/25 15:31:11 by dabdygal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,26 +64,58 @@ static int	change_dir(char *path, char ***envp)
 	return (0);
 }
 
+static int	parse_path(char **path, char ***envp)
+{
+	if (*path == NULL)
+	{
+		*path = ft_getenv("HOME", *envp);
+		if (*path == NULL)
+		{
+			if (write(STDERR_FILENO, "minishell: cd: HOME not set\n", 28) < 0)
+				return (-1);
+			return (0);
+		}
+	}
+	else if (**path == '-')
+	{
+		*path = ft_getenv("OLDPWD", *envp);
+		if (*path == NULL)
+		{
+			if (write(STDERR_FILENO, "minishell: cd: OLDPWD not set\n", 30) < 0)
+				return (-1);
+			return (0);
+		}
+		*path = ft_strdup(*path);
+		if (!path)
+			return (-1);
+	}
+	return (0);
+}
+
 int	cd(const char *argv[], char ***envp)
 {
 	char	*path;
 
 	path = (char *) argv[1];
-	if (path == NULL)
+	if (parse_path(&path, envp) < 0)
 	{
-		path = ft_getenv("HOME", *envp);
-		if (path == NULL)
-		{
-			write(STDERR_FILENO, "minishell: cd: HOME not set\n", 28);
-			return (EXIT_FAILURE);
-		}
+		perror("minishell: cd");
+		errno = 0;
+		return (EXIT_FAILURE);
 	}
-	if (change_dir(path, envp) < 0)
+	if (!path)
+		return (EXIT_FAILURE);
+	if (*path != '\0' && change_dir(path, envp) < 0)
 	{
 		write(STDERR_FILENO, "minishell: cd: ", 15);
 		perror(path);
 		errno = 0;
 		return (EXIT_FAILURE);
+	}
+	if (*argv[1] == '-')
+	{
+		printf("%s\n", path);
+		free(path);
 	}
 	return (EXIT_SUCCESS);
 }
