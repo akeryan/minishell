@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 10:54:20 by dabdygal          #+#    #+#             */
-/*   Updated: 2024/02/23 16:39:06 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/02/23 21:06:58 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,15 +82,11 @@ static int	inval_arg_warn(char *str)
 	return (0);
 }
 
-int	ft_export(char *argv[], char ***envp)
+static int	run_through_args(char **argv, char ***envp)
 {
-	if (argv[1] == NULL && export_print(*envp) < 0)
-	{
-		perror("minishell: export");
-		errno = 0;
-		return (EXIT_FAILURE);
-	}
-	argv++;
+	int	status;
+
+	status = 0;
 	while (*argv)
 	{
 		if (is_valid_entry(*argv))
@@ -103,8 +99,23 @@ int	ft_export(char *argv[], char ***envp)
 			}
 		}
 		else if (inval_arg_warn(*argv) < 0)
-			return (EXIT_FAILURE);
+			status = EXIT_FAILURE;
 		argv++;
 	}
-	return (EXIT_SUCCESS);
+	return (status);
+}
+
+int	ft_export(char *argv[], char ***envp)
+{
+	int	status;
+
+	if (argv[1] == NULL && export_print(*envp) < 0)
+	{
+		perror("minishell: export");
+		errno = 0;
+		return (EXIT_FAILURE);
+	}
+	argv++;
+	status = run_through_args(argv, envp);
+	return (status);
 }

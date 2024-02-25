@@ -1,4 +1,5 @@
 minishell.dSYM
 .*
 *.gch
+*.dSYM
 !.gitignore
