@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 11:54:33 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/25 23:29:44 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/02/26 00:00:52 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,10 @@ void	redir_read(char *file_name)
 		return ;
 	fd = open(file_name, O_RDONLY);
 	if (fd == -1)
-		error_exit("open: redir_read()");
+	{
+		ft_printf(2, "minishell: %s: No such file of directory\n", file_name);
+		exit(EXIT_FAILURE);
+	}
 	if (dup2(fd, STDIN_FILENO) == -1)
 	{
 		close(fd);
