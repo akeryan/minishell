@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 13:49:09 by dabdygal          #+#    #+#             */
-/*   Updated: 2024/02/25 16:24:42 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/02/25 19:31:14 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,14 @@ int	g_signal;
 
 void	handle_sigint(int x)
 {
-	x = 0;
 	write(STDERR_FILENO, "\n", 1);
-	rl_replace_line("", 1);
-	rl_on_new_line();
-	rl_redisplay();
+	if (g_signal == 0)
+	{
+		x = 0;
+		rl_replace_line("", 1);
+		rl_on_new_line();
+		rl_redisplay();
+	}
 }
 
 int	setup_sigs(void)
