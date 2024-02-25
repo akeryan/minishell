@@ -6,13 +6,14 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/28 10:50:20 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/25 23:05:09 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/02/26 00:22:05 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <errno.h>
 #include <stdlib.h>
 #include <string.h>
+#include "signal.h"
 #include "rules.h"
 #include "word_list.h"
 #include "libft.h"
@@ -29,8 +30,9 @@
 */
 static void	ft_execve(char *cmd_name, char **argv, char **envp)
 {
-	char	*path;
-	char	*tmp;
+	struct sigaction	s_sint;
+	char				*path;
+	char				*tmp;
 
 	if (ft_strchr(cmd_name, '/'))
 	{
@@ -43,6 +45,11 @@ static void	ft_execve(char *cmd_name, char **argv, char **envp)
 	}
 	else
 		path = get_cmd_path(cmd_name, envp);
+	s_sint.__sigaction_u.__sa_handler = SIG_DFL;
+		s_sint.sa_flags = 0;
+		s_sint.sa_mask = 0;
+	if (sigaction(SIGQUIT, &s_sint, NULL) < 0)
+		return ;
 	if (execve(path, argv, envp) == -1)
 		cmd_error_msg(cmd_name);//STOPPED HERE 
 		//explore all the possible values of errno that occure when execve returns -1

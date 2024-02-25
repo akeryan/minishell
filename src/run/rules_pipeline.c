@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 16:32:04 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/25 16:26:55 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/02/26 00:29:52 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,8 +92,6 @@ static void	run_cmd_in_child(t_node *node, int *p, int *p_, t_data *d)
 		{
 			if (WIFEXITED(status))
 				d->exit_status = WEXITSTATUS(status);
-			else
-				ft_printf(2, "EXIT ERROR: %d", status);
 		}
 	}
 }
