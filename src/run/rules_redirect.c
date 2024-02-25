@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 11:54:33 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/25 00:12:41 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/02/25 14:04:01 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,26 +67,26 @@ static void	here_doc(char *file_name, t_data *data)
 {
 	int		fd;
 	char	*str;
-	char    n = '\n';
+	char	n;
 
 	if (!file_name)
 		return ;
 	fd = open(file_name, O_RDONLY);
 	if (fd == -1)
 		error_exit("open");
-	while(1)
+	while (1)
 	{
 		str = get_next_line(fd);
-		if(str == NULL)
-			break;
+		if (str == NULL)
+			break ;
 		*(ft_strchr(str, '\n')) = '\0';
 		dollar_expansion(&str, data);
 		write(STDIN_FILENO, str, ft_strlen(str));
+		n = '\n';
 		write(STDIN_FILENO, &n, 1);
 		free(str);
 	}
-	if (close(fd) == -1)
-		error_exit("close");
+	close(fd);
 	if (unlink(file_name) == -1)
 		error_exit("unlink");
 	exit(EXIT_SUCCESS);
