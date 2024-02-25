@@ -1,4 +1,4 @@
-readline
+minishell.dSYM
 .*
 *.gch
 *.dSYM
