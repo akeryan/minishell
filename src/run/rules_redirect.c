@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 11:54:33 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/25 14:04:01 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/02/25 19:27:05 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,6 @@ static void	here_doc(char *file_name, t_data *data)
 	close(fd);
 	if (unlink(file_name) == -1)
 		error_exit("unlink");
-	exit(EXIT_SUCCESS);
 }
 
 void	redirect(t_node *node, t_data *data)
