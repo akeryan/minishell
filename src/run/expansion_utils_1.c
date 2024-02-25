@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 17:06:26 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/24 20:53:29 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/02/25 23:03:24 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	remove_quotation_marks(char **word)
 	char	*str;
 	bool	sngl_qm;
 	bool	dble_qm;
-	
+
 	sngl_qm = false;
 	dble_qm = false;
 	str = *word;

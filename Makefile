@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: dabdygal <dabdygal@student.42.fr>          +#+  +:+       +#+         #
+#    By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/15 15:43:23 by dabdygal          #+#    #+#              #
-#    Updated: 2024/02/25 16:09:47 by dabdygal         ###   ########.fr        #
+#    Updated: 2024/02/25 23:25:51 by akeryan          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -92,6 +92,7 @@ SRC_FILES = signals.c \
 			run/utils.c \
 			run/get_next_line.c \
 			run/get_next_line_utils.c \
+			run/here-doc.c \
 			run/free.c
 
 OBJ_FILES = $(SRC_FILES:.c=.o)

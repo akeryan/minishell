@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/28 10:50:20 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/25 14:55:12 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/02/25 23:05:09 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,13 +62,12 @@ static char	**list_to_array(t_word_node *head, char *cmd_name)
 	int			len;
 	int			i;
 
+	if (!cmd_name)
+		return (NULL);
 	len = word_list_len(head);
 	argv = (char **)malloc((len + 2) * sizeof(char *));
 	if (argv == NULL)
-	{
-		perror("malloc (list_to_array): ");
-		return (NULL);
-	}
+		panic_malloc();
 	i = 1;
 	while (head)
 	{
@@ -139,11 +138,12 @@ int	command(t_node *const node, t_data *data)
 		return (EXIT_FAILURE);
 	args_list = NULL;
 	argv = NULL;
+	builtin_status = 0;
 	prefix(node->left, data);
 	suffix(node->right, &args_list, data);
 	argv = list_to_array(args_list, node->word);
 	apply_expansions(&node->word, data);
-	if (ft_strcmp(node->word, "") == 0)
+	if (node->word && ft_strcmp(node->word, "") == 0)
 		exit(EXIT_SUCCESS);
 	builtin_status = run_builtin(node->word, argv, data);
 	if (builtin_status == -100 && node->word)

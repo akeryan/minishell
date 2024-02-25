@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 11:54:33 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/25 19:27:05 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/02/25 23:29:44 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,9 @@
 #include "get_next_line.h"
 #include "libft.h"
 
-static void	redir_read(char *file_name)
+void	here_doc(char *file_name, t_data *data);
+
+void	redir_read(char *file_name)
 {
 	int	fd;
 
@@ -26,14 +28,17 @@ static void	redir_read(char *file_name)
 		return ;
 	fd = open(file_name, O_RDONLY);
 	if (fd == -1)
-		error_exit("open");
+		error_exit("open: redir_read()");
 	if (dup2(fd, STDIN_FILENO) == -1)
+	{
+		close(fd);
 		error_exit("dup2");
+	}
 	if (close(fd) == -1)
 		error_exit("close");
 }
 
-static void	redir_write(char *file_name)
+void	redir_write(char *file_name)
 {
 	int	fd;
 
@@ -48,7 +53,7 @@ static void	redir_write(char *file_name)
 		error_exit("close");
 }
 
-static void	redir_append(char *file_name)
+void	redir_append(char *file_name)
 {
 	int	fd;
 
@@ -61,34 +66,6 @@ static void	redir_append(char *file_name)
 		error_exit("dup2");
 	if (close(fd) == -1)
 		error_exit("close");
-}
-
-static void	here_doc(char *file_name, t_data *data)
-{
-	int		fd;
-	char	*str;
-	char	n;
-
-	if (!file_name)
-		return ;
-	fd = open(file_name, O_RDONLY);
-	if (fd == -1)
-		error_exit("open");
-	while (1)
-	{
-		str = get_next_line(fd);
-		if (str == NULL)
-			break ;
-		*(ft_strchr(str, '\n')) = '\0';
-		dollar_expansion(&str, data);
-		write(STDIN_FILENO, str, ft_strlen(str));
-		n = '\n';
-		write(STDIN_FILENO, &n, 1);
-		free(str);
-	}
-	close(fd);
-	if (unlink(file_name) == -1)
-		error_exit("unlink");
 }
 
 void	redirect(t_node *node, t_data *data)
