@@ -6,7 +6,7 @@
 #    By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/15 15:43:23 by dabdygal          #+#    #+#              #
-#    Updated: 2024/02/25 23:25:51 by akeryan          ###   ########.fr        #
+#    Updated: 2024/02/26 17:05:30 by akeryan          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,6 +50,7 @@ INCLUDE_FILES = minishell.h \
 				free.h \
 				expansion.h \
 				dollar_expansion.h \
+				print_tree.h \
 				main_utils.h
 
 MAIN_FILE = main.c
@@ -72,6 +73,8 @@ SRC_FILES = signals.c \
 			parse_0.c \
 			parse_1.c \
 			shlvl.c \
+			print_tree_0.c \
+			print_tree_1.c \
 			main_utils.c \
 			run/error_handling.c \
 			run/pid_list.c \
