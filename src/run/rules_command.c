@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/28 10:50:20 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/26 00:22:05 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/02/26 13:42:34 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,8 @@ static void	ft_execve(char *cmd_name, char **argv, char **envp)
 	else
 		path = get_cmd_path(cmd_name, envp);
 	s_sint.__sigaction_u.__sa_handler = SIG_DFL;
-		s_sint.sa_flags = 0;
-		s_sint.sa_mask = 0;
+	s_sint.sa_flags = 0;
+	s_sint.sa_mask = 0;
 	if (sigaction(SIGQUIT, &s_sint, NULL) < 0)
 		return ;
 	if (execve(path, argv, envp) == -1)

@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 16:32:04 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/26 00:29:52 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/02/26 14:57:30 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,16 +18,6 @@
 #include "error_handling.h"
 #include "rules.h"
 #include "data.h"
-
-static int	fork_(void)
-{
-	int	pid;
-
-	pid = fork();
-	if (pid == -1)
-		error_exit("fork");
-	return (pid);
-}
 
 bool	check_if_in_parent(int *p_, char *cmd)
 {
@@ -70,12 +60,33 @@ static void	child_process(t_node *node, int *p, int *p_, t_data *d)
 		d->exit_status = status;
 }
 
+static void	process_signals(int status, t_data *d)
+{
+	int	termsig;
+
+	if (WIFEXITED(status))
+		d->exit_status = WEXITSTATUS(status);
+	else if (WIFSIGNALED(status))
+	{
+		termsig = WTERMSIG(status);
+		if (termsig == SIGINT)
+			d->exit_status = 130;
+		else if (termsig == SIGQUIT)
+		{
+			printf("Quit: 3\n");
+			d->exit_status = 131;
+		}
+	}
+}
+
 static void	run_cmd_in_child(t_node *node, int *p, int *p_, t_data *d)
 {
 	int	pid;
 	int	status;
 
-	pid = fork_();
+	pid = fork();
+	if (pid == -1)
+		error_exit("fork");
 	if (pid == -1)
 		error_exit("fork");
 	else if (pid == 0)
@@ -87,12 +98,10 @@ static void	run_cmd_in_child(t_node *node, int *p, int *p_, t_data *d)
 		pipeline(node->right, &p[0], d);
 		if (node->right && close(p[0]) == -1)
 			error_exit("close in parent");
-		waitpid(pid, &status, 0);
+		if (waitpid(pid, &status, 0) == -1)
+			d->exit_status = 130;
 		if (!node->right)
-		{
-			if (WIFEXITED(status))
-				d->exit_status = WEXITSTATUS(status);
-		}
+			process_signals(status, d);
 	}
 }
 
