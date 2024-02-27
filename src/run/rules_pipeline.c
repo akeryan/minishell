@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 16:32:04 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/26 14:57:30 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/02/27 20:31:30 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,10 @@ bool	check_if_in_parent(int *p_, char *cmd)
 	return (false);
 }
 
-static void	child_process(t_node *node, int *p, int *p_, t_data *d)
+static void	run_command(t_node *node, int *p, int *p_, t_data *d)
 {
 	int	status;
+	//ft_printf(2, "-> run_command(): --------------- %p\n", p_);
 
 	if (p_)
 	{
@@ -48,8 +49,9 @@ static void	child_process(t_node *node, int *p, int *p_, t_data *d)
 	{
 		if (dup2(p[1], STDOUT_FILENO) == -1)
 			error_exit("dup2 in pipeline");
-		if (close(p[0]) == -1)
-			error_exit("close in child (1)");
+		if (!check_if_in_parent(p_, node->left->word))
+			if (close(p[0]) == -1)
+				error_exit("close in child (1)");
 		if (close(p[1]) == -1)
 			error_exit("close in child (2)");
 	}
@@ -58,6 +60,7 @@ static void	child_process(t_node *node, int *p, int *p_, t_data *d)
 		exit(status);
 	else if (!node->right)
 		d->exit_status = status;
+	//ft_printf(2, "<- run_command(): --------------- %p\n", p_);
 }
 
 static void	process_signals(int status, t_data *d)
@@ -84,13 +87,14 @@ static void	run_cmd_in_child(t_node *node, int *p, int *p_, t_data *d)
 	int	pid;
 	int	status;
 
+	//ft_printf(2, "-> child process\n");
 	pid = fork();
 	if (pid == -1)
 		error_exit("fork");
 	if (pid == -1)
 		error_exit("fork");
 	else if (pid == 0)
-		child_process(node, p, p_, d);
+		run_command(node, p, p_, d);
 	else if (pid > 0)
 	{
 		if (node->right && close(p[1]) == -1)
@@ -103,6 +107,7 @@ static void	run_cmd_in_child(t_node *node, int *p, int *p_, t_data *d)
 		if (!node->right)
 			process_signals(status, d);
 	}
+	//ft_printf(2, "<- child process\n");
 }
 
 /**
@@ -112,6 +117,7 @@ static void	run_cmd_in_child(t_node *node, int *p, int *p_, t_data *d)
 */
 void	pipeline(t_node *node, int *p_, t_data *d)
 {
+	//ft_printf(2, "-> PIPIELINE: %p\n", p_);
 	int	p[2];
 
 	if (node == NULL)
@@ -121,9 +127,11 @@ void	pipeline(t_node *node, int *p_, t_data *d)
 			error_exit("pipe");
 	if (check_if_in_parent(p_, node->left->word))
 	{
-		child_process(node, p, p_, d);
+		run_command(node, p, p_, d);
+		
 		pipeline(node->right, &p[0], d);
 	}
 	else
 		run_cmd_in_child(node, p, p_, d);
+	//ft_printf(2, "<- PIPIELINE: %p\n", p_);
 }
