@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 11:54:33 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/27 20:41:12 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/02/27 21:11:39 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,15 @@
 
 void	here_doc(char *file_name, t_data *data);
 
-void	redir_read(char *file_name)
+void	redir_read(char *file_name, t_data *data)
 {
 	int	fd;
 
 	if (!file_name)
 		return ;
+	data->less_fd = dup(STDIN_FILENO);
+	if (data->less_fd == -1)
+		panic("dup in redir_reader()");
 	fd = open(file_name, O_RDONLY);
 	if (fd == -1)
 	{
@@ -41,12 +44,15 @@ void	redir_read(char *file_name)
 		error_exit("close");
 }
 
-void	redir_write(char *file_name)
+void	redir_write(char *file_name, t_data *data)
 {
 	int	fd;
 
 	if (!file_name)
 		return ;
+	data->great_fd = dup(STDOUT_FILENO);
+	if(data->great_fd == -1)
+		panic("dup in redir_write");
 	fd = open(file_name, O_WRONLY | O_CREAT | O_TRUNC, 0666);
 	if (fd == -1)
 		error_exit("open");
@@ -56,12 +62,15 @@ void	redir_write(char *file_name)
 		error_exit("close");
 }
 
-void	redir_append(char *file_name)
+void	redir_append(char *file_name, t_data *data)
 {
 	int	fd;
 
 	if (!file_name)
 		return ;
+	data->great_fd = dup(STDOUT_FILENO);
+	if(data->great_fd == -1)
+		panic("dup in redir_write");
 	fd = open(file_name, O_WRONLY | O_CREAT | O_APPEND, 0666);
 	if (fd == -1)
 		error_exit("open");
@@ -77,11 +86,11 @@ void	redirect(t_node *node, t_data *data)
 		return ;
 	apply_expansions(&node->word, data);
 	if (node->token_type == LESS)
-		redir_read(node->word);
+		redir_read(node->word, data);
 	else if (node->token_type == GREAT)
-		redir_write(node->word);
+		redir_write(node->word, data);
 	else if (node->token_type == DGREAT)
-		redir_append(node->word);
+		redir_append(node->word, data);
 	else if (node->token_type == DLESS)
 		here_doc(node->word, data);
 }

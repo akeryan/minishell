@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 16:32:04 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/27 20:31:30 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/02/27 21:11:04 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,22 @@ static void	run_cmd_in_child(t_node *node, int *p, int *p_, t_data *d)
 	//ft_printf(2, "<- child process\n");
 }
 
+static void undo_redirections(t_data *data)
+{
+	if (data->less_fd >= 0)
+	{
+		if(dup2(data->less_fd, STDIN_FILENO) == -1)
+			panic("dup2 in undo_redirections");
+		close(data->less_fd);
+	}
+	if (data->great_fd >= 0)
+	{
+		if(dup2(data->great_fd, STDOUT_FILENO) == -1)
+			panic("dup2 in undo_redirections");
+		close(data->great_fd);
+	}
+}
+
 /**
  * @brief	Implements 'pipeline' node of the parsing tree
  * @param	node Pointer to PIPELINE node	
@@ -128,7 +144,7 @@ void	pipeline(t_node *node, int *p_, t_data *d)
 	if (check_if_in_parent(p_, node->left->word))
 	{
 		run_command(node, p, p_, d);
-		
+		undo_redirections(d);	
 		pipeline(node->right, &p[0], d);
 	}
 	else

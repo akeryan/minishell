@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/25 19:21:52 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/26 17:19:46 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/02/27 20:54:46 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ void	init_data(t_data *data)
 	data->env = ft_copy_strv((const char **)environ);
 	data->exit_status = 0;
 	data->dbl_dollar = getpid();
+	data->less_fd = -1;
+	data->great_fd = -1;
 }
 
 static int	run(t_grammar *grammar, t_data *data)
