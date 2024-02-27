@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 11:59:34 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/21 14:33:37 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/02/27 14:52:11 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,5 @@ typedef struct s_tilde_vars
 	char	*usrs_dir;
 	char	*home_dir;
 }	t_tilde_vars;
-
 
 #endif

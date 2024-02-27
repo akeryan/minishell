@@ -2,4 +2,5 @@ minishell.dSYM
 .*
 *.gch
 *.dSYM
+*.gch
 !.gitignore

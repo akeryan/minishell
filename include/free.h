@@ -6,8 +6,13 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 16:57:20 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/07 16:57:59 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/02/27 14:56:07 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-void free_split(char **ptr);
+#ifndef FREE_H
+# define FREE_H
+
+void	free_split(char **ptr);
+
+#endif
