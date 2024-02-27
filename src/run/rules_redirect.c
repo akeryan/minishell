@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 11:54:33 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/27 21:11:39 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/02/28 01:24:04 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	redir_read(char *file_name, t_data *data)
 	fd = open(file_name, O_RDONLY);
 	if (fd == -1)
 	{
-		ft_printf(2, "minishell: %s: No such file of directory\n", file_name);
+		ft_printf(2, "minishell: %s: No such file or directory\n", file_name);
 		exit(EXIT_FAILURE);
 	}
 	if (dup2(fd, STDIN_FILENO) == -1)
@@ -51,7 +51,7 @@ void	redir_write(char *file_name, t_data *data)
 	if (!file_name)
 		return ;
 	data->great_fd = dup(STDOUT_FILENO);
-	if(data->great_fd == -1)
+	if (data->great_fd == -1)
 		panic("dup in redir_write");
 	fd = open(file_name, O_WRONLY | O_CREAT | O_TRUNC, 0666);
 	if (fd == -1)
@@ -69,7 +69,7 @@ void	redir_append(char *file_name, t_data *data)
 	if (!file_name)
 		return ;
 	data->great_fd = dup(STDOUT_FILENO);
-	if(data->great_fd == -1)
+	if (data->great_fd == -1)
 		panic("dup in redir_write");
 	fd = open(file_name, O_WRONLY | O_CREAT | O_APPEND, 0666);
 	if (fd == -1)

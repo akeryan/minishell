@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 16:32:04 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/27 21:43:59 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/02/28 02:31:13 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include <sys/wait.h>
 #include <stdlib.h>
 #include <stdbool.h>
+#include "main_utils.h"
 #include "libft.h"
 #include "error_handling.h"
 #include "rules.h"
@@ -33,17 +34,20 @@ bool	check_if_in_parent(int *p_, char *cmd)
 	return (false);
 }
 
+static void	dup_stdin(int *p_)
+{
+	if (dup2(*p_, STDIN_FILENO) == -1)
+		error_exit("dup2 in pipeline (p_)");
+	if (close(*p_) == -1)
+		error_exit("close in pipeline (p_)");
+}
+
 static void	run_command(t_node *node, int *p, int *p_, t_data *d)
 {
 	int	status;
 
 	if (p_)
-	{
-		if (dup2(*p_, STDIN_FILENO) == -1)
-			error_exit("dup2 in pipeline (p_)");
-		if (close(*p_) == -1)
-			error_exit("close in pipeline (p_)");
-	}
+		dup_stdin(p_);
 	if (node->right)
 	{
 		if (check_if_in_parent(p_, node->left->word))
@@ -67,25 +71,6 @@ static void	run_command(t_node *node, int *p, int *p_, t_data *d)
 		d->exit_status = status;
 }
 
-static void	process_signals(int status, t_data *d)
-{
-	int	termsig;
-
-	if (WIFEXITED(status))
-		d->exit_status = WEXITSTATUS(status);
-	else if (WIFSIGNALED(status))
-	{
-		termsig = WTERMSIG(status);
-		if (termsig == SIGINT)
-			d->exit_status = 130;
-		else if (termsig == SIGQUIT)
-		{
-			printf("Quit: 3\n");
-			d->exit_status = 131;
-		}
-	}
-}
-
 static void	run_cmd_in_child(t_node *node, int *p, int *p_, t_data *d)
 {
 	int	pid;
@@ -105,30 +90,10 @@ static void	run_cmd_in_child(t_node *node, int *p, int *p_, t_data *d)
 		pipeline(node->right, &p[0], d);
 		if (node->right && close(p[0]) == -1)
 			error_exit("close in parent");
-		if (waitpid(pid, &status, 0) == -1)
+		if (waitpid(pid, &status, WUNTRACED) == -1)
 			d->exit_status = 130;
 		if (!node->right)
 			process_signals(status, d);
-	}
-}
-
-static void restore_stdout(t_data *data)
-{
-	if (data->great_fd >= 0)
-	{
-		if(dup2(data->great_fd, STDOUT_FILENO) == -1)
-			panic("dup2 in restore_stdout");
-		close(data->great_fd);
-	}
-}
-
-static void restore_stdin(t_data *data)
-{
-	if (data->less_fd >= 0)
-	{
-		if(dup2(data->less_fd, STDIN_FILENO) == -1)
-			panic("dup2 in restore_stdin");
-		close(data->less_fd);
 	}
 }
 
@@ -149,8 +114,10 @@ void	pipeline(t_node *node, int *p_, t_data *d)
 	if (check_if_in_parent(p_, node->left->word))
 	{
 		run_command(node, p, p_, d);
-		restore_stdin(d);
-		restore_stdout(d);
+		if (restore_stdin(d) == -1)
+			exit (EXIT_FAILURE);
+		if (restore_stdout(d) == -1)
+			exit (EXIT_FAILURE);
 		pipeline(node->right, &p[0], d);
 	}
 	else

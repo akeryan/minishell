@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 14:42:11 by dabdygal          #+#    #+#             */
-/*   Updated: 2024/02/23 19:52:32 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/02/27 22:36:39 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	ft_exit(char *argv[])
 	unsigned char	status;
 
 	status = 0;
-	if (ft_putstr_fd("exit\n", STDERR_FILENO) < 0)
+	if (ft_putstr_fd("exit\n", STDOUT_FILENO) < 0)
 		return (1);
 	if (argv[1] && ft_str_is_int(argv[1]) == 0)
 	{

@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/28 10:50:20 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/26 13:42:34 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/02/28 02:07:57 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,38 +58,6 @@ static void	ft_execve(char *cmd_name, char **argv, char **envp)
 	exit(EXIT_FAILURE);
 }
 
-/**
- * @brief Converts the t_word_node list to an array of strings
- * @param head A pointer to the first node of the list 
- * @return A pointer to the array of strings
-*/
-static char	**list_to_array(t_word_node *head, char *cmd_name)
-{
-	char		**argv;
-	int			len;
-	int			i;
-
-	if (!cmd_name)
-		return (NULL);
-	len = word_list_len(head);
-	argv = (char **)malloc((len + 2) * sizeof(char *));
-	if (argv == NULL)
-		panic_malloc();
-	i = 1;
-	while (head)
-	{
-		argv[i] = ft_strdup(head->word);
-		if (argv[i] == NULL)
-		{
-			while (--i >= 0)
-				free(argv[i]);
-			return (NULL);
-		}
-		head = head->next;
-		i++;
-	}
-	return (argv[0] = ft_strdup(cmd_name), argv[i] = NULL, argv);
-}
 
 static int	run_exit(char **argv, t_data *data)
 {
@@ -128,6 +96,33 @@ static int	run_builtin(char *cmd, char **argv, t_data *data)
 	return (-100);
 }
 
+static int	get_cmd_from_args(char ***argv, t_node *node)
+{
+	char	**tmp;
+	char	*tmp_word;
+
+	if (*argv[1] == NULL)
+		return (0);
+	else
+	{
+		tmp_word = ft_strdup(*argv[1]);
+		if (tmp_word == NULL)
+			return (-1);
+		free(node->word);
+		node->word = tmp_word;
+		tmp = ft_strdup2(*argv + 1);
+		free_split(*argv);
+		*argv = tmp;
+		if (*argv == NULL)
+		{
+			ft_printf(2, "failed to malloc in ft_strdup2(): %s\n", \
+				strerror(errno));
+			return (-1);
+		}
+	}
+	return (0);
+}
+
 /**
  * @brief Implements 'command' node of the parsing tree
  * @param node Pointer to the COMMAND node
@@ -145,17 +140,21 @@ int	command(t_node *const node, t_data *data)
 		return (EXIT_FAILURE);
 	args_list = NULL;
 	argv = NULL;
-	builtin_status = 0;
 	prefix(node->left, data);
 	suffix(node->right, &args_list, data);
-	argv = list_to_array(args_list, node->word);
 	apply_expansions(&node->word, data);
+	argv = list_to_array(args_list, node->word);
+	if (argv == NULL)
+	{
+		ft_printf(2, "failed to malloc in list_to_array(): %s\n", \
+			strerror(errno));
+		return (EXIT_FAILURE);
+	}
 	if (node->word && ft_strcmp(node->word, "") == 0)
-		exit(EXIT_SUCCESS);
+		if (get_cmd_from_args(&argv, node) == -1)
+			return (EXIT_FAILURE);
 	builtin_status = run_builtin(node->word, argv, data);
 	if (builtin_status == -100 && node->word)
 		ft_execve(node->word, argv, data->env);
-	free_word_list(args_list);
-	free_split(argv);
-	return (builtin_status);
+	return (free_word_list(args_list), free_split(argv), builtin_status);
 }

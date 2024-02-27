@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 11:11:56 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/24 19:54:06 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/02/27 23:17:50 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ char	*get_cmd_path(char *cmd, char **envp)
 	path = ft_getenv("PATH", envp);
 	if (path == NULL)
 	{
-		ft_printf(2, "minishell: %s: No such file of directory\n", cmd);
+		ft_printf(2, "minishell: %s: No such file or directory\n", cmd);
 		exit(127);
 	}
 	paths = ft_split(path, ':');

@@ -6,7 +6,7 @@
 #    By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/15 15:43:23 by dabdygal          #+#    #+#              #
-#    Updated: 2024/02/26 17:05:30 by akeryan          ###   ########.fr        #
+#    Updated: 2024/02/28 02:22:12 by akeryan          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -92,7 +92,8 @@ SRC_FILES = signals.c \
 			run/dollar_expansion_0.c \
 			run/dollar_expansion_1.c \
 			run/dollar_expansion_2.c \
-			run/utils.c \
+			run/utils_0.c \
+			run/utils_1.c \
 			run/get_next_line.c \
 			run/get_next_line_utils.c \
 			run/here-doc.c \
