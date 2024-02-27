@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 16:32:04 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/27 21:11:04 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/02/27 21:43:59 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ bool	check_if_in_parent(int *p_, char *cmd)
 static void	run_command(t_node *node, int *p, int *p_, t_data *d)
 {
 	int	status;
-	//ft_printf(2, "-> run_command(): --------------- %p\n", p_);
 
 	if (p_)
 	{
@@ -47,6 +46,12 @@ static void	run_command(t_node *node, int *p, int *p_, t_data *d)
 	}
 	if (node->right)
 	{
+		if (check_if_in_parent(p_, node->left->word))
+		{
+			d->great_fd = dup(STDOUT_FILENO);
+			if (d->great_fd == -1)
+				panic("Failed to dup stdout in run_command()");
+		}
 		if (dup2(p[1], STDOUT_FILENO) == -1)
 			error_exit("dup2 in pipeline");
 		if (!check_if_in_parent(p_, node->left->word))
@@ -60,7 +65,6 @@ static void	run_command(t_node *node, int *p, int *p_, t_data *d)
 		exit(status);
 	else if (!node->right)
 		d->exit_status = status;
-	//ft_printf(2, "<- run_command(): --------------- %p\n", p_);
 }
 
 static void	process_signals(int status, t_data *d)
@@ -87,7 +91,6 @@ static void	run_cmd_in_child(t_node *node, int *p, int *p_, t_data *d)
 	int	pid;
 	int	status;
 
-	//ft_printf(2, "-> child process\n");
 	pid = fork();
 	if (pid == -1)
 		error_exit("fork");
@@ -107,22 +110,25 @@ static void	run_cmd_in_child(t_node *node, int *p, int *p_, t_data *d)
 		if (!node->right)
 			process_signals(status, d);
 	}
-	//ft_printf(2, "<- child process\n");
 }
 
-static void undo_redirections(t_data *data)
+static void restore_stdout(t_data *data)
+{
+	if (data->great_fd >= 0)
+	{
+		if(dup2(data->great_fd, STDOUT_FILENO) == -1)
+			panic("dup2 in restore_stdout");
+		close(data->great_fd);
+	}
+}
+
+static void restore_stdin(t_data *data)
 {
 	if (data->less_fd >= 0)
 	{
 		if(dup2(data->less_fd, STDIN_FILENO) == -1)
-			panic("dup2 in undo_redirections");
+			panic("dup2 in restore_stdin");
 		close(data->less_fd);
-	}
-	if (data->great_fd >= 0)
-	{
-		if(dup2(data->great_fd, STDOUT_FILENO) == -1)
-			panic("dup2 in undo_redirections");
-		close(data->great_fd);
 	}
 }
 
@@ -133,7 +139,6 @@ static void undo_redirections(t_data *data)
 */
 void	pipeline(t_node *node, int *p_, t_data *d)
 {
-	//ft_printf(2, "-> PIPIELINE: %p\n", p_);
 	int	p[2];
 
 	if (node == NULL)
@@ -144,10 +149,10 @@ void	pipeline(t_node *node, int *p_, t_data *d)
 	if (check_if_in_parent(p_, node->left->word))
 	{
 		run_command(node, p, p_, d);
-		undo_redirections(d);	
+		restore_stdin(d);
+		restore_stdout(d);
 		pipeline(node->right, &p[0], d);
 	}
 	else
 		run_cmd_in_child(node, p, p_, d);
-	//ft_printf(2, "<- PIPIELINE: %p\n", p_);
 }
