@@ -3,4 +3,5 @@ minishell.dSYM
 *.gch
 *.dSYM
 *.gch
+minishell_tester
 !.gitignore
