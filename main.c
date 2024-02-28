@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/25 19:21:52 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/28 13:53:28 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/02/28 20:22:40 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@
 #include "print_tree.h"
 
 void	print_tree(t_node *node, int level);
-
 
 void	init_data(t_data *data)
 {
