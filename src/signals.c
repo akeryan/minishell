@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dabdygal <dabdygal@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 13:49:09 by dabdygal          #+#    #+#             */
-/*   Updated: 2024/02/28 18:52:36 by dabdygal         ###   ########.fr       */
+/*   Updated: 2024/02/28 19:07:00 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	handle_sigint(int x)
 	write(STDERR_FILENO, "\n", 1);
 	if (g_signal == 0)
 	{
-		x = 0;
+		x++;
 		rl_replace_line("", 1);
 		rl_on_new_line();
 		rl_redisplay();

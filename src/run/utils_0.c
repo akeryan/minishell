@@ -6,12 +6,13 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 16:31:55 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/28 02:42:25 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/02/28 19:07:26 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <signal.h>
 #include "word_list.h"
 #include "libft.h"
 #include "data.h"
