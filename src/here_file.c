@@ -6,7 +6,7 @@
 /*   By: dabdygal <dabdygal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 15:02:17 by dabdygal          #+#    #+#             */
-/*   Updated: 2024/02/24 12:59:07 by dabdygal         ###   ########.fr       */
+/*   Updated: 2024/02/28 18:58:59 by dabdygal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,15 +58,12 @@ void	here_sig(int x)
 
 static char	*here_read(char *prompt)
 {
-	char				*line;
-	size_t				len;
-	struct sigaction	s_act;
-	struct sigaction	s_old;
+	char	*line;
+	size_t	len;
+	void	(*old)(int);
 
-	s_act.__sigaction_u.__sa_handler = here_sig;
-	s_act.sa_flags = 0;
-	s_act.sa_mask = 0;
-	if (sigaction(SIGINT, &s_act, &s_old) < 0)
+	old = signal(SIGINT, here_sig);
+	if (old == SIG_ERR)
 		return (NULL);
 	if (ft_putstr_fd(prompt, STDERR_FILENO) < 0)
 		return (NULL);
@@ -76,7 +73,7 @@ static char	*here_read(char *prompt)
 		g_signal = 0;
 		errno = 0;
 	}
-	if (sigaction(SIGINT, &s_old, NULL) < 0 || !line)
+	if (signal(SIGINT, old) == SIG_ERR || !line)
 		return (NULL);
 	len = ft_strlen(line);
 	if (line[len - 1] == '\n')
