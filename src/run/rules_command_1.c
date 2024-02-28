@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 17:01:50 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/29 00:12:33 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/02/29 00:33:05 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,16 +52,11 @@ static void	ft_execve(char *cmd_name, char **argv, char **envp)
 	}
 	else
 		path = get_cmd_path(cmd_name, envp);
-	if (path != NULL)
-	{
-		ft_process_signals();
-		if (execve(path, argv, envp) == -1)
-			status = execve_error_msg(path);
-		free(path);
-		exit(status);
-	}
-	ft_printf(2, "%s: %s: %s\n", MSH_NAME, cmd_name, "command not found");
-	exit(127);
+	ft_process_signals();
+	if (execve(path, argv, envp) == -1)
+		status = execve_error_msg(path, cmd_name);
+	free(path);
+	exit(status);
 }
 
 /**

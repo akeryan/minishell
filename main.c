@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/25 19:21:52 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/28 20:22:40 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/02/29 00:53:50 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,18 +34,17 @@ void	init_data(t_data *data)
 	data->dbl_dollar = getpid();
 	data->less_fd = -1;
 	data->great_fd = -1;
+	data->root = NULL;
 }
 
 static int	run(t_grammar *grammar, t_data *data)
 {
-	t_node		*root;
-
 	while (1)
 	{
-		root = build_tree(grammar, NULL);
+		data->root = build_tree(grammar, NULL);
 		if (errno != 0)
 			perror("ERRNO");
-		if (!root)
+		if (!data->root)
 		{
 			if (peek_token(NULL).type == EOF_TOKEN)
 			{
@@ -60,8 +59,8 @@ static int	run(t_grammar *grammar, t_data *data)
 					;
 			}
 		}
-		program(root, data);
-		clean_tree(root);
+		program(data->root, data);
+		clean_tree(data->root);
 	}
 }
 

@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 17:09:25 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/28 15:55:49 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/02/29 00:33:54 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # include <string.h>
 # include <errno.h>
 
-int		execve_error_msg(char *cmd_name);
+int		execve_error_msg(char *path, char *cmd_name);
 void	error_exit(char *str);
 void	panic_malloc(void);
 void	panic(char *txt);

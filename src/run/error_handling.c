@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 10:29:34 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/29 00:03:09 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/02/29 00:34:37 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,11 +58,16 @@ static int	process_stat(char *path)
 	return (exit_stat);
 }
 
-int	execve_error_msg(char *path)
+int	execve_error_msg(char *path, char *cmd_name)
 {
 	struct stat	path_stat;
 	int			exit_stat;
 
+	if (path == NULL)
+	{
+		ft_printf(2, "%s: %s: %s\n", MSH_NAME, cmd_name, "command not found");
+		return (127);
+	}
 	exit_stat = EXIT_SUCCESS;
 	if (errno == EFAULT)
 	{

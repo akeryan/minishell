@@ -6,7 +6,7 @@
 #    By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/15 15:43:23 by dabdygal          #+#    #+#              #
-#    Updated: 2024/02/28 19:13:13 by akeryan          ###   ########.fr        #
+#    Updated: 2024/02/29 00:26:41 by akeryan          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -121,6 +121,20 @@ $(addprefix $(PRINTF_DIR)/,$(PRINTF_NAME)):
 	make $(PRINTF_NAME) -C $(PRINTF_DIR)
 
 all: $(BIN_NAME)
+
+# --leak-check=full: "each individual leak will be shown in detail"
+# --show-leak-kinds=all: Show all of "definite, indirect, possible, reachable" leak kinds in the "full" report.
+# --verbose: Can tell you about unusual behavior of your program. Repeat for more verbosity.
+leaks_fd:
+	make re && make clean && valgrind --track-fds=yes  ./minishell
+ --suppressions=supress_readline \
+ --log-file=valgrind-out.txt 
+leaks:
+	make re && make clean \
+	&& valgrind --leak-check=full \
+	--track-origins=yes \
+	--show-leak-kinds=all -s \
+	./minishell
 
 clean:
 	rm -f $(addprefix $(OBJ_DIR)/,$(OBJ_FILES))
