@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/25 19:21:52 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/28 01:19:01 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/02/28 13:53:28 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@
 
 void	print_tree(t_node *node, int level);
 
-extern int	g_signal;
 
 void	init_data(t_data *data)
 {
@@ -62,9 +61,8 @@ static int	run(t_grammar *grammar, t_data *data)
 					;
 			}
 		}
-		g_signal = 1;
 		program(root, data);
-		g_signal = 0;
+		clean_tree(root);
 	}
 }
 

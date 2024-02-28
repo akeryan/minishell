@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 11:46:35 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/24 15:27:30 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/02/28 13:44:15 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 #include "error_handling.h"
 #include "word_list.h"
 #include "expansion.h"
+
+extern int	g_signal;
 
 /**
  * @brief Implements 'program' node of the parsing tree
@@ -27,10 +29,12 @@
 */
 int	program(t_node *root, t_data *data)
 {
+	g_signal = 1;
 	if (root == NULL)
 		return (-1);
 	newline_list(root->newl_ptr);
 	pipeline(root->left, NULL, data);
+	g_signal = 0;
 	return (0);
 }
 

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   utils_0.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 16:31:55 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/28 02:18:05 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/02/28 02:42:25 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,6 @@ void	process_signals(int status, t_data *d)
 	else if (WIFSIGNALED(status))
 	{
 		termsig = WTERMSIG(status);
-		printf("termsig: %i\n", termsig);
 		if (termsig == SIGINT)
 			d->exit_status = 130;
 		else if (termsig == SIGQUIT)
