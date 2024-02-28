@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rules_command.c                                    :+:      :+:    :+:   */
+/*   rules_command_1.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/28 10:50:20 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/28 02:07:57 by akeryan          ###   ########.fr       */
+/*   Created: 2024/02/28 17:01:50 by akeryan           #+#    #+#             */
+/*   Updated: 2024/02/28 17:11:34 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,17 @@
 #include "builtins.h"
 #include "main_utils.h"
 
+static void	ft_process_signals(void)
+{
+	struct sigaction	s_sint;
+
+	s_sint.__sigaction_u.__sa_handler = SIG_DFL;
+	s_sint.sa_flags = 0;
+	s_sint.sa_mask = 0;
+	if (sigaction(SIGQUIT, &s_sint, NULL) < 0)
+		return ;
+}
+
 /**
  * @brief Executes command with execve system utility
  * @param cmd_name Name of the command to be executed
@@ -30,10 +41,11 @@
 */
 static void	ft_execve(char *cmd_name, char **argv, char **envp)
 {
-	struct sigaction	s_sint;
 	char				*path;
 	char				*tmp;
+	int					status;
 
+	status = EXIT_SUCCESS;
 	if (ft_strchr(cmd_name, '/'))
 	{
 		path = cmd_name;
@@ -45,82 +57,11 @@ static void	ft_execve(char *cmd_name, char **argv, char **envp)
 	}
 	else
 		path = get_cmd_path(cmd_name, envp);
-	s_sint.__sigaction_u.__sa_handler = SIG_DFL;
-	s_sint.sa_flags = 0;
-	s_sint.sa_mask = 0;
-	if (sigaction(SIGQUIT, &s_sint, NULL) < 0)
-		return ;
+	ft_process_signals();
 	if (execve(path, argv, envp) == -1)
-		cmd_error_msg(cmd_name);//STOPPED HERE 
-		//explore all the possible values of errno that occure when execve returns -1
-		//currently it executes path_error_msg, which outputs path related errors...
+		status = execve_error_msg(path);
 	free(path);
-	exit(EXIT_FAILURE);
-}
-
-
-static int	run_exit(char **argv, t_data *data)
-{
-	int	status;
-
-	status = ft_exit(argv);
-	if (status != 1)
-		exit (status);
-	else
-	{
-		data->exit_status = 1;
-		return (EXIT_FAILURE);
-	}
-	return (status);
-}
-
-static int	run_builtin(char *cmd, char **argv, t_data *data)
-{
-	if (cmd)
-	{
-		if (ft_strcmp(cmd, "echo") == 0)
-			return (echo((const char **)argv));
-		if (ft_strcmp(cmd, "cd") == 0)
-			return (cd((const char **)argv, &data->env));
-		if (ft_strcmp(cmd, "pwd") == 0)
-			return (pwd());
-		if (ft_strcmp(cmd, "export") == 0)
-			return (ft_export(argv, &data->env));
-		if (ft_strcmp(cmd, "unset") == 0)
-			return (unset(argv, data->env));
-		if (ft_strcmp(cmd, "env") == 0)
-			return (env(argv, data->env));
-		if (ft_strcmp(cmd, "exit") == 0)
-			return (run_exit(argv, data));
-	}
-	return (-100);
-}
-
-static int	get_cmd_from_args(char ***argv, t_node *node)
-{
-	char	**tmp;
-	char	*tmp_word;
-
-	if (*argv[1] == NULL)
-		return (0);
-	else
-	{
-		tmp_word = ft_strdup(*argv[1]);
-		if (tmp_word == NULL)
-			return (-1);
-		free(node->word);
-		node->word = tmp_word;
-		tmp = ft_strdup2(*argv + 1);
-		free_split(*argv);
-		*argv = tmp;
-		if (*argv == NULL)
-		{
-			ft_printf(2, "failed to malloc in ft_strdup2(): %s\n", \
-				strerror(errno));
-			return (-1);
-		}
-	}
-	return (0);
+	exit(status);
 }
 
 /**

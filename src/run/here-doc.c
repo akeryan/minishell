@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/25 23:19:24 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/25 23:44:08 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/02/28 17:12:02 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ void	here_doc(char *file_name, t_data *data)
 	fd2 = open_file_2(new_file_name, file_name, fd);
 	read_write(fd, fd2, data);
 	close(fd2);
-	redir_read(new_file_name);
+	redir_read(new_file_name, data);
 	free(new_file_name);
 	close(fd);
 	if (unlink(new_file_name) == -1)
