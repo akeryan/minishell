@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rules_command_1.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
+/*   By: dabdygal <dabdygal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 17:01:50 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/28 17:11:34 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/02/28 19:01:41 by dabdygal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,7 @@
 
 static void	ft_process_signals(void)
 {
-	struct sigaction	s_sint;
-
-	s_sint.__sigaction_u.__sa_handler = SIG_DFL;
-	s_sint.sa_flags = 0;
-	s_sint.sa_mask = 0;
-	if (sigaction(SIGQUIT, &s_sint, NULL) < 0)
+	if (signal(SIGQUIT, SIG_DFL) == SIG_ERR)
 		return ;
 }
 
