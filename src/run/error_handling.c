@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 10:29:34 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/28 16:52:14 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/02/29 00:03:09 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ int	execve_error_msg(char *path)
 	exit_stat = EXIT_SUCCESS;
 	if (errno == EFAULT)
 	{
+		printf("PATH: %s\n", path);
 		ft_printf(2, "%s: %s\n", path, "command not found\n");
 		return (127);
 	}

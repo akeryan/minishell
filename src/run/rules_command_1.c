@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rules_command_1.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dabdygal <dabdygal@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 17:01:50 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/28 19:01:41 by dabdygal         ###   ########.fr       */
+/*   Updated: 2024/02/29 00:12:33 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,11 +52,16 @@ static void	ft_execve(char *cmd_name, char **argv, char **envp)
 	}
 	else
 		path = get_cmd_path(cmd_name, envp);
-	ft_process_signals();
-	if (execve(path, argv, envp) == -1)
-		status = execve_error_msg(path);
-	free(path);
-	exit(status);
+	if (path != NULL)
+	{
+		ft_process_signals();
+		if (execve(path, argv, envp) == -1)
+			status = execve_error_msg(path);
+		free(path);
+		exit(status);
+	}
+	ft_printf(2, "%s: %s: %s\n", MSH_NAME, cmd_name, "command not found");
+	exit(127);
 }
 
 /**
