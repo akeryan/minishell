@@ -6,15 +6,15 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 11:11:56 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/27 23:17:50 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/02/29 17:38:20 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "ft_printf.h"
 #include "libft.h"
-#include "free.h"
 #include "error_handling.h"
+#include "main_utils.h"
 
 static char	*cmd_in_path(char *path, char *cmd);
 
@@ -46,9 +46,9 @@ char	*get_cmd_path(char *cmd, char **envp)
 	{
 		pth = cmd_in_path(paths[i], cmd);
 		if (pth)
-			return (free_split(paths), pth);
+			return (clean_dblptr(paths), pth);
 	}
-	return (free_split(paths), NULL);
+	return (clean_dblptr(paths), NULL);
 }
 
 /**

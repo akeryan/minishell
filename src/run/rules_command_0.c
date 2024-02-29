@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/28 10:50:20 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/29 16:45:50 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/02/29 18:41:50 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@
 #include "word_list.h"
 #include "libft.h"
 #include "error_handling.h"
-#include "free.h"
 #include "expansion.h"
 #include "builtins.h"
 #include "main_utils.h"
@@ -27,9 +26,9 @@ int	run_exit(char **argv, t_data *data)
 {
 	data->exit_status = ft_exit(argv);
 	if (data->exit_status == 1)
-		return (EXIT_FAILURE);
+		return (0);
 	else
-		return (EXIT_SUCCESS);
+		return (1);
 }
 
 int	run_builtin(char *cmd, char **argv, t_data *data)
@@ -67,7 +66,7 @@ int	get_cmd_from_args(char ***argv, t_node *node)
 		free(node->word);
 		node->word = tmp_word;
 		tmp = ft_strdup2(*argv + 1);
-		free_split(*argv);
+		clean_dblptr(*argv);
 		*argv = tmp;
 		if (*argv == NULL)
 		{

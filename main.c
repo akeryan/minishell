@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/25 19:21:52 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/29 16:45:37 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/02/29 22:23:39 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ static int	run(t_grammar *grammar, t_data *data)
 	while (1)
 	{
 		data->root = build_tree(grammar, NULL);
+		//print_tree(data->root, 0);
 		if (errno != 0)
 			perror("ERRNO");
 		if (!data->root)
@@ -64,7 +65,7 @@ static int	run(t_grammar *grammar, t_data *data)
 		state = program(data->root, data);
 		printf("state from program(): %d\n", state);
 		clean_tree(data->root);
-		if (state == EXIT_SUCCESS)
+		if (state == 1)
 		{
 			printf("BREAK\n");
 			break ;
@@ -77,7 +78,6 @@ int	main(void)
 {
 	t_grammar	grammar;
 	t_data		data;
-	int			status;
 
 	if (setup_sigs() < 0)
 	{
@@ -88,6 +88,7 @@ int	main(void)
 	if (handle_shlvl(&data.env) < 0)
 		return (EXIT_FAILURE);
 	grammar = setup_grammar();
-	status = run(&grammar, &data);
-	return (status);
+	run(&grammar, &data);
+	clean_dblptr(data.env);
+	return (data.exit_status);
 }

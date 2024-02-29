@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 16:32:04 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/29 16:38:24 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/02/29 22:46:38 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,10 +66,12 @@ static int	run_command(t_node *node, int *p, int *p_, t_data *d)
 	}
 	state = command(node->left, d);
 	printf("state from command(): %d\n", state);
-	if (!check_if_in_parent(p_, node->left->word))
-		exit(d->exit_status);
-	else if (!node->right)
-		d->exit_status = 111;//not sure what to assign
+	printf("exit_status in run_command(): %d\n", d->exit_status);
+	//if (!check_if_in_parent(p_, node->left->word))
+		//exit(d->exit_status);
+	//else 
+	//if (!node->right)
+		//d->exit_status = 111;//not sure what to assign
 	return (state);
 }
 
@@ -83,8 +85,13 @@ static void	run_cmd_in_child(t_node *node, int *p, int *p_, t_data *d)
 		error_exit("fork");
 	if (pid == -1)
 		error_exit("fork");
-	else if (pid == 0)
+	else if (pid == 0) {
 		run_command(node, p, p_, d);
+		// clean_tree(d->root);
+		// clean_dblptr(d->env);
+		// exit(d->exit_status);
+		ft_cleaner(d, NULL, NULL, d->exit_status);
+	}
 	else if (pid > 0)
 	{
 		if (node->right && close(p[1]) == -1)

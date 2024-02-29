@@ -6,7 +6,7 @@
 #    By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/15 15:43:23 by dabdygal          #+#    #+#              #
-#    Updated: 2024/02/29 00:26:41 by akeryan          ###   ########.fr        #
+#    Updated: 2024/02/29 22:24:40 by akeryan          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,7 +47,6 @@ INCLUDE_FILES = minishell.h \
 				pipe_list.h \
 				rules.h \
 				word_list.h \
-				free.h \
 				expansion.h \
 				dollar_expansion.h \
 				print_tree.h \
@@ -75,8 +74,7 @@ SRC_FILES = signals.c \
 			shlvl.c \
 			print_tree_0.c \
 			print_tree_1.c \
-			main_utils.c \
-			clean_tree.c \
+			clean.c \
 			run/error_handling.c \
 			run/pid_list.c \
 			run/pipe_list.c \
@@ -98,12 +96,11 @@ SRC_FILES = signals.c \
 			run/utils_1.c \
 			run/get_next_line.c \
 			run/get_next_line_utils.c \
-			run/here-doc.c \
-			run/free.c
+			run/here-doc.c
 
 OBJ_FILES = $(SRC_FILES:.c=.o)
 
-CC = cc
+CC = cc -g3
 
 CFLAGS = -Wall -Wextra -Werror -g -I $(INCLUDE_DIR) -I $(LIBREAD_INC)
 
@@ -126,11 +123,11 @@ all: $(BIN_NAME)
 # --show-leak-kinds=all: Show all of "definite, indirect, possible, reachable" leak kinds in the "full" report.
 # --verbose: Can tell you about unusual behavior of your program. Repeat for more verbosity.
 leaks_fd:
-	make re && make clean && valgrind --track-fds=yes  ./minishell
- --suppressions=supress_readline \
- --log-file=valgrind-out.txt 
+	make && valgrind --track-fds=yes  \
+ --suppressions=supression.txt \
+ --log-file=valgrind-out.txt ./minishell
 leaks:
-	make re && make clean \
+	make \
 	&& valgrind --leak-check=full \
 	--track-origins=yes \
 	--show-leak-kinds=all -s \
