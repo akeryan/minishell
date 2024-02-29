@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 16:32:04 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/28 02:40:30 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/02/29 15:53:00 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,9 @@ static void	dup_stdin(int *p_)
 		error_exit("close in pipeline (p_)");
 }
 
-static void	run_command(t_node *node, int *p, int *p_, t_data *d)
+static int	run_command(t_node *node, int *p, int *p_, t_data *d)
 {
-	int	status;
+	int	state;
 
 	if (p_)
 		dup_stdin(p_);
@@ -64,11 +64,12 @@ static void	run_command(t_node *node, int *p, int *p_, t_data *d)
 		if (close(p[1]) == -1)
 			error_exit("close in child (2)");
 	}
-	status = command(node->left, d);
+	state = command(node->left, d);
 	if (!check_if_in_parent(p_, node->left->word))
-		exit(status);
+		exit(d->exit_status);
 	else if (!node->right)
-		d->exit_status = status;
+		d->exit_status = 111;//not sure what to assign
+	return (state);
 }
 
 static void	run_cmd_in_child(t_node *node, int *p, int *p_, t_data *d)
@@ -102,18 +103,20 @@ static void	run_cmd_in_child(t_node *node, int *p, int *p_, t_data *d)
  * @param	node Pointer to PIPELINE node	
  * @param	p_ pointer to the reading end of the preceding pipe
 */
-void	pipeline(t_node *node, int *p_, t_data *d)
+int	pipeline(t_node *node, int *p_, t_data *d)
 {
 	int	p[2];
+	int state;
 
 	if (node == NULL)
 		return ;
+	state = 0;
 	if (node->right)
 		if (pipe(p) == -1)
 			error_exit("pipe");
 	if (check_if_in_parent(p_, node->left->word))
 	{
-		run_command(node, p, p_, d);
+		state = run_command(node, p, p_, d);
 		if (restore_stdin(d) == -1)
 			exit (EXIT_FAILURE);
 		if (restore_stdout(d) == -1)
@@ -122,4 +125,5 @@ void	pipeline(t_node *node, int *p_, t_data *d)
 	}
 	else
 		run_cmd_in_child(node, p, p_, d);
+	return (state);
 }
