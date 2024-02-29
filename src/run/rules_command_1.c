@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 17:01:50 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/29 15:39:48 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/02/29 16:38:03 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,10 @@ int	command(t_node *const node, t_data *data)
 		if (get_cmd_from_args(&argv, node) == -1)
 			return (EXIT_FAILURE);
 	if (ft_strcmp(node->word, "exit") == 0)
+	{
 		state = run_exit(argv, data);
+		printf("state from run_exit(): %d\n", state);
+	}
 	else
 		state = run_builtin(node->word, argv, data);
 	if (state == -100 && node->word)

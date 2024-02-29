@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 16:32:04 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/29 15:53:00 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/02/29 16:38:24 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ static int	run_command(t_node *node, int *p, int *p_, t_data *d)
 			error_exit("close in child (2)");
 	}
 	state = command(node->left, d);
+	printf("state from command(): %d\n", state);
 	if (!check_if_in_parent(p_, node->left->word))
 		exit(d->exit_status);
 	else if (!node->right)
@@ -109,7 +110,7 @@ int	pipeline(t_node *node, int *p_, t_data *d)
 	int state;
 
 	if (node == NULL)
-		return ;
+		return (1);
 	state = 0;
 	if (node->right)
 		if (pipe(p) == -1)
@@ -117,6 +118,7 @@ int	pipeline(t_node *node, int *p_, t_data *d)
 	if (check_if_in_parent(p_, node->left->word))
 	{
 		state = run_command(node, p, p_, d);
+		printf("state from run_command(): %d\n", state);
 		if (restore_stdin(d) == -1)
 			exit (EXIT_FAILURE);
 		if (restore_stdout(d) == -1)

@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 11:46:35 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/29 15:42:54 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/02/29 16:38:36 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ int	program(t_node *root, t_data *data)
 		return (-1);
 	newline_list(root->newl_ptr);
 	state = pipeline(root->left, NULL, data);
+	printf("state from pipeline(): %d\n", state);
 	g_signal = 0;
 	return (state);
 }

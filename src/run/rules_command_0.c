@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/28 10:50:20 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/29 15:40:04 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/02/29 16:45:50 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,9 @@ int	run_exit(char **argv, t_data *data)
 {
 	data->exit_status = ft_exit(argv);
 	if (data->exit_status == 1)
-		return (1);
+		return (EXIT_FAILURE);
 	else
-		return (0);
+		return (EXIT_SUCCESS);
 }
 
 int	run_builtin(char *cmd, char **argv, t_data *data)
