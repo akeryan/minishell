@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 16:32:04 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/29 22:46:38 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/02/29 23:32:37 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,8 @@ static int	run_command(t_node *node, int *p, int *p_, t_data *d)
 			error_exit("close in child (2)");
 	}
 	state = command(node->left, d);
-	printf("state from command(): %d\n", state);
-	printf("exit_status in run_command(): %d\n", d->exit_status);
+	//printf("state from command(): %d\n", state);
+	//printf("exit_status in run_command(): %d\n", d->exit_status);
 	//if (!check_if_in_parent(p_, node->left->word))
 		//exit(d->exit_status);
 	//else 
@@ -85,11 +85,9 @@ static void	run_cmd_in_child(t_node *node, int *p, int *p_, t_data *d)
 		error_exit("fork");
 	if (pid == -1)
 		error_exit("fork");
-	else if (pid == 0) {
+	else if (pid == 0)
+	{
 		run_command(node, p, p_, d);
-		// clean_tree(d->root);
-		// clean_dblptr(d->env);
-		// exit(d->exit_status);
 		ft_cleaner(d, NULL, NULL, d->exit_status);
 	}
 	else if (pid > 0)
@@ -125,7 +123,7 @@ int	pipeline(t_node *node, int *p_, t_data *d)
 	if (check_if_in_parent(p_, node->left->word))
 	{
 		state = run_command(node, p, p_, d);
-		printf("state from run_command(): %d\n", state);
+		//printf("state from run_command(): %d\n", state);
 		if (restore_stdin(d) == -1)
 			exit (EXIT_FAILURE);
 		if (restore_stdout(d) == -1)

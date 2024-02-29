@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 13:48:45 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/23 12:55:17 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/03/01 00:15:29 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,5 +92,6 @@ void	free_word_list(t_word_node *head)
 		head = head->next;
 		free(tmp->word);
 		free(tmp);
+		tmp = NULL;
 	}
 }

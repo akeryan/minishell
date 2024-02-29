@@ -6,7 +6,7 @@
 #    By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/15 15:43:23 by dabdygal          #+#    #+#              #
-#    Updated: 2024/02/29 22:24:40 by akeryan          ###   ########.fr        #
+#    Updated: 2024/03/01 00:45:15 by akeryan          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -132,6 +132,8 @@ leaks:
 	--track-origins=yes \
 	--show-leak-kinds=all -s \
 	./minishell
+
+#valgrind --leak-check=full --track-origins=yes --show-leak-kinds=all -s --suppressions=supression.txt ./minishell
 
 clean:
 	rm -f $(addprefix $(OBJ_DIR)/,$(OBJ_FILES))

@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 14:51:56 by dabdygal          #+#    #+#             */
-/*   Updated: 2024/02/29 17:32:38 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/03/01 00:40:16 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,10 @@ void	clean_tree(t_node *root)
 	if (!root)
 		return ;
 	if (root->word)
+	{
 		free(root->word);
-	root->word = NULL;
+		root->word = NULL;
+	}
 	if (root->left)
 		clean_tree(root->left);
 	root->left = NULL;
@@ -30,6 +32,7 @@ void	clean_tree(t_node *root)
 		clean_tree(root->right);
 	root->right = NULL;
 	free(root);
+	root = NULL;
 }
 
 void	clean_dblptr(char **str)
@@ -42,4 +45,5 @@ void	clean_dblptr(char **str)
 	while (str[i])
 		free(str[i++]);
 	free(str);
+	str = NULL;
 }

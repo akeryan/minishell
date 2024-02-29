@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 17:01:50 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/29 22:45:54 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/03/01 00:36:52 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,11 +66,6 @@ static void	ft_execve(char *cmd_name, char **argv, t_data *d, t_word_node *arg_l
 		status = execve_error_msg(path, cmd_name);
 	free(path);
 	ft_cleaner(d, arg_lst, argv, status);
-	// clean_tree(d->root);
-	// clean_dblptr(argv);
-	// free_word_list(arg_lst);
-	// clean_dblptr(d->env);
-	// exit(status);
 }
 
 /**
@@ -106,11 +101,16 @@ int	command(t_node *const node, t_data *data)
 	if (ft_strcmp(node->word, "exit") == 0)
 	{
 		state = run_exit(argv, data);
-		printf("state from run_exit(): %d\n", state);
+		//printf("state from run_exit(): %d\n", state);
 	}
 	else
+	{
 		state = run_builtin(node->word, argv, data);
+		//printf("STATE: %d\n", state);
+		data->exit_status = state;
+	}
 	if (state == -100 && node->word)
 		ft_execve(node->word, argv, data, args_list);
-	return (free_word_list(args_list), clean_dblptr(argv), state);//state);
+	//return(state);
+	return (free_word_list(args_list), clean_dblptr(argv), state);
 }
