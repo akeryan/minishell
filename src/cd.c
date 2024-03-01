@@ -6,7 +6,7 @@
 /*   By: dabdygal <dabdygal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 17:46:12 by dabdygal          #+#    #+#             */
-/*   Updated: 2024/02/25 15:31:11 by dabdygal         ###   ########.fr       */
+/*   Updated: 2024/03/01 15:19:31 by dabdygal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ static int	resetenv(const char *name, const char *value, char ***envp)
 	size_t	i;
 	size_t	len;
 
+	if (!value)
+		return (0);
 	i = 0;
 	len = ft_strlen(name);
 	while (envp[0][i])
@@ -44,14 +46,14 @@ static int	change_dir(char *path, char ***envp)
 	char	*str;
 
 	str = getcwd(NULL, 0);
-	if (str == NULL)
+	if (str == NULL && *path == '.')
 		return (-1);
 	if (chdir(path) < 0 || resetenv("OLDPWD", str, envp) < 0)
 	{
-		free(str);
+		ft_free((void **)&str);
 		return (-1);
 	}
-	free (str);
+	ft_free((void **)&str);
 	str = getcwd(NULL, 0);
 	if (str == NULL)
 		return (-1);
