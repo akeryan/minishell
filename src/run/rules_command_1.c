@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 17:01:50 by akeryan           #+#    #+#             */
-/*   Updated: 2024/03/01 12:34:33 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/03/01 12:56:32 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ static void	ft_execve(char *cmd_name, char **argv, t_data *d, t_word_node *arg_l
 	status = EXIT_SUCCESS;
 	if (ft_strchr(cmd_name, '/'))
 	{
-		path = cmd_name;
+		path = ft_strdup(cmd_name);
 		tmp = ft_strdup(ft_strrchr(argv[0], '/') + 1);
 		if (tmp == NULL)
 			panic_malloc();
