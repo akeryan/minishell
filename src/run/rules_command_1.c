@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 17:01:50 by akeryan           #+#    #+#             */
-/*   Updated: 2024/03/01 19:50:57 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/03/01 20:57:51 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,14 +90,17 @@ int	command(t_node *const node, t_data *data)
 	apply_expansions(&node->word, data);
 	argv = list_to_array(args_list, node->word);
 	if (argv == NULL)
-	{
-		ft_printf(2, "failed to malloc in list_to_array(): %s\n", \
-			strerror(errno));
 		return (EXIT_FAILURE);
-	}
-	if (node->word && ft_strcmp(node->word, "") == 0)//HERE
+	if (node->word && ft_strcmp(node->word, "") == 0)
+	{
 		if (get_cmd_from_args(&argv, node) == -1)
 			return (EXIT_FAILURE);
+		else
+		{
+			data->exit_status = 0;
+			return (EXIT_SUCCESS);
+		}
+	}
 	if (ft_strcmp(node->word, "exit") == 0)
 	{
 		state = run_exit(argv, data);
@@ -106,7 +109,6 @@ int	command(t_node *const node, t_data *data)
 	else
 	{
 		state = run_builtin(node->word, argv, data);
-		//printf("STATE: %d\n", state);
 		data->exit_status = state;
 	}
 	if (state == -100 && node->word)
