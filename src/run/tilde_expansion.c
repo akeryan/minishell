@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 20:10:13 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/20 19:42:11 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/03/01 12:35:46 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static char	*no_slash_expansion(t_tilde_vars *v, char **word)
 			panic_malloc();
 		if (!does_dir_exist(ptr))
 		{
-			free(ptr);
+			ft_free((void **)&ptr);
 			ptr = ft_strdup(*word);
 		}
 		else
@@ -72,7 +72,7 @@ static char	*with_slash_expansion(t_tilde_vars *v, char **word)
 			ptr = ft_strdup(*word);
 		else
 			ptr = ft_strjoin(v->usrs_dir, *word + 1);
-		free(ptr2);
+		ft_free((void **)&ptr2);
 	}
 	if (!ptr)
 		panic_malloc();
@@ -102,7 +102,7 @@ void	tilde_expansion(char **word, char ***env)
 	init_vars(&v, env);
 	v.slash = is_there_unquoted_slash(*word);
 	tmp = get_expansion(&v, word);
-	free(v.usrs_dir);
-	free(*word);
+	ft_free((void **)&v.usrs_dir);
+	ft_free((void **)word);
 	*word = tmp;
 }

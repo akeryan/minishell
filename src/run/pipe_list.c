@@ -6,13 +6,14 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/28 12:07:55 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/08 10:24:59 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/03/01 12:29:11 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stddef.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include "libft.h"
 #include "error_handling.h"
 #include "pipe_list.h"
 
@@ -76,6 +77,6 @@ void	free_pipe_list(t_pipe_node *head)
 	{
 		tmp = head;
 		head = head->next;
-		free(tmp);
+		ft_free((void **)&tmp);
 	}
 }

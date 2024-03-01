@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/28 10:50:20 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/29 23:46:35 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/03/01 12:32:18 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ int	get_cmd_from_args(char ***argv, t_node *node)
 		tmp_word = ft_strdup(*argv[1]);
 		if (tmp_word == NULL)
 			return (-1);
-		free(node->word);
+		ft_free((void **)&node->word);
 		node->word = tmp_word;
 		tmp = ft_strdup2(*argv + 1);
 		clean_dblptr(*argv);

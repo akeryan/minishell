@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/28 10:59:14 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/07 21:20:45 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/03/01 12:28:21 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include <stdlib.h>
 #include <errno.h>
 #include <string.h>
+#include "libft.h"
 #include "pid_list.h"
 #include "error_handling.h"
 
@@ -69,7 +70,7 @@ int	free_pid_list(t_pid_node *head)
 	{
 		tmp = head;
 		head = head->next;
-		free(tmp);
+		ft_free((void **) &tmp);
 	}
 	return (0);
 }

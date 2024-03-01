@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 14:55:06 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/25 00:14:23 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/03/01 12:39:27 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static void	no_space_case(char **word, char **env)
 	char	*tmp;
 
 	tmp = ft_getenv_aram(*word + 1, env);
-	free (*word);
+	ft_free ((void **)word);
 	if (tmp == NULL)
 		*word = ft_strdup("");
 	else
@@ -49,9 +49,9 @@ void	expand_word(t_word_node *node, char ***env)
 		if (!tmp2)
 			panic_malloc();
 		tmp = ft_getenv_aram(tmp2, *env);
-		free (tmp2);
+		ft_free ((void **)&tmp2);
 		tmp2 = ft_strjoin(tmp, space);
-		free (node->word);
+		ft_free ((void **)&node->word);
 		node->word = tmp2;
 	}
 	else
@@ -75,7 +75,7 @@ static char	*join_words(t_word_node *head, char ***env)
 				tmp = ft_strjoin(out, head->word);
 			if (!tmp)
 				panic_malloc();
-			free (out);
+			ft_free ((void **)&out);
 			out = tmp;
 		}
 		if (head->next)
@@ -119,7 +119,7 @@ void	dollar_expansion(char **word, t_data *data)
 	current = *word;
 	head = NULL;
 	tokenizer(&ptr, &current, &head, data);
-	free(*word);
+	ft_free((void **)word);
 	*word = join_words(head, &data->env);
 	free_word_list(head);
 }

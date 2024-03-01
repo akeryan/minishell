@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 11:11:56 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/29 17:38:20 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/03/01 12:31:59 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,9 +65,9 @@ static char	*cmd_in_path(char *path, char *cmd)
 	pth[1] = ft_strjoin(pth[0], cmd);
 	if (!pth[0] || !pth[1])
 		panic_malloc();
-	free(pth[0]);
+	ft_free((void **)&pth[0]);
 	if (access(pth[1], F_OK) == 0)
 		return (pth[1]);
-	free(pth[1]);
+	ft_free((void **)&pth[1]);
 	return (NULL);
 }

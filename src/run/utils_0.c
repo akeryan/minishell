@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 16:31:55 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/28 19:07:26 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/03/01 12:40:24 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,8 @@ char	**ft_strdup2(char **str)
 		if (out[i] == NULL)
 		{
 			while (--i >= 0)
-				free(out[i]);
-			free(out);
+				ft_free((void **)&out[i]);
+			ft_free((void **)&out);
 			return (NULL);
 		}
 	}
@@ -80,7 +80,7 @@ char	**list_to_array(t_word_node *head, char *cmd_name)
 		if (argv[i] == NULL)
 		{
 			while (--i >= 0)
-				free(argv[i]);
+				ft_free((void **)&argv[i]);
 			return (NULL);
 		}
 		head = head->next;

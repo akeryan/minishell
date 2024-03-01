@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 17:01:50 by akeryan           #+#    #+#             */
-/*   Updated: 2024/03/01 00:36:52 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/03/01 12:34:33 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ static void	ft_execve(char *cmd_name, char **argv, t_data *d, t_word_node *arg_l
 		tmp = ft_strdup(ft_strrchr(argv[0], '/') + 1);
 		if (tmp == NULL)
 			panic_malloc();
-		free(argv[0]);
+		ft_free((void **)&argv[0]);
 		argv[0] = tmp;
 	}
 	else
@@ -64,7 +64,7 @@ static void	ft_execve(char *cmd_name, char **argv, t_data *d, t_word_node *arg_l
 	ft_process_signals();
 	if (execve(path, argv, d->env) == -1)
 		status = execve_error_msg(path, cmd_name);
-	free(path);
+	ft_free((void **)&path);
 	ft_cleaner(d, arg_lst, argv, status);
 }
 
