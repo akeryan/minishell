@@ -6,7 +6,7 @@
 #    By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/15 15:43:23 by dabdygal          #+#    #+#              #
-#    Updated: 2024/03/01 16:33:06 by akeryan          ###   ########.fr        #
+#    Updated: 2024/03/01 18:29:17 by akeryan          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -102,8 +102,8 @@ OBJ_FILES = $(SRC_FILES:.c=.o)
 
 CC = cc -g3
 
-CFLAGS = -Wall -Wextra -Werror -g -fsanitize=address -I $(INCLUDE_DIR) -I $(LIBREAD_INC)
-# CFLAGS = -Wall -Wextra -Werror -g -I $(INCLUDE_DIR) -I $(LIBREAD_INC)
+#CFLAGS = -Wall -Wextra -Werror -g -fsanitize=address -I $(INCLUDE_DIR) -I $(LIBREAD_INC)
+CFLAGS = -Wall -Wextra -Werror -g -I $(INCLUDE_DIR) -I $(LIBREAD_INC)
 
 # ************************************RULES*********************************** #
 
@@ -131,6 +131,7 @@ leaks:
 	valgrind --leak-check=full \
 	--track-origins=yes \
 	--show-leak-kinds=all -s \
+ 	--suppressions=supression.txt \
 	./minishell
 
 #valgrind --leak-check=full --track-origins=yes --show-leak-kinds=all -s --suppressions=supression.txt ./minishell

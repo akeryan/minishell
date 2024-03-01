@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/25 21:41:53 by akeryan           #+#    #+#             */
-/*   Updated: 2024/03/01 16:11:43 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/03/01 19:12:31 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ int	ft_has_nl(char *tail)
 	return (-1);
 }
 
-char	*ft_substr(char const *str, unsigned int start, size_t length)
+char	*ft_substr_my(char const *str, unsigned int start, size_t length)
 {
 	char	*ptr;
 	size_t	i;

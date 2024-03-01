@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/25 23:19:24 by akeryan           #+#    #+#             */
-/*   Updated: 2024/03/01 16:28:42 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/03/01 18:26:57 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,8 @@ static void	read_write(int fd, int fd2, t_data *data)
 			break ;
 		*(ft_strchr(str, '\n')) = '\0';
 		dollar_expansion(&str, data);
-		*(ft_strchr(str, '\0')) = '\n';
 		write(fd2, str, ft_strlen(str));
+		write(fd2, "\n", 1);
 		free(str);
 		str = NULL;
 	}

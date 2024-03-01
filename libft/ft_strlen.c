@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 14:56:24 by dabdygal          #+#    #+#             */
-/*   Updated: 2024/03/01 16:32:33 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/03/01 17:40:13 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ size_t	ft_strlen(const char *s)
 
 	if (!s || s == NULL)
 	{
-		printf("str argument is NULL\n");
+		printf("arg is NULL in ft_strlen\n");
 		return (0);
 	}
 	i = 0;

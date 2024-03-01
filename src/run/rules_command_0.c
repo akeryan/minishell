@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/28 10:50:20 by akeryan           #+#    #+#             */
-/*   Updated: 2024/03/01 14:15:04 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/03/01 18:51:34 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int	get_cmd_from_args(char ***argv, t_node *node)
 	char	**tmp;
 	char	*tmp_word;
 
-	if (*argv[1] == NULL)
+	if (!argv || !(*argv)[0] || !(*argv)[1])
 		return (0);
 	else
 	{

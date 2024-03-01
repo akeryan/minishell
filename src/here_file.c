@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 15:02:17 by dabdygal          #+#    #+#             */
-/*   Updated: 2024/03/01 15:09:31 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/03/01 19:24:26 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,6 +124,7 @@ char	*here_file(t_token token)
 		ft_free((void **) &filename);
 		return (NULL);
 	}
+	ft_free((void **)&delim);
 	if (close(fd) != 0)
 	{
 		if (unlink(filename) == -1)
