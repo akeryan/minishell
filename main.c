@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
+/*   By: dabdygal <dabdygal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/25 19:21:52 by akeryan           #+#    #+#             */
-/*   Updated: 2024/03/01 16:25:30 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/03/01 20:12:37 by dabdygal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@
 #include "rules.h"
 #include "main_utils.h"
 #include "print_tree.h"
+
+extern int	g_signal;
 
 void	print_tree(t_node *node, int level);
 
@@ -90,5 +92,7 @@ int	main(void)
 	grammar = setup_grammar();
 	run(&grammar, &data);
 	clean_dblptr(data.env);
+	if (data.exit_status == 0 && g_signal < 0)
+		data.exit_status = 1;
 	return (data.exit_status);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
+/*   By: dabdygal <dabdygal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 14:42:11 by dabdygal          #+#    #+#             */
-/*   Updated: 2024/02/27 22:36:39 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/03/01 20:08:43 by dabdygal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 #include <errno.h>
 #include <stdlib.h>
 #include "libft.h"
+
+extern int	g_signal;
 
 static int	inval_arg_warn(char *str)
 {
@@ -58,5 +60,7 @@ int	ft_exit(char *argv[])
 		ft_printf(2, "minishell: exit: too many arguments\n");
 		return (1);
 	}
+	if (status == 0 && g_signal < 1)
+		status = 1;
 	return (status);
 }
