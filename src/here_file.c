@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   here_file.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dabdygal <dabdygal@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 15:02:17 by dabdygal          #+#    #+#             */
-/*   Updated: 2024/02/28 18:58:59 by dabdygal         ###   ########.fr       */
+/*   Updated: 2024/03/01 15:09:31 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,13 +119,15 @@ char	*here_file(t_token token)
 	if (!delim || fill_file(fd, delim, token.slice.length) < 0)
 	{
 		close(fd);
-		unlink(filename);
+		if (unlink(filename) == -1)
+			ft_printf(2, "unlink failed in here_file()\n");
 		ft_free((void **) &filename);
 		return (NULL);
 	}
 	if (close(fd) != 0)
 	{
-		unlink(filename);
+		if (unlink(filename) == -1)
+			ft_printf(2, "unlink failed in here_file()\n");
 		ft_free((void **) &filename);
 	}
 	return (filename);

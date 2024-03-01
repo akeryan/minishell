@@ -3,24 +3,32 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akeryan <akeryan@student.42.fr>            +#+  +:+       +#+        */
+/*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/25 21:41:53 by akeryan           #+#    #+#             */
-/*   Updated: 2021/12/28 19:01:20 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/03/01 16:11:43 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdio.h>
 #include "get_next_line.h"
+#include "libft.h"
 
-size_t	ft_strlen(const char *str)
-{
-	size_t	len;
-
-	len = 0;
-	while (str[len])
-		len++;
-	return (len);
-}
+//size_t	ft_strlen(const char *str)
+//{
+	//size_t	len;
+	//if (str == NULL)
+		//return(0);
+		//// ft_printf(2, "str argument is NULL\n");	
+	//if (!str)
+		//return (0);
+		//// ft_printf(2, "str argument is NULL\n");
+	//printf("str: %s\n", str);
+	//len = 0;
+	//while (str && str[len])
+		//len++;
+	//return (len);
+//}
 
 char	*ft_attach(char *tail, char *buf, size_t size)
 {

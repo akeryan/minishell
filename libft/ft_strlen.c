@@ -3,21 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dabdygal <dabdygal@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 14:56:24 by dabdygal          #+#    #+#             */
-/*   Updated: 2023/07/04 15:05:01 by dabdygal         ###   ########.fr       */
+/*   Updated: 2024/03/01 16:32:33 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stddef.h>
+#include <stdio.h>
+#include "libft.h"
 
 size_t	ft_strlen(const char *s)
 {
 	size_t	i;
 
+	if (!s || s == NULL)
+	{
+		printf("str argument is NULL\n");
+		return (0);
+	}
 	i = 0;
-	while (*(s + i))
+	while (s && *(s + i))
 	{
 		i++;
 	}
