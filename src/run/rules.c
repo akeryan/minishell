@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rules.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dabdygal <dabdygal@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 11:46:35 by akeryan           #+#    #+#             */
-/*   Updated: 2024/03/01 19:59:33 by dabdygal         ###   ########.fr       */
+/*   Updated: 2024/03/02 14:29:17 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ int	program(t_node *root, t_data *data)
 	int	old;
 
 	old = g_signal;
+	if (old < 0)
+		data->exit_status = 1;
 	g_signal = 1;
 	if (root == NULL)
 		return (-1);
