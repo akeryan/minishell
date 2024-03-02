@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 11:54:33 by akeryan           #+#    #+#             */
-/*   Updated: 2024/03/01 19:49:39 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/03/02 15:17:19 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,8 @@ void	redir_write(char *file_name, t_data *data)
 	fd = open(file_name, O_WRONLY | O_CREAT | O_TRUNC, 0666);
 	if (fd == -1)
 	{
-		ft_printf(2, "minishell: %s: failed to create file in redir_write()\n", file_name);
+		ft_printf(2, "minishell: %s: failed to create file in redir_write()\n", \
+			file_name);
 		return ;
 	}
 	if (dup2(fd, STDOUT_FILENO) == -1)

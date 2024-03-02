@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 11:59:34 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/29 00:57:29 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/03/02 15:04:42 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include "pid_list.h"
 # include "tokens.h"
 
-typedef struct s_node t_node;
+typedef struct s_node	t_node;
 
 typedef struct s_data
 {

@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 10:29:34 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/29 00:34:37 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/03/02 15:12:59 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,14 +78,8 @@ int	execve_error_msg(char *path, char *cmd_name)
 	if (stat(path, &path_stat) == -1)
 		return (process_stat(path));
 	if (S_ISDIR(path_stat.st_mode))
-	{
-		ft_printf(2, "%s: %s: %s\n", MSH_NAME, path, "is a directory");
-		exit_stat = 126;
-	}
+		do_this_1(path, &exit_stat);
 	else
-	{
-		ft_printf(2, "%s: %s: %s\n", MSH_NAME, path, "Permission denied\n");
-		exit_stat = 126;
-	}
+		do_this_2(path, &exit_stat);
 	return (exit_stat);
 }

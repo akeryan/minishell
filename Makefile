@@ -6,7 +6,7 @@
 #    By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/15 15:43:23 by dabdygal          #+#    #+#              #
-#    Updated: 2024/03/01 18:29:17 by akeryan          ###   ########.fr        #
+#    Updated: 2024/03/02 15:15:07 by akeryan          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -76,6 +76,7 @@ SRC_FILES = signals.c \
 			print_tree_1.c \
 			clean.c \
 			run/error_handling.c \
+			run/error_handling_1.c \
 			run/pid_list.c \
 			run/pipe_list.c \
 			run/word_list_0.c \
@@ -83,6 +84,7 @@ SRC_FILES = signals.c \
 			run/path.c \
 			run/rules_command_0.c \
 			run/rules_command_1.c \
+			run/rules_command_2.c \
 			run/rules_pipeline.c \
 			run/rules.c \
 			run/rules_redirect.c \

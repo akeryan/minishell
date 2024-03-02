@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 11:47:48 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/29 22:46:58 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/03/02 14:56:59 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,5 +33,7 @@ int		run_exit(char **argv, t_data *data);
 int		run_builtin(char *cmd, char **argv, t_data *data);
 int		get_cmd_from_args(char ***argv, t_node *node);
 void	ft_cleaner(t_data *d, t_word_node *arglist, char **argv, int status);
+int		cmd_func_1(char ***argv, t_node *node, t_data *data);
+void	cmd_func_2(int *state, t_node *node, char **argv, t_data *data);
 
 #endif

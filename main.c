@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/25 19:21:52 by akeryan           #+#    #+#             */
-/*   Updated: 2024/03/02 14:21:44 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/03/02 15:03:11 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,16 +46,12 @@ static int	run(t_grammar *grammar, t_data *data)
 	while (1)
 	{
 		data->root = build_tree(grammar, NULL);
-		//print_tree(data->root, 0);
 		if (errno != 0)
 			perror("ERRNO");
 		if (!data->root)
 		{
 			if (peek_token(NULL).type == EOF_TOKEN)
-			{
-				printf(EXIT_MSG);
-				return (EXIT_SUCCESS);
-			}
+				return (printf(EXIT_MSG), EXIT_SUCCESS);
 			else
 			{
 				ft_printf(2, "minishell: syntax error near unexpected token \

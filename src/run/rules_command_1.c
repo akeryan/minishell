@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 17:01:50 by akeryan           #+#    #+#             */
-/*   Updated: 2024/03/02 14:15:17 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/03/02 14:56:44 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static void	ft_process_signals(void)
  * @param argv Arguments of the command
 */
 
-void	ft_cleaner(t_data *d, t_word_node *arglist, char **argv, int status) 
+void	ft_cleaner(t_data *d, t_word_node *arglist, char **argv, int status)
 {
 	clean_tree(d->root);
 	clean_dblptr(argv);
@@ -43,7 +43,8 @@ void	ft_cleaner(t_data *d, t_word_node *arglist, char **argv, int status)
 	exit(status);
 }
 
-static void	ft_execve(char *cmd_name, char **argv, t_data *d, t_word_node *arg_lst)
+static void	ft_execve(char *cmd_name, char **argv, t_data *d, \
+	t_word_node *arg_lst)
 {
 	char				*path;
 	char				*tmp;
@@ -80,6 +81,7 @@ int	command(t_node *const node, t_data *data)
 	t_word_node	*args_list;
 	char		**argv;
 	int			state;
+	int			a;
 
 	if (!node)
 		return (EXIT_FAILURE);
@@ -91,29 +93,14 @@ int	command(t_node *const node, t_data *data)
 	argv = list_to_array(args_list, node->word);
 	if (argv == NULL)
 		return (EXIT_FAILURE);
-	if (node->word && ft_strcmp(node->word, "") == 0)
-	{
-		if (get_cmd_from_args(&argv, node) == -1)
-		{
-			clean_dblptr(argv);
-			return (EXIT_FAILURE);
-		}
-		else
-		{
-			data->exit_status = 0;
-			clean_dblptr(argv);
-			return (EXIT_SUCCESS);
-		}
-	}
+	a = cmd_func_1(&argv, node, data);
+	if (a != -1)
+		return (a);
 	if (ft_strcmp(node->word, "exit") == 0)
 		state = run_exit(argv, data);
 	else
-	{
-		state = run_builtin(node->word, argv, data);
-		data->exit_status = state;
-	}
+		cmd_func_2(&state, node, argv, data);
 	if (state == -100 && node->word)
 		ft_execve(node->word, argv, data, args_list);
-	//return(state);
 	return (free_word_list(args_list), clean_dblptr(argv), state);
 }
