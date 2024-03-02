@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rules.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
+/*   By: dabdygal <dabdygal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 11:46:35 by akeryan           #+#    #+#             */
-/*   Updated: 2024/02/29 23:34:03 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/03/01 19:59:33 by dabdygal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,14 +30,16 @@ extern int	g_signal;
 int	program(t_node *root, t_data *data)
 {
 	int	state;
+	int	old;
 
+	old = g_signal;
 	g_signal = 1;
 	if (root == NULL)
 		return (-1);
 	newline_list(root->newl_ptr);
 	state = pipeline(root->left, NULL, data);
 	//printf("state from pipeline(): %d\n", state);
-	g_signal = 0;
+	g_signal = old;
 	return (state);
 }
 
