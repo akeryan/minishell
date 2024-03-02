@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   here-doc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
+/*   By: dabdygal <dabdygal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/25 23:19:24 by akeryan           #+#    #+#             */
-/*   Updated: 2024/03/01 18:26:57 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/03/02 14:09:14 by dabdygal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ static void	read_write(int fd, int fd2, t_data *data)
 
 	while (1)
 	{
-		str = get_next_line(fd);
+		str = ft_get_next_line(fd);
 		if (str == NULL)
 			break ;
 		*(ft_strchr(str, '\n')) = '\0';

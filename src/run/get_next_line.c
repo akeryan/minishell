@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
+/*   By: dabdygal <dabdygal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/25 18:51:42 by akeryan           #+#    #+#             */
-/*   Updated: 2024/03/01 19:12:12 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/03/02 14:08:41 by dabdygal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ static int	ft_check_nl(int nl, char **buf, char **tail)
 	return (nl);
 }
 
-char	*get_next_line(int fd)
+char	*ft_get_next_line(int fd)
 {	
 	static char	*tail[1024];
 	char		*buf;	

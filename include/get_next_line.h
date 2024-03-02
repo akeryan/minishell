@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
+/*   By: dabdygal <dabdygal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/28 18:48:35 by akeryan           #+#    #+#             */
-/*   Updated: 2024/03/01 19:13:54 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/03/02 14:09:22 by dabdygal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 
 int		ft_has_nl(char *tail);
 char	*ft_substr_my(char const *str, unsigned int start, size_t length);
-char	*get_next_line(int fd);
+char	*ft_get_next_line(int fd);
 char	*ft_attach(char *tail, char *buf, size_t size);
 int		ft_read(int fd, char **tail, char **buf);
 
