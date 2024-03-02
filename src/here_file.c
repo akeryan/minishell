@@ -6,7 +6,7 @@
 /*   By: dabdygal <dabdygal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 15:02:17 by dabdygal          #+#    #+#             */
-/*   Updated: 2024/03/02 14:14:26 by dabdygal         ###   ########.fr       */
+/*   Updated: 2024/03/02 15:16:33 by dabdygal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,10 +69,7 @@ static char	*here_read(char *prompt)
 		return (NULL);
 	line = get_next_line(STDIN_FILENO);
 	if (g_signal == SIGINT)
-	{
-		g_signal = 0;
 		errno = 0;
-	}
 	if (signal(SIGINT, old) == SIG_ERR || !line)
 		return (NULL);
 	len = ft_strlen(line);
@@ -87,7 +84,7 @@ static int	fill_file(int fd, char *delim, size_t len)
 	size_t	line_len;
 
 	line = here_read(MSH_PS2);
-	while (line)
+	while (line && g_signal != SIGINT)
 	{
 		line_len = ft_strlen(line);
 		if (line_len == len && ft_strncmp(line, delim, len) == 0)
