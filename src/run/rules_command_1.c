@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 17:01:50 by akeryan           #+#    #+#             */
-/*   Updated: 2024/03/01 20:57:51 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/03/02 14:15:17 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,18 +94,19 @@ int	command(t_node *const node, t_data *data)
 	if (node->word && ft_strcmp(node->word, "") == 0)
 	{
 		if (get_cmd_from_args(&argv, node) == -1)
+		{
+			clean_dblptr(argv);
 			return (EXIT_FAILURE);
+		}
 		else
 		{
 			data->exit_status = 0;
+			clean_dblptr(argv);
 			return (EXIT_SUCCESS);
 		}
 	}
 	if (ft_strcmp(node->word, "exit") == 0)
-	{
 		state = run_exit(argv, data);
-		//printf("state from run_exit(): %d\n", state);
-	}
 	else
 	{
 		state = run_builtin(node->word, argv, data);

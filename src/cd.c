@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dabdygal <dabdygal@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 17:46:12 by dabdygal          #+#    #+#             */
-/*   Updated: 2024/03/01 15:19:31 by dabdygal         ###   ########.fr       */
+/*   Updated: 2024/03/02 13:59:37 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,7 @@ int	cd(const char *argv[], char ***envp)
 		errno = 0;
 		return (EXIT_FAILURE);
 	}
-	if (*argv[1] == '-')
+	if (argv[1] && *argv[1] == '-')
 	{
 		printf("%s\n", path);
 		free(path);
