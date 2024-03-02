@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_1.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
+/*   By: dabdygal <dabdygal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 15:18:18 by dabdygal          #+#    #+#             */
-/*   Updated: 2024/02/23 20:03:13 by akeryan          ###   ########.fr       */
+/*   Updated: 2024/03/02 15:10:18 by dabdygal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,9 @@ int	fill_node(t_node *node, t_book *book, t_grammar *grammar, char *ps2)
 t_node	*build_tree(t_grammar *grammar, char *ps2)
 {
 	t_node	*root;
+	int		old;
 
+	old = g_signal;
 	root = parse(PROGRAM, grammar, ps2);
 	while (!root && g_signal == SIGINT)
 	{
@@ -72,7 +74,7 @@ t_node	*build_tree(t_grammar *grammar, char *ps2)
 		{
 		}
 		ft_putchar_fd('\n', STDERR_FILENO);
-		g_signal = 0;
+		g_signal = old;
 		root = parse(PROGRAM, grammar, ps2);
 	}
 	return (root);
