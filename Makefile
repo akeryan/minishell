@@ -6,7 +6,7 @@
 #    By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/15 15:43:23 by dabdygal          #+#    #+#              #
-#    Updated: 2024/03/02 15:15:07 by akeryan          ###   ########.fr        #
+#    Updated: 2024/03/02 15:22:13 by akeryan          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -102,9 +102,8 @@ SRC_FILES = signals.c \
 
 OBJ_FILES = $(SRC_FILES:.c=.o)
 
-CC = cc -g3
+CC = cc
 
-#CFLAGS = -Wall -Wextra -Werror -g -fsanitize=address -I $(INCLUDE_DIR) -I $(LIBREAD_INC)
 CFLAGS = -Wall -Wextra -Werror -g -I $(INCLUDE_DIR) -I $(LIBREAD_INC)
 
 # ************************************RULES*********************************** #
