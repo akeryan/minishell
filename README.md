@@ -28,3 +28,4 @@ Custom signal handlers are implemented to manage signals like **SIGINT** (Ctrl+C
 # Installation
 To build and run the Minishell project, follow these steps:
 1. Clone the repository:
+![clone repository](https://github.com/akeryan/minishell/blob/main/images/clone.png)
